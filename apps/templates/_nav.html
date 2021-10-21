@@ -61,13 +61,26 @@
         </a>
         <ul class="nav nav-second-level">
             {% if LICENSE_VALID %}
-            <li id="remote-app"><a href="{% url 'applications:remote-app-list' %}">{% trans 'RemoteApp' %}</a></li>
+            <li id="remote-app"><a href="{% url 'applications:cloud-info-list' %}">{% trans 'RemoteApp' %}</a></li>
             {% endif %}
             <li id="database-app"><a href="{% url 'applications:database-app-list' %}">{% trans 'DatabaseApp' %}</a></li>
         </ul>
     </li>
 {% endif %}
 
+
+{# Elastics #}
+{% if request.user.can_admin_current_org %}
+    <li id="elastics">
+        <a>
+            <i class="fa fa-soundcloud" style="width: 14px" aria-hidden="true"></i> <span class="nav-label">{% trans 'Elastics' %}</span><span class="fa arrow"></span>
+        </a>
+        <ul class="nav nav-second-level">
+            <li id="cloud"><a href="{% url 'elastics:cloud-info-list' %}">{% trans 'CloudInfor' %}</a></li>
+            <li id="meta"><a href="{% url 'elastics:meta-info-list' %}">{% trans 'MetaInfo' %}</a></li>
+        </ul>
+    </li>
+{% endif %}
 
 {# Perms #}
 {% if request.user.can_admin_current_org %}

@@ -9720,7 +9720,7 @@ extend(Highcharts.Pointer.prototype, {
 		// Is the chart dragged off its bounds, determined by dataMin and dataMax?
 		if (outOfBounds) {
 
-			// Modify the touchNow position in order to create an elastic drag movement. This indicates
+			// Modify the touchNow position in order to create an elastics drag movement. This indicates
 			// to the user that the chart is responsive but can't be dragged further.
 			touch0Now -= 0.8 * (touch0Now - lastValidTouch[xy][0]);
 			if (!singleTouch) {

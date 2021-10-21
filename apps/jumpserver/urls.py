@@ -13,6 +13,7 @@ api_v1 = [
     path('index/', api.IndexApi.as_view()),
     path('users/', include('users.urls.api_urls', namespace='api-users')),
     path('assets/', include('assets.urls.api_urls', namespace='api-assets')),
+    path('elastics/', include('elastics.urls.api_urls', namespace='api-elastics')),
     path('perms/', include('perms.urls.api_urls', namespace='api-perms')),
     path('terminal/', include('terminal.urls.api_urls', namespace='api-terminal')),
     path('ops/', include('ops.urls.api_urls', namespace='api-ops')),
@@ -34,6 +35,7 @@ api_v2 = [
 app_view_patterns = [
     path('users/', include('users.urls.views_urls', namespace='users')),
     path('assets/', include('assets.urls.views_urls', namespace='assets')),
+    path('elastics/', include('elastics.urls.views_urls', namespace='elastics')),
     path('perms/', include('perms.urls.views_urls', namespace='perms')),
     path('terminal/', include('terminal.urls.views_urls', namespace='terminal')),
     path('ops/', include('ops.urls.view_urls', namespace='ops')),
