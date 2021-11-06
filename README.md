@@ -206,6 +206,16 @@ JumpServer是一款安全产品，请参考 [基本安全建议](https://docs.ju
 - support@fit2cloud.com 
 - 400-052-0755
 
+## 国际化支持
+```
+cd jumpserver/apps
+python manage.py makemessages -l zh
+# 修改jumpserver/apps/locale/zh/LC_MESSAGES/django.po 的中英文对应
+vim jumpserver/apps/locale/zh/LC_MESSAGES/django.po
+# 修改完成后生效，完全生效需要服务重启
+python manage.py compilemessages
+```
+
 ## License & Copyright
 
 Copyright (c) 2014-2020 飞致云 FIT2CLOUD, All rights reserved.
