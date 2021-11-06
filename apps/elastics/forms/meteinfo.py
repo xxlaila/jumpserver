@@ -10,28 +10,30 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from ..models import MetaInfo,CloudInfor
+from orgs.mixins.forms import OrgModelForm
+from common.utils import validate_ssh_private_key, ssh_pubkey_gen, get_logger
 
+logger = get_logger(__file__)
 __all__ = ['MetaInfoForm']
 
-class MetaInfoForm(forms.ModelForm):
-    # cloud = forms.ModelMultipleChoiceField(
-    #     queryset=CloudInfor.objects, label=_('Cloud'), required=False,
-    #     widget=forms.SelectMultiple(
-    #         attrs={'class': 'select2', 'data-placeholder': _('Select Cloud')}
-    #     )
-    # )
+class MetaInfoForm(OrgModelForm):
+
+    def save(self, commit=True):
+        raise forms.ValidationError("Use api to save")
 
     class Meta:
         model = MetaInfo
         fields = ['name', 'env', 'address', 'username', 'password',
-                  'kibana', 'kafka', 'cloud', 'comment', 'labels']
+                  'kibana', 'kafka', 'cloud', 'comment', 'labels',
+                  'health', 'setting', 'alter', 'index', 'node']
 
-    widgets = {
-        'mfa_level': forms.RadioSelect(),
-        'cloud': forms.SelectMultiple(
-            attrs={
-                'class': 'select2',
-                # 'data-placeholder': _('Join user groups')
-            }
-        )
-    }
+    # widgets = {
+    #     # 'name': forms.TextInput(attrs={'placeholder': _('Name')}),
+    #     'cloud': forms.SelectMultiple(
+    #         attrs={
+    #             'class': 'select2',
+    #             'data-placeholder': _('Cloud')
+    #         }
+    #     )
+    # }
+

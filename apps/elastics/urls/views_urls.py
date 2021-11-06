@@ -8,6 +8,7 @@
 
 from django.urls import path
 from .. import views
+from .. import utils
 
 app_name = 'elastics'
 
@@ -22,5 +23,13 @@ urlpatterns = [
     path('meta-info/<uuid:pk>/update/', views.MetaInfoUpdateView.as_view(), name='meta-info-update'),
     path('meta-info/<uuid:pk>/', views.MetaInfoDetailView.as_view(), name='meta-info-detail'),
     path('meta-info/<uuid:pk>/delete/', views.MetaInfoDeleteView.as_view(), name='meta-info-delete'),
+    path('meta-info/<uuid:pk>/basiccluster/', views.BasicClusterListView.as_view(), name='basic-cluster-list'),
+    path('meta-info/<uuid:pk>/cluterremote/', views.ClusterRemoteListView.as_view(), name='cluster-remote-list'),
+    path('meta-info/<uuid:pk>/node/', views.NodeListView.as_view(), name='node-list'),
+    path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
+
+
+
+    path('meta-info/health', utils.get_nodes_connenct, name='meta-info-health'),
 
 ]

@@ -11,18 +11,20 @@ from django.views.generic import TemplateView, CreateView, \
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy
-from common.permissions import PermissionsMixin, IsOrgAdmin, IsSuperUser
+from common.permissions import PermissionsMixin, IsOrgAdmin, IsSuperUser, IsValidUser
 from django.shortcuts import get_object_or_404, reverse
 from common.const import create_success_msg, update_success_msg
+from common.utils import get_object_or_none, get_logger
 from ..forms import MetaInfoForm
-from ..models import MetaInfo
+from ..models import MetaInfo, CloudInfor
 
 __all__ = (
     "MetaInfoListView", "MetaInfoCreateView", "MetaInfoUpdateView",
     "MetaInfoDetailView", "MetaInfoDeleteView"
 )
+logger = get_logger(__file__)
 
-class MetaInfoListView(PermissionsMixin, TemplateView):
+class MetaInfoListView(PermissionsMixin,TemplateView):
     model = MetaInfo
     template_name = 'elastics/meta_info_list.html'
     permission_classes = [IsOrgAdmin]
@@ -30,6 +32,8 @@ class MetaInfoListView(PermissionsMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = {
             'app': _('Elastics'),
+            # 'labels': Label.objects.all().order_by('name'),
+            # 'cloud': CloudInfor.objects.all().order_by('name'),
             'action': _('Meta info list'),
         }
         kwargs.update(context)
@@ -71,8 +75,9 @@ class MetaInfoUpdateView(PermissionsMixin, UpdateView):
 
 class MetaInfoDetailView(PermissionsMixin, DetailView):
     model = MetaInfo
+    context_object_name = 'meteinfo'
     template_name = 'elastics/meta_info_detail.html'
-    permission_classes = [IsOrgAdmin]
+    permission_classes = [IsOrgAdmin, IsValidUser]
 
     def get_context_data(self, **kwargs):
         context = {

@@ -7,3 +7,5 @@
 """
 from .cloudinfo import *
 from .metainfo import *
+from .basiccluster import *
+from .esnode import *

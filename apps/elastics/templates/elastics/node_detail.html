@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block custom_head_css_js %}
+{#    <link rel="stylesheet" href="{% static 'css/customize/font-awesome.min.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/customize/three-columns.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+{#                            <li>#}
+{#                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}"#}
+{#                                   class="text-center"><i#}
+{#                                        class="fa fa-laptop"></i> {% trans 'Meta info detail' %}#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="{% url 'elastics:basic-cluster-list' pk=object.id %}"#}
+{#                                   class="text-center"><i#}
+{#                                        class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %}#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="{% url 'elastics:cluster-remote-list' pk=object.id %}"#}
+{#                                   class="text-center"><i#}
+{#                                        class="fa fa-gavel"></i> {% trans 'Cluster remote list' %}#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="{% url 'elastics:node-list' pk=object.id %}"#}
+{#                                   class="text-center"><i#}
+{#                                        class="fa fa-server"></i> {% trans 'Node list' %}#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li class="pull-right">#}
+{#                                <a class="btn btn-outline btn-default" href="#"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>#}
+{#                            </li>#}
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span style="float: left"><b>{% trans 'Node list' %}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle"
+                                           data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Name' %} </span>: {{ object.name }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'IP' %} </span>: {{ object.ip }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Disk total' %} </span>: {{ object.disktotal }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Disk used' %} </span>: {{ object.diskused }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Disk avail' %} </span>: {{ object.diskavail }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Used total memory' %} </span>: {{ object.ramcurrent }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total memory' %} </span>: {{ object.rammax }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Node roles' %} </span>: {{ object.noderole }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Process id' %} </span>: {{ object.pid }}</p>
+                                    </div>
+                                     <div class="box">
+                                        <p><span class="font1">{% trans 'Transmission port' %} </span>: {{ object.port }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Http monitoring' %} </span>: {{ object.http_address }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Version' %} </span>: {{ object.version }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Jdk version' %} </span>: {{ object.jdk }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Running uptime' %} </span>: {{ object.uptime }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Date updated' %} </span>: {{ object.date_updated|date:"Y-m-j H:i:s" }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Date created' %} </span>: {{ object.date_created|date:"Y-m-j H:i:s" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#{% include 'assets/_gateway_test_modal.html' %}#}
+{% endblock %}
+{% block content_bottom_left %}{% endblock %}
+{% block custom_foot_js %}
+<script>
+</script>
+{% endblock %}

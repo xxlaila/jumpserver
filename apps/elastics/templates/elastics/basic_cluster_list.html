@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block custom_head_css_js %}
+{#    <link rel="stylesheet" href="{% static 'css/customize/font-awesome.min.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/customize/three-columns.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-laptop"></i> {% trans 'Meta info detail' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:basic-cluster-list' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:cluster-remote-list' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-gavel"></i> {% trans 'Cluster remote list' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:node-list' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-server"></i> {% trans 'Node list' %}
+                                </a>
+                            </li>
+                            <li class="pull-right">
+                                <a class="btn btn-outline btn-default" href="#"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span style="float: left"><b>{% trans 'Basic cluster list' %}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle"
+                                           data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                {% for i in cluster %}
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Name' %} </span>: {{ i.name }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Status' %} </span>: {{ i.status }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Total shard' %} </span>: {{ i.st }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Primary shard' %} </span>: {{ i.sp }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Total index' %} </span>: {{ i.incount }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Total docs' %} </span>: {{ i.indocs }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Total use space' %} </span>: {{ i.instore }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Total node' %} </span>: {{ i.nt }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Read-only node' %} </span>: {{ i.nc }}</p>
+                                </div>
+                                 <div class="box">
+                                    <p><span class="font1">{% trans 'Data node' %} </span>: {{ i.nd }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Ingest node' %} </span>: {{ i.ni }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Master node' %} </span>: {{ i.nm }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Client node' %} </span>: {{ i.nr }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Total memory' %} </span>: {{ i.mt }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Free memory' %} </span>: {{ i.mf }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Use memory' %} </span>: {{ i.mu }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Install' %} </span>: {{ i.pt }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Date updated' %} </span>: {{ i.date_updated }}</p>
+                                </div>
+
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#{% include 'assets/_gateway_test_modal.html' %}#}
+{% endblock %}
+{% block content_bottom_left %}{% endblock %}
+{% block custom_foot_js %}
+<script>
+</script>
+{% endblock %}

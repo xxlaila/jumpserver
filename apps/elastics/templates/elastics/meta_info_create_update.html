@@ -22,6 +22,50 @@
     {% bootstrap_field form.comment layout="horizontal" %}
     {% bootstrap_field form.labels layout="horizontal" %}
 
+    <h3 id="auth_title_id">{% trans 'Default Enable' %}</h3>
+    {% block auth %}
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.health.id_for_label }}" class="col-sm-2 control-label">{% trans 'Health' %}</label>
+            <div class="col-sm-8">
+                {{ form.health}}
+            </div>
+        </div>
+    </div>
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.node.id_for_label }}" class="col-sm-2 control-label">{% trans 'Node' %}</label>
+            <div class="col-sm-8">
+                {{ form.node}}
+            </div>
+        </div>
+    </div>
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.alter.id_for_label }}" class="col-sm-2 control-label">{% trans 'Alter' %}</label>
+            <div class="col-sm-8">
+                {{ form.alter}}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <h3>{% trans 'Other' %}</h3>
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.setting.id_for_label }}" class="col-sm-2 control-label">{% trans 'Setting' %}</label>
+            <div class="col-sm-8">
+                {{ form.setting}}
+            </div>
+        </div>
+    </div>
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.index.id_for_label }}" class="col-sm-2 control-label">{% trans 'Index' %}</label>
+            <div class="col-sm-8">
+                {{ form.index}}
+            </div>
+        </div>
+    </div>
 
     <div class="hr-line-dashed"></div>
     <div class="form-group">
@@ -85,4 +129,3 @@ $(document).ready(function () {
  })
 </script>
 {% endblock %}
-

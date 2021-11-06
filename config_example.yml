@@ -126,3 +126,7 @@ REDIS_PORT: 6379
 #
 # Windows 登录跳过手动输入密码
 # WINDOWS_SKIP_ALL_MANUAL_PASSWORD: False
+
+# 飞书机器人通知
+FEISHU_KEY_WORDS: [elk]
+FEISHU_WEBHOOK: 'https://open.feishu.cn/open-apis/bot/v2/hook/a9f9fa82-9515-2121212'

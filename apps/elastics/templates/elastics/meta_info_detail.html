@@ -2,6 +2,11 @@
 {% load static %}
 {% load i18n %}
 
+{% block custom_head_css_js %}
+    <link href='{% static "css/plugins/sweetalert/sweetalert.css" %}' rel="stylesheet">
+    <script src='{% static "js/plugins/sweetalert/sweetalert.min.js" %}'></script>
+{% endblock %}
+
 {% block content %}
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
@@ -9,24 +14,33 @@
                 <div class="ibox float-e-margins">
                     <div class="panel-options">
                         <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Detail' %} </a>
+                            <li>
+                                <a href="{% url 'elastics:meta-info-detail' pk=meteinfo.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Meta info detail' %} </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:basic-cluster-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %} </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:cluster-remote-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-gavel"></i> {% trans 'Cluster remote list' %} </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:node-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-server"></i> {% trans 'Node list' %} </a>
                             </li>
                             <li class="pull-right">
-                                <a class="btn btn-outline btn-default" href="{% url 'elastics:meta-info-update' pk=object.id %}"><i class="fa fa-edit"></i>{% trans 'Update' %}</a>
+                                <a class="btn btn-outline btn-default" href="{% url 'elastics:meta-info-update' pk=meteinfo.id %}"><i class="fa fa-edit"></i>{% trans 'Update' %}</a>
                             </li>
                             <li class="pull-right">
-                                <a class="btn btn-outline btn-danger btn-del btn-delete-domain">
+                                <a class="btn btn-outline btn-danger btn-delete-asset">
                                     <i class="fa fa-trash-o"></i>{% trans 'Delete' %}
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="tab-content">
-                        <div class="col-sm-8" style="padding-left: 0;">
+                        <div class="col-sm-8" style="padding-left: 0">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <span class="label"><b>{{ object.name }}</b></span>
+                                    <span class="label"><b>{{ meteinfo.name }}</b></span>
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
                                             <i class="fa fa-chevron-up"></i>
@@ -46,113 +60,425 @@
                                         <tbody>
                                         <tr class="no-borders-tr">
                                             <td>{% trans 'Name' %}:</td>
-                                            <td><b>{{ object.name }}</b></td>
+                                            <td><b>{{ meteinfo.name }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Env' %}:</td>
-                                            <td><b>{{ object.env }}</b></td>
+                                            <td><b>{{ meteinfo.env }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Address' %}:</td>
-                                            <td><b>{{ object.address }}</b></td>
+                                            <td><b>{{ meteinfo.address }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Username' %}:</td>
-                                            <td><b>{{ object.username }}</b></td>
+                                            <td><b>{{ meteinfo.username }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Password' %}:</td>
-                                            <td><b>{{ object.password }}</b></td>
+                                            <td><b>{{ meteinfo.password }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Kibana addr' %}:</td>
-                                            <td><b>{{ object.kibana }}</b></td>
+                                            <td><b>{{ meteinfo.kibana }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Kafka addr' %}:</td>
-                                            <td><b>{{ object.kafka }}</b></td>
+                                            <td><b>{{ meteinfo.kafka }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Cloud' %}:</td>
-                                            <td><b>{{ object.cloud }}</b></td>
+                                            <td><b>{{ meteinfo.cloud }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Labels' %}:</td>
-                                            <td><b>{{ object.labels }}</b></td>
+                                            <td><b>{{ meteinfo.labels }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Health check' %}:</td>
+                                            <td><b>{{ meteinfo.health|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Default Setting' %}:</td>
+                                            <td><b>{{ meteinfo.setting|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Alter status' %}:</td>
+                                            <td><b>{{ meteinfo.alter|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Index status' %}:</td>
+                                            <td><b>{{ meteinfo.index|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Node status' %}:</td>
+                                            <td><b>{{ meteinfo.node|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Created by' %}:</td>
+                                            <td><b>{{ meteinfo.created_by }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Date created' %}:</td>
-                                            <td><b>{{ object.date_created }}</b></td>
+                                            <td><b>{{ meteinfo.date_created|date:"Y-m-j H:i:s" }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Comment' %}:</td>
-                                            <td><b>{{ object.comment }}</b></td>
-                                        </tr>
-                                         <tr>
-                                            <td>{% trans 'Created by' %}:</td>
-                                            <td><b>{{ object.created_by }}</b></td>
+                                            <td><b>{{ meteinfo.comment }}</b></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+
+                        {% if user.is_superuser or user.is_org_admin %}
+                        <div class="col-sm-4" style="padding-left: 0;padding-right: 0">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'Basic check' %}
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td>{% trans 'Network check' %}:</td>
+                                            <td>
+                                                <span class="pull-right">
+                                                    <button type="button" class="btn btn-primary btn-xs" id="btn_refresh_asset" style="width: 54px">{% trans 'Refresh' %}</button>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Port connective' %}:</td>
+                                            <td>
+                                                <span class="pull-right">
+                                                    <button type="button" class="btn btn-primary btn-xs" id="btn-test-is-alive" style="width: 54px">{% trans 'Test' %}</button>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!--aa-->
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'Quick modify' %}
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Health check' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.health %} checked {% endif %}  class="onoffswitch-checkbox" id="health">
+                                                          <label class="onoffswitch-label" for="health">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Default Setting' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.setting %} checked {% endif %}  class="onoffswitch-checkbox" id="setting">
+                                                          <label class="onoffswitch-label" for="setting">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Alter status' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.alter %} checked {% endif %}  class="onoffswitch-checkbox" id="alter">
+                                                          <label class="onoffswitch-label" for="alter">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Index status' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.index %} checked {% endif %}  class="onoffswitch-checkbox" id="index">
+                                                          <label class="onoffswitch-label" for="index">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Node status' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.node %} checked {% endif %}  class="onoffswitch-checkbox" id="node">
+                                                          <label class="onoffswitch-label" for="node">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'Labels' %}
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="tag-list" style="padding: 0">
+                                        <li ><a href=""><i class="fa fa-tag"></i> {{ meteinfo.labels }}:{{ meteinfo.labels }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
-{% block content_bottom_left %}{% endblock %}
 {% block custom_foot_js %}
 <script>
-function initTable() {
-    var options = {
-        ele: $('#domain_list_table'),
-        columnDefs: [
-            {targets: 1, createdCell: function (td, cellData, rowData) {
-                var detail_btn = '<a href="{% url "elastics:meta-info-detail" pk=DEFAULT_PK %}">' + cellData + '</a>';
-                $(td).html(detail_btn.replace('{{ DEFAULT_PK }}', rowData.id));
-             }},
-
-            {targets: 5, createdCell: function (td, cellData, rowData) {
-                var update_btn = '<a href="{% url "elastics:meta-info-update" pk=DEFAULT_PK %}" class="btn btn-xs btn-info">{% trans "Update" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
-                var del_btn = '<a class="btn btn-xs btn-danger m-l-xs btn-delete" data-uid="{{ DEFAULT_PK }}">{% trans "Delete" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
-                $(td).html(update_btn + del_btn)
-             }}
-        ],
-        ajax_url: '{% url "api-elastics:meta-info-list" %}',
-        columns: [
-            {data: "id" }, {data: "name" }, {data: "env" }, {data: "address"},
-            {data: "kibana"}, {data: "cloud"}, {data: "comment"},
-            {data: "id"}
-        ],
-        op_html: $('#actions').html()
+jumpserver.nodes_selected = {};
+function updateAssetNodes(nodes) {
+    var the_url = "{% url 'api-elastics:meta-info-detail' pk=meteinfo.id %}";
+    var body = {
+        nodes: Object.assign([], nodes)
     };
-    jumpserver.initDataTable(options);
+    var success = function(data) {
+        // remove all the selected groups from select > option and rendered ul element;
+        $('.select2-selection__rendered').empty();
+        $('#groups_selected').val('');
+        $.map(jumpserver.nodes_selected, function(group_name, index) {
+            $('#opt_' + index).remove();
+            // change tr html of user groups.
+            $('#add-asset2group tbody').append(
+                '<tr>' +
+                '<td><b class="bdg_node" data-gid="' + index + '">' + group_name + '</b></td>' +
+                '<td><button class="btn btn-danger btn-xs pull-right btn-leave-node" type="button"><i class="fa fa-minus"></i></button></td>' +
+                '</tr>'
+            )
+        });
+        // clear jumpserver.groups_selected
+        jumpserver.nodes_selected = {};
+    };
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success: success
+    });
 }
-$(document).ready(function(){
-    initTable();
-})
-.on('click', '.btn-delete', function () {
+
+function zxctest() {
+    var the_url = "{% url 'api-elastics:metainfo-task-create' pk=meteinfo.id %}";
+    $("#btn_refresh_asset").on("click", function () {
+        requestApi({
+            url: the_url,
+            method: 'POST',
+            data: {action: "refresh"}
+        })
+    })
+}
+
+function refreshMetainfo() {
+    var the_url = "{% url 'api-elastics:metainfo-task-create' pk=meteinfo.id %}";
+    var success = function(data) {
+        var task_id = data.task;
+        showCeleryTaskLog(task_id);
+    };
+    requestApi({
+        url: the_url,
+        success: success,
+        data: {action: "refresh"},
+        method: 'POST'
+    });
+}
+
+
+$(document).ready(function () {
+    nodesSelect2Init(".nodes-select2")
+    .on('select2:select', function(evt) {
+        var data = evt.params.data;
+        jumpserver.nodes_selected[data.id] = data.text;
+    }).on('select2:unselect', function(evt) {
+        var data = evt.params.data;
+        delete jumpserver.nodes_selected[data.id]
+    });
+}).on('click', '#health', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'health': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(10) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(10) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(10) > td:last >b").html('False');
+    }
+}).on('click', '#setting', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'setting': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(11) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(11) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(11) > td:last >b").html('False');
+    }
+}).on('click', '#alter', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'alter': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(12) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(12) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(12) > td:last >b").html('False');
+    }
+}).on('click', '#index', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'index': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(13) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(13) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(13) > td:last >b").html('False');
+    }
+}).on('click', '#node', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'node': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").html('False');
+    }
+}).on('click', '#btn-update-nodes', function () {
+    if (Object.keys(jumpserver.nodes_selected).length === 0) {
+       return false;
+    }
+    var nodes = $('.bdg_node').map(function() {
+        return $(this).data('gid');
+    }).get();
+    $.map(jumpserver.nodes_selected, function(value, index) {
+        nodes.push(index);
+        $('#opt_' + index).remove();
+    });
+    updateAssetNodes(nodes)
+}).on('click', '.btn-leave-node', function() {
     var $this = $(this);
-    var $data_table = $('#meta_info_list_table').DataTable();
-    var name = $(this).closest("tr").find(":nth-child(2)").children('a').html();
-    var uid = $this.data('uid');
-    var the_url = '{% url "api-elastics:meta-info-detail" pk=DEFAULT_PK %}'.replace('{{ DEFAULT_PK }}', uid);
-    objectDelete($this, name, the_url);
-    setTimeout( function () {
-        $data_table.ajax.reload();
-    }, 3000);
-})
-.on('click', '.btn-delete-domain', function () {
+    var $tr = $this.closest('tr');
+    var $badge = $tr.find('.bdg_node');
+    var gid = $badge.data('gid');
+    var group_name = $badge.html() || $badge.text();
+    $('#groups_selected').append(
+        '<option value="' + gid + '" id="opt_' + gid + '">' + group_name + '</option>'
+    );
+    $tr.remove();
+    var groups = $('.bdg_node').map(function () {
+        return $(this).data('gid');
+    }).get();
+    updateAssetNodes(groups)
+}).on('click', '.btn-delete-asset', function () {
     var $this = $(this);
-    var name = "{{ object.name }}";
-    var uid = "{{ object.id }}";
+    var name = "{{ asset.hostname }}";
+    var uid = "{{ asset.id }}";
     var the_url = '{% url "api-elastics:meta-info-detail" pk=DEFAULT_PK %}'.replace('{{ DEFAULT_PK }}', uid);
     var redirect_url = "{% url 'elastics:meta-info-list' %}";
     objectDelete($this, name, the_url, redirect_url);
+}).on('click', '#btn_refresh_asset11', function () {
+    refreshMetainfo()
+}).on('click', '#btn-test-is-alive', function () {
+    var the_url = "{% url 'api-elastics:metainfo-task-create' pk=meteinfo.id %}";
+    var success = function(data) {
+        var task_id = data.task;
+        showCeleryTaskLog(task_id);
+    };
+    requestApi({
+        url: the_url,
+        method: 'POST',
+        data: {action: "test"},
+        success: success
+    });
 })
-;
+
 </script>
 {% endblock %}
