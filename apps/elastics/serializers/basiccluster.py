@@ -17,7 +17,7 @@ class BasicClusterSerializer(BulkOrgResourceModelSerializer):
         model = BasicCluster
         list_serializer_class = AdaptedBulkListSerializer
         fields = [
-            'id', 'name', 'status', 'status', 'st', 'sp', 'incount', 'indocs',
-            'instore', 'nt', 'nc', 'nd', 'ni', 'nm', 'nr', 'mt', 'mf', 'mu', 'pt', 'metainfo',
+            'id', 'name', 'status', 'st', 'sp', 'incount', 'indocs','instore',
+            'nt', 'nc', 'nd', 'ni', 'nm', 'nr', 'mt', 'mf', 'mu', 'pt', 'metainfo',
             'date_updated'
         ]

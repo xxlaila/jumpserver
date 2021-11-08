@@ -20,12 +20,14 @@ from orgs.mixins import generics
 logger = get_logger(__file__)
 __all__ = ["BasicclusterViewSet", "BasicClusterListApi"]
 
+
 class BasicclusterViewSet(OrgBulkModelViewSet):
     model = BasicCluster
-    filter_fields = ("metainfo__name", "name", "status")
+    filter_fields = ("metainfo__name", "name", "status", "metainfo")
     search_fields = ("metainfo__name", "name", "status")
     permission_classes = (IsOrgAdmin,)
     serializer_class = serializers.BasicClusterSerializer
+
 
 
 class BasicClusterListApi(generics.ListAPIView):

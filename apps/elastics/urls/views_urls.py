@@ -27,7 +27,11 @@ urlpatterns = [
     path('meta-info/<uuid:pk>/cluterremote/', views.ClusterRemoteListView.as_view(), name='cluster-remote-list'),
     path('meta-info/<uuid:pk>/node/', views.NodeListView.as_view(), name='node-list'),
     path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
-
+    path('node/<uuid:pk>/update/', views.NodeUpdateView.as_view(), name='node-update'),
+    path('cluterremote/<uuid:pk>/update/', views.ClusterRemoteInfoUpdateView.as_view(), name='cluster-remote-update'),
+    path('default-settings/<uuid:pk>/update/', views.DefaultSettingsUpdateView.as_view(), name='default-settings-update'),
+    path('basic-cluster/<uuid:pk>/update/', views.BasicClusterUpdateView.as_view(),
+         name='basic-cluster-update'),
 
 
     path('meta-info/health', utils.get_nodes_connenct, name='meta-info-health'),

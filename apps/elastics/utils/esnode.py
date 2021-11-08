@@ -9,11 +9,14 @@ from elasticsearch import TransportError
 from ..models import EsNode, MetaInfo
 from ..utils import default_conn
 import datetime,time
-import logging
+from django.http import JsonResponse
+from common.utils import get_logger
 from celery import shared_task
 from ops.celery.decorator import (
     register_as_period_task, after_app_ready_start, after_app_shutdown_clean_periodic
 )
+
+logger = get_logger(__name__)
 
 display = ('id', 'ip', 'name', 'disk.total', 'disk.used', 'disk.avail', 'ram.current', 'ram.percent', 'ram.max',
            'cpu', 'hp', 'fm', 'sm', 'sc', 'qcm', 'sqti', 'uptime', 'pid', 'nodeRole', 'jdk', 'port', 'http',
@@ -23,9 +26,11 @@ params = {'format': 'json', 'full_id': 'true', 'master_timeout': '180s', 'bytes'
 
 @shared_task
 @register_as_period_task(interval=600)
-def get_nodes_connenct(request):
+def get_nodes_connenct(basics=None):
     try:
-        basics = MetaInfo.objects.filter(node=True)
+        obj = []
+        if basics is None:
+            basics = MetaInfo.objects.filter(node=True)
         for k in basics:
             try:
                 data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cat.nodes(
@@ -38,13 +43,15 @@ def get_nodes_connenct(request):
                     raise ValueError("Incorrect account password")
                 else:
                     raise ValueError("connent timeout")
-            write_node_params(data, k)
-            # return data, k
+            obj.append(write_node_params(data, k))
+        return ({"status": obj})
     except MetaInfo.DoesNotExist:
         return False
 
 def write_node_params(results, k):
     if results is not None:
+        value = {}
+        ack = []
         for result in results:
             data = {"name": result['name'], "ip": result['ip'], "disktotal": result['disk.total'],
                     "diskused": result['disk.used'], "diskavail": result['disk.avail'], "ramcurrent": result['ram.current'],
@@ -55,10 +62,21 @@ def write_node_params(results, k):
                 # obj = Node.objects.filter(date_updated__gte=datetime.datetime.now().date(), metainfo_id=k.id, ip=data['ip']).first()
                 obj = EsNode.objects.filter(metainfo_id=k.id, ip=data['ip']).first()
                 if obj:
-                    EsNode.objects.filter(id=obj.id).update(**data)
+                    try:
+                        EsNode.objects.filter(id=obj.id).update(**data)
+                    except Exception as e:
+                        logger.error(f'Update data error: {e}')
+                        return ({"status": "EsNode error"})
                 else:
-                    EsNode.objects.create(**data)
+                    try:
+                        EsNode.objects.create(**data)
+                    except Exception as e:
+                        logger.error(f'Create data error: {e}')
+                        return ({"status": "EsNode error"})
+                ack.append(obj.name)
+                value[obj.metainfo.name] = ack
             except Exception as e:
-                logging.error("Node error")
-                raise ValueError(e)
+                logger.error(f'Error getting result detail with error: {e}')
+                return {'Error': 'obj Does Not Exist.'}
+        return value
     return False

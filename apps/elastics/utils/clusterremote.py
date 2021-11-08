@@ -11,6 +11,7 @@ from ..models import BasicCluster, MetaInfo, ClusterRemote,ClusterSetting
 from ..utils import default_conn
 import datetime,time,json
 import logging
+from rest_framework.views import Response
 from django.http import JsonResponse
 from celery import shared_task
 from ops.celery.decorator import (
@@ -38,7 +39,8 @@ def get_cluster_remote():
                 obj.append(result)
             else:
                 obj.append("error")
-        return JsonResponse({"status": obj})
+        # return JsonResponse({"status": obj})
+        return Response({"status": obj})
     except MetaInfo.DoesNotExist:
         return False
 
@@ -59,6 +61,6 @@ def write_cluster_remote(results, k):
                     ack.append(obj.name)
                 value[obj.metainfo.name] = ack
             except Exception as e:
-                return ({"status": "Clusremote error", "message": 'Error: ' + str(e)})
+                return Response({"status": "Clusremote error", "message": 'Error: ' + str(e)})
         return value
     return False

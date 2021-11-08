@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 09:35+0800\n"
+"POT-Creation-Date: 2021-11-06 13:57+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -216,11 +216,12 @@ msgstr "数据库"
 #: applications/templates/applications/user_database_app_list.html:20
 #: applications/templates/applications/user_remote_app_list.html:19
 #: assets/models/asset.py:150 assets/models/asset.py:226
+#: assets/models/asset_expansion.py:70 assets/models/balanced.py:42
 #: assets/models/base.py:237 assets/models/cluster.py:29
 #: assets/models/cmd_filter.py:23 assets/models/cmd_filter.py:56
-#: assets/models/domain.py:21 assets/models/domain.py:53
-#: assets/models/group.py:23 assets/models/label.py:23
-#: assets/templates/assets/admin_user_detail.html:67
+#: assets/models/diskinfo.py:66 assets/models/domain.py:21
+#: assets/models/domain.py:53 assets/models/group.py:23
+#: assets/models/label.py:23 assets/templates/assets/admin_user_detail.html:67
 #: assets/templates/assets/admin_user_list.html:24
 #: assets/templates/assets/asset_detail.html:128
 #: assets/templates/assets/cmd_filter_detail.html:60
@@ -433,6 +434,7 @@ msgstr "提交"
 
 #: applications/templates/applications/database_app_detail.html:13
 #: applications/templates/applications/remote_app_detail.html:13
+#: assets/models/balanced.py:39
 #: assets/templates/assets/admin_user_assets.html:13
 #: assets/templates/assets/admin_user_detail.html:13
 #: assets/templates/assets/cmd_filter_detail.html:14
@@ -933,7 +935,8 @@ msgstr "元数据"
 msgid "Internal"
 msgstr "内部的"
 
-#: assets/models/asset.py:186 assets/models/domain.py:49
+#: assets/models/asset.py:186 assets/models/asset_expansion.py:56
+#: assets/models/balanced.py:27 assets/models/domain.py:49
 #: assets/serializers/asset_user.py:46
 #: assets/templates/assets/_asset_list_modal.html:47
 #: assets/templates/assets/_asset_user_list.html:20
@@ -950,8 +953,8 @@ msgstr "内部的"
 msgid "IP"
 msgstr "IP"
 
-#: assets/models/asset.py:187 assets/serializers/asset_user.py:45
-#: assets/serializers/gathered_user.py:20
+#: assets/models/asset.py:187 assets/models/asset_expansion.py:37
+#: assets/serializers/asset_user.py:45 assets/serializers/gathered_user.py:20
 #: assets/templates/assets/_asset_list_modal.html:46
 #: assets/templates/assets/_asset_user_auth_update_modal.html:9
 #: assets/templates/assets/_asset_user_auth_view_modal.html:15
@@ -1026,7 +1029,8 @@ msgstr "CPU核数"
 msgid "CPU vcpus"
 msgstr "CPU总数"
 
-#: assets/models/asset.py:214 assets/templates/assets/asset_detail.html:92
+#: assets/models/asset.py:214 assets/models/asset_expansion.py:39
+#: assets/templates/assets/asset_detail.html:92
 msgid "Memory"
 msgstr "内存"
 
@@ -1044,7 +1048,7 @@ msgstr "硬盘信息"
 msgid "OS"
 msgstr "操作系统"
 
-#: assets/models/asset.py:219
+#: assets/models/asset.py:219 assets/models/asset_expansion.py:45
 msgid "OS version"
 msgstr "系统版本"
 
@@ -1062,6 +1066,143 @@ msgstr "主机名原始"
 #: elastics/templates/elastics/meta_info_detail.html:260 templates/_nav.html:46
 msgid "Labels"
 msgstr "标签管理"
+
+#: assets/models/asset_expansion.py:38 assets/models/balanced.py:28
+msgid "Instance name"
+msgstr "实例名"
+
+#: assets/models/asset_expansion.py:40
+msgid "Cpu threads"
+msgstr "CPU线程数"
+
+#: assets/models/asset_expansion.py:41
+msgid "Virtual cpu"
+msgstr "虚拟CPU"
+
+#: assets/models/asset_expansion.py:42
+msgid "Cpu core"
+msgstr "CPU核数"
+
+#: assets/models/asset_expansion.py:43
+msgid "Number of data disks"
+msgstr "磁盘块数"
+
+#: assets/models/asset_expansion.py:44
+msgid "Single disk size"
+msgstr "单块磁盘大小"
+
+#: assets/models/asset_expansion.py:46
+msgid "Release"
+msgstr "已释放"
+
+#: assets/models/asset_expansion.py:47
+msgid "Mirror image"
+msgstr "镜像"
+
+#: assets/models/asset_expansion.py:48 assets/models/balanced.py:36
+msgid "Vpc network"
+msgstr "VPC网络"
+
+#: assets/models/asset_expansion.py:49
+msgid "Security group"
+msgstr "安全组"
+
+#: assets/models/asset_expansion.py:50 assets/models/balanced.py:29
+msgid "Virtual switch"
+msgstr "虚拟交换机"
+
+#: assets/models/asset_expansion.py:51 assets/models/balanced.py:35
+msgid "Instance type"
+msgstr "实例类型"
+
+#: assets/models/asset_expansion.py:52
+msgid "Flexible ip"
+msgstr "弹性IP"
+
+#: assets/models/asset_expansion.py:53
+msgid "Elastic ip bandwidth"
+msgstr "弹性ip带宽"
+
+#: assets/models/asset_expansion.py:54
+msgid "Bandwidth billing method"
+msgstr "带宽计费方式"
+
+#: assets/models/asset_expansion.py:57
+msgid "Private network card"
+msgstr "私有网卡"
+
+#: assets/models/asset_expansion.py:58
+msgid "Private network card mac"
+msgstr "私有网卡mac"
+
+#: assets/models/asset_expansion.py:59 assets/models/balanced.py:37
+#: assets/models/diskinfo.py:58
+msgid "Area"
+msgstr "区域"
+
+#: assets/models/asset_expansion.py:60 assets/models/diskinfo.py:49
+msgid "Availability zone"
+msgstr "可用去"
+
+#: assets/models/asset_expansion.py:61 assets/models/balanced.py:31
+#: assets/models/diskinfo.py:47
+msgid "Billing method"
+msgstr "计费方式"
+
+#: assets/models/asset_expansion.py:62
+msgid "Operation and maintenance principal"
+msgstr "运维负责人"
+
+#: assets/models/asset_expansion.py:63
+msgid "Development Director"
+msgstr "开发负责人"
+
+#: assets/models/asset_expansion.py:64
+msgid "Department"
+msgstr "部门"
+
+#: assets/models/asset_expansion.py:65 assets/models/balanced.py:38
+#: assets/models/diskinfo.py:62 audits/models.py:88
+#: audits/templates/audits/login_log_list.html:64
+#: elastics/models/es_cluster.py:23 elastics/models/es_cluster.py:69
+#: elastics/templates/elastics/basic_cluster_list.html:74
+#: elastics/templates/elastics/cluster_remote_list.html:77
+#: tickets/templates/tickets/ticket_detail.html:34
+#: tickets/templates/tickets/ticket_list.html:36
+#: tickets/templates/tickets/ticket_list.html:104
+msgid "Status"
+msgstr "状态"
+
+#: assets/models/asset_expansion.py:66 assets/models/balanced.py:40
+#: assets/models/diskinfo.py:64
+msgid "Creation time"
+msgstr "创建时间"
+
+#: assets/models/asset_expansion.py:67 assets/models/diskinfo.py:63
+msgid "Expired"
+msgstr "过期时间"
+
+#: assets/models/asset_expansion.py:68
+msgid "Start Time"
+msgstr "开始时间"
+
+#: assets/models/asset_expansion.py:69 assets/models/balanced.py:41
+#: assets/models/base.py:239 assets/models/diskinfo.py:65
+#: assets/models/gathered_user.py:20
+#: assets/templates/assets/cmd_filter_detail.html:68 common/mixins/models.py:51
+#: elastics/models/es_cluster.py:40 elastics/models/es_cluster.py:56
+#: elastics/models/es_cluster.py:77 elastics/models/esnode.py:36
+#: elastics/templates/elastics/basic_cluster_list.html:122
+#: elastics/templates/elastics/cluster_remote_list.html:98
+#: elastics/templates/elastics/node_detail.html:112 ops/models/adhoc.py:39
+msgid "Date updated"
+msgstr "更新日期"
+
+#: assets/models/asset_expansion.py:78
+#, fuzzy
+#| msgid "Asset permission"
+msgid "AssetExpansion"
+msgstr "资产授权"
 
 #: assets/models/authbook.py:18
 msgid "Bulk delete deny"
@@ -1086,6 +1227,28 @@ msgstr "版本"
 msgid "AuthBook"
 msgstr ""
 
+#: assets/models/balanced.py:26
+msgid "Instance id"
+msgstr "实例ID"
+
+#: assets/models/balanced.py:30
+#, fuzzy
+#| msgid "Enterprise edition"
+msgid "Enterprise Resource Group"
+msgstr "企业资源组"
+
+#: assets/models/balanced.py:32
+msgid "Main zone"
+msgstr "主区域"
+
+#: assets/models/balanced.py:33
+msgid "Backup zone"
+msgstr "备区域"
+
+#: assets/models/balanced.py:34
+msgid "Network Type"
+msgstr "网络类型"
+
 #: assets/models/base.py:235
 msgid "SSH private key"
 msgstr "ssh密钥"
@@ -1093,16 +1256,6 @@ msgstr "ssh密钥"
 #: assets/models/base.py:236
 msgid "SSH public key"
 msgstr "ssh公钥"
-
-#: assets/models/base.py:239 assets/models/gathered_user.py:20
-#: assets/templates/assets/cmd_filter_detail.html:68 common/mixins/models.py:51
-#: elastics/models/es_cluster.py:40 elastics/models/es_cluster.py:56
-#: elastics/models/es_cluster.py:77 elastics/models/esnode.py:36
-#: elastics/templates/elastics/basic_cluster_list.html:122
-#: elastics/templates/elastics/cluster_remote_list.html:98
-#: elastics/templates/elastics/node_detail.html:112 ops/models/adhoc.py:39
-msgid "Date updated"
-msgstr "更新日期"
 
 #: assets/models/cluster.py:20
 msgid "Bandwidth"
@@ -1210,6 +1363,58 @@ msgstr "每行一个命令"
 #: assets/models/cmd_filter.py:63
 msgid "Command filter rule"
 msgstr "命令过滤规则"
+
+#: assets/models/diskinfo.py:42
+#, fuzzy
+#| msgid "Disk info"
+msgid "Disk id"
+msgstr "硬盘信息"
+
+#: assets/models/diskinfo.py:43
+#, fuzzy
+#| msgid "Disk avail"
+msgid "Disk device"
+msgstr "硬盘大小"
+
+#: assets/models/diskinfo.py:44
+#, fuzzy
+#| msgid "Doc type"
+msgid "Disk type"
+msgstr "文档类型"
+
+#: assets/models/diskinfo.py:45
+#, fuzzy
+#| msgid "Disk used"
+msgid "Disk size"
+msgstr "禁用用户"
+
+#: assets/models/diskinfo.py:51
+#, fuzzy
+#| msgid "assets"
+msgid "assetexpansion"
+msgstr "资产管理"
+
+#: assets/models/diskinfo.py:53
+#, fuzzy
+#| msgid "Released"
+msgid "Release method"
+msgstr "已释放"
+
+#: assets/models/diskinfo.py:55
+msgid "Automatic snapshot strategy"
+msgstr ""
+
+#: assets/models/diskinfo.py:57
+msgid "Snapshot policy function"
+msgstr ""
+
+#: assets/models/diskinfo.py:59
+msgid "Disk attributes"
+msgstr ""
+
+#: assets/models/diskinfo.py:60
+msgid "Whether to encrypt"
+msgstr ""
 
 #: assets/models/domain.py:61 assets/templates/assets/domain_detail.html:16
 #: assets/templates/assets/domain_detail.html:59
@@ -1774,7 +1979,7 @@ msgid "If use nat, set the ssh real port"
 msgstr "如果使用了nat端口映射，请设置为ssh真实监听的端口"
 
 #: assets/templates/assets/_node_detail_modal.html:11
-#: assets/templates/assets/asset_list.html:124 elastics/views/esnode.py:58
+#: assets/templates/assets/asset_list.html:124 elastics/views/esnode.py:50
 msgid "Node detail"
 msgstr "节点详情"
 
@@ -2496,16 +2701,6 @@ msgstr "多因子认证"
 msgid "Reason"
 msgstr "原因"
 
-#: audits/models.py:88 audits/templates/audits/login_log_list.html:64
-#: elastics/models/es_cluster.py:23 elastics/models/es_cluster.py:69
-#: elastics/templates/elastics/basic_cluster_list.html:74
-#: elastics/templates/elastics/cluster_remote_list.html:77
-#: tickets/templates/tickets/ticket_detail.html:34
-#: tickets/templates/tickets/ticket_list.html:36
-#: tickets/templates/tickets/ticket_list.html:104
-msgid "Status"
-msgstr "状态"
-
 #: audits/models.py:89
 msgid "Date login"
 msgstr "登录日期"
@@ -3216,7 +3411,7 @@ msgstr "跨集群列表"
 #: elastics/templates/elastics/meta_info_detail.html:27
 #: elastics/templates/elastics/node_detail.html:52
 #: elastics/templates/elastics/node_list.html:33
-#: elastics/templates/elastics/node_list.html:44 elastics/views/esnode.py:38
+#: elastics/templates/elastics/node_list.html:44 elastics/views/esnode.py:34
 msgid "Node list"
 msgstr "节点角色"
 
@@ -3285,7 +3480,7 @@ msgstr "创建原集群"
 #: elastics/views/basiccluster.py:88 elastics/views/basiccluster.py:112
 #: elastics/views/cloudinfor.py:33 elastics/views/cloudinfor.py:49
 #: elastics/views/cloudinfor.py:66 elastics/views/cloudinfor.py:80
-#: elastics/views/esnode.py:37 elastics/views/esnode.py:57
+#: elastics/views/esnode.py:33 elastics/views/esnode.py:49
 #: elastics/views/meteinfo.py:34 elastics/views/meteinfo.py:52
 #: elastics/views/meteinfo.py:69 elastics/views/meteinfo.py:84
 #: templates/_nav.html:76
@@ -6621,9 +6816,6 @@ msgstr "用户授权数据库应用"
 #~ msgid "Tips: The asset information is always covered"
 #~ msgstr "提示：资产信息总是被覆盖"
 
-#~ msgid "Available"
-#~ msgstr "有效"
-
 #~ msgid "Unavailable"
 #~ msgstr "无效"
 
@@ -6660,17 +6852,11 @@ msgstr "用户授权数据库应用"
 #~ msgid "Synced"
 #~ msgstr "已同步"
 
-#~ msgid "Released"
-#~ msgstr "已释放"
-
 #~ msgid "Sync task"
 #~ msgstr "同步任务"
 
 #~ msgid "Sync instance task history"
 #~ msgstr "同步实例任务历史"
-
-#~ msgid "Instance"
-#~ msgstr "实例"
 
 #~ msgid "Alibaba Cloud"
 #~ msgstr "阿里云"
@@ -6885,9 +7071,6 @@ msgstr "用户授权数据库应用"
 #~ msgid "Standard edition"
 #~ msgstr "标准版"
 
-#~ msgid "Enterprise edition"
-#~ msgstr "企业版"
-
 #~ msgid "Ultimate edition"
 #~ msgstr "旗舰版"
 
@@ -6920,9 +7103,6 @@ msgstr "用户授权数据库应用"
 
 #~ msgid "Corporation"
 #~ msgstr "公司"
-
-#~ msgid "Expired"
-#~ msgstr "过期时间"
 
 #~ msgid "Edition"
 #~ msgstr "版本"

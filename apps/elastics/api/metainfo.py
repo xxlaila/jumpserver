@@ -17,7 +17,9 @@ from ..tasks import (
 )
 
 
-__all__ = ['MetaInfoViewSet', 'MetaInfoTaskCreateApi']
+__all__ = ['MetaInfoViewSet',
+           'MetaInfoTaskCreateApi'
+           ]
 
 class MetaInfoViewSet(OrgBulkModelViewSet):
     model = MetaInfo

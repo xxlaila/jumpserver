@@ -15,10 +15,10 @@ from ..models import MetaInfo
 
 
 logger = get_logger(__file__)
-__all__ = [
-    'test_mete_info_network_manual', 'test_mete_info_port_manual',
-    # 'test_mete_info_network_util', 'test_mete_info_port_util'
-]
+# __all__ = [
+#     'test_mete_info_network_manual', 'test_mete_info_port_manual',
+#     # 'test_mete_info_network_util', 'test_mete_info_port_util'
+# ]
 
 # @shared_task
 # @org_aware_func("meteinfo")

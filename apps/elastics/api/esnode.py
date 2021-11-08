@@ -18,14 +18,6 @@ __all__ = [
     'EsNodeViewSet'
 ]
 
-# class EsNodeViewSet(OrgBulkModelViewSet):
-#     model = EsNode
-#     filter_fields = ("name", "ip")
-#     search_fields = filter_fields
-#     permission_classes = (IsOrgAdmin,)
-#     serializer_class = serializers.EsNodeSerializer
-
-
 class EsNodeViewSet(OrgBulkModelViewSet):
     model = EsNode
     filter_fields = ("metainfo__name", "name", "ip", "metainfo")

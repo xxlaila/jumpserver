@@ -39,7 +39,7 @@
                                 </a>
                             </li>
                             <li class="pull-right">
-                                <a class="btn btn-outline btn-default" href="#"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
+                                <a class="btn btn-outline btn-default" href="{% url 'elastics:cluster-remote-update' %}"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
                             </li>
                         </ul>
                     </div>
@@ -80,7 +80,7 @@
                                         <p><span class="font1">{% trans 'Connection timed out' %} </span>: {{ i.conn_timeout }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Skip cluster' %} </span>: {{ i.skip_una }}</p>
+                                        <p><span class="font1">{% trans 'Skip cluster' %} </span>: {{ i.skip_una|yesno:"Yes,No" }}</p>
                                     </div>
                                     <div class="box">
                                         <p><span class="font1">{% trans 'Connection address' %} </span>: {{ i.seeds }}</p>
@@ -95,7 +95,7 @@
                                         <p><span class="font1">{% trans 'Proxy model' %} </span>: {{ i.proxy_add }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Date updated' %} </span>: {{ i.date_updated }}</p>
+                                        <p><span class="font1">{% trans 'Date updated' %} </span>: {{ i.date_updated|date:"Y-m-j H:i:s" }}</p>
                                     </div>
                                 </div>
                             </div>

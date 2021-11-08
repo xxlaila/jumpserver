@@ -26,6 +26,8 @@ router.register(r'nodes', api.EsNodeViewSet, 'node')
 urlpatterns = [
     path('metainfo/<uuid:pk>/tasks/', api.MetaInfoTaskCreateApi.as_view(), name='metainfo-task-create'),
     path('metainfo/<uuid:pk>/basiccluster/', api.BasicClusterListApi.as_view(), name='basic-cluster-list'),
+    path('gateways/<uuid:pk>/test-serverport/', api.ServerPortConnectApi.as_view(), name='test-server-port'),
+    path('gateways/<uuid:pk>/test-network/', api.ServerPingApi.as_view(), name='test-server-ping'),
 
 ]
 

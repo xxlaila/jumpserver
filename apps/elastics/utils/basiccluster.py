@@ -7,6 +7,7 @@
 """
 
 from elasticsearch import TransportError
+from rest_framework.views import Response
 from ..models import BasicCluster, MetaInfo, ClusterRemote,ClusterSetting
 from ..utils import default_conn
 import datetime,time,json
@@ -18,9 +19,11 @@ from ops.celery.decorator import (
 
 @shared_task
 @register_as_period_task(interval=600)
-def get_default_setting():
+def get_default_setting(basics=None):
     try:
-        basics = MetaInfo.objects.filter(setting=True)
+        obj = []
+        if basics is None:
+            basics = MetaInfo.objects.filter(setting=True)
         for k in basics:
             try:
                 data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.stats()
@@ -31,13 +34,18 @@ def get_default_setting():
                     raise ValueError("Incorrect account password")
                 else:
                     raise ValueError("connent timeout")
-            write_default_setting(data, k)
-            # return data, k
+            result = write_default_setting(data, k)
+            if result:
+                obj.append(result)
+            else:
+                obj.append("error")
+        return Response({"status": obj})
     except MetaInfo.DoesNotExist:
         return False
 
 def write_default_setting(results, k):
     if results is not None:
+        ack = {}
         node = results["nodes"]["count"]
         mem = results["nodes"]["os"]["mem"]
         indi = results["indices"]
@@ -52,20 +60,24 @@ def write_default_setting(results, k):
                                               metainfo_id=k.id).first()
             if obj:
                 BasicCluster.objects.filter(id=obj.id).update(**data)
+                ack.update({"update ": obj.name})
             else:
                 BasicCluster.objects.create(**data)
-            # return json.loads({"status": "%s update success" % k.name})
+                ack.update({"create  ": obj.name})
         except Exception as e:
             logging.error("Clubrief error")
             raise ValueError(e)
+        return ack
     return False
 
 
 class DefaultSettings(object):
 
-    def check_setting_connent(self):
+    def check_setting_connent(self, _settins=None):
         try:
-            _settins = MetaInfo.objects.filter(setting=True)
+            obj = []
+            if _settins is None:
+                _settins = MetaInfo.objects.filter(setting=True)
             for k in _settins:
                 try:
                     data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().get_settings(include_defaults='true')
@@ -76,14 +88,18 @@ class DefaultSettings(object):
                         raise ValueError("Incorrect account password")
                     else:
                         raise ValueError("connent timeout")
-                return data, k
+                result = self.get_check_setting_data(data, k)
+                if result:
+                    obj.append(result)
+                else:
+                    obj.append("error")
+            return Response({"status": obj})
         except MetaInfo.DoesNotExist:
             return False
 
     @shared_task
     @register_as_period_task(interval=600)
-    def get_check_setting_data(self):
-        results, k = self.check_setting_connent()
+    def get_check_setting_data(self, results, k):
         f_data = {"persis": results["persistent"], "tran": results["transient"],
                  "def_clus": results["defaults"]["cluster"],
                  "def_xpack": results["defaults"]["xpack"]["flattened"],
@@ -94,16 +110,18 @@ class DefaultSettings(object):
                 ClusterSetting.objects.filter(id=data.id).update(**f_data)
             else:
                 ClusterSetting.objects.create(**f_data)
-            return json.loads({"status": "%s update success" % k.name})
+            return Response({"status": "%s update success" % k.name})
         except Exception as e:
             logging.error("Settinginfo error")
             raise ValueError(e)
 
 
 class ClusterRemoteInfo:
-    def cluster_remote_connent(self):
+    def cluster_remote_connent(self, _settins=None):
         try:
-            _settins = MetaInfo.objects.filter(setting=True)
+            obj = []
+            if _settins is None:
+                _settins = MetaInfo.objects.filter(setting=True)
             for k in _settins:
                 try:
                     data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.remote_info()
@@ -114,14 +132,18 @@ class ClusterRemoteInfo:
                         raise ValueError("Incorrect account password")
                     else:
                         raise ValueError("connent timeout")
-                return data, k
+                result = self.get_cluster_remote(data, k)
+                if result:
+                    obj.append(result)
+                else:
+                    obj.append("error")
+            return Response({"status": obj})
         except MetaInfo.DoesNotExist:
             return False
 
     @shared_task
     @register_as_period_task(interval=600)
-    def get_cluster_remote(self):
-        results, k = self.cluster_remote_connent()
+    def get_cluster_remote(self, results, k):
         if results is not None:
             for key, vaule in results.items():
                 data = {"name": key, "mode": vaule["mode"], "conn": vaule["connected"], "conn_timeout": vaule["initial_connect_timeout"],
@@ -129,7 +151,8 @@ class ClusterRemoteInfo:
                         "max_conn": vaule["max_connections_per_cluster"], "proxy_add": "", "metainfo_id": k.id}
                 try:
                     obj, created = ClusterRemote.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)
-                    return json.loads({"status": "%s update success: %s" % (data['name'], obj)})
+                    if obj:
+                        return Response({"status": "%s update success: %s" % (data['name'], obj)})
                 except Exception as e:
-                    return ({"status": "Clusremote error", "message": 'Error: ' + str(e)})
+                    return Response({"status": "Clusremote error", "message": 'Error: ' + str(e)})
         return False

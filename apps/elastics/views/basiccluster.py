@@ -15,10 +15,20 @@ from common.permissions import PermissionsMixin, IsOrgAdmin,IsOrgAdminOrAppUser
 from ..models import ClusterSetting, ClusterRemote, BasicCluster, MetaInfo
 from orgs.mixins import generics
 from .. import serializers
+from common.utils import get_logger
+from common.const import create_success_msg, update_success_msg
+from django.urls import reverse_lazy
+from rest_framework.views import APIView, Response
+from django.shortcuts import (
+    render, redirect
+)
+from ..utils import get_default_setting
 
 __all__ = (
-    "BasicClusterListView", "ClusterRemoteListView", "ClusterSettingListView"
+    "BasicClusterListView", "ClusterRemoteListView", "ClusterSettingListView",
+    "ClusterRemoteInfoUpdateView", "DefaultSettingsUpdateView", "BasicClusterUpdateView"
 )
+logger = get_logger(__name__)
 
 class BasicClusterListView(PermissionsMixin, SingleObjectMixin, TemplateView):
     template_name = 'elastics/basic_cluster_list.html'
@@ -117,5 +127,78 @@ class NodeListView(PermissionsMixin, SingleObjectMixin, TemplateView):
         kwargs.update(context)
         return super().get_context_data(**kwargs)
 
+class BasicClusterUpdateView(SingleObjectMixin, APIView):
+    model = MetaInfo
+    success_url = reverse_lazy('elastics:basic-cluster-list')
+    template_name = 'elastics/basic_cluster_list.html'
+    success_message = update_success_msg
+    permission_classes = [IsOrgAdmin]
 
+    def get_object1(self, k):
+        result = self.model.objects.filter(id=k, setting=True)
+        return result
+
+    def get(self, request, *args, **kwargs):
+        try:
+            try:
+                obj = self.get_object1(self.kwargs['pk'])
+                if obj:
+                    get_default_setting(obj)
+            except MetaInfo.DoesNotExist:
+                return Response({'Error': 'obj Does Not Exist.'}, status=404)
+            # return Response({"status": "success"}, status=200)
+        except Exception as e:
+            logger.error(f'Error getting obj detail with error: {e}')
+            return Response({'Error': 'Database error, return to previous page'}, status=500)
+        return redirect('elastics:basic-cluster-list')
+
+class DefaultSettingsUpdateView(SingleObjectMixin, APIView):
+    model = MetaInfo
+    success_url = reverse_lazy('api-elastics:node-list')
+    template_name = 'elastics/node_detail.html'
+    success_message = update_success_msg
+    permission_classes = [IsOrgAdmin]
+
+    def get_object1(self, k):
+        result = self.model.objects.filter(id=k, setting=True)
+        return result
+
+    def get(self, request, *args, **kwargs):
+        try:
+            try:
+                obj = self.get_object1(self.kwargs['pk'])
+                if obj:
+                    get_default_setting(obj)
+            except MetaInfo.DoesNotExist:
+                return Response({'Error': 'obj Does Not Exist.'}, status=404)
+            # return Response({"status": "success"}, status=200)
+            return redirect('api-elastics:node-list')
+        except Exception as e:
+            logger.error(f'Error getting obj detail with error: {e}')
+            return Response({'Error': 'Database error, return to previous page'}, status=500)
+
+class ClusterRemoteInfoUpdateView(SingleObjectMixin, APIView):
+    model = MetaInfo
+    success_url = reverse_lazy('elastics:cluster-remote-list')
+    template_name = 'elastics/cluster_remote_list.html'
+    success_message = update_success_msg
+    permission_classes = [IsOrgAdmin]
+
+    def get_object1(self, k):
+        result = self.model.objects.filter(id=k, setting=True)
+        return result
+
+    def get(self, request, *args, **kwargs):
+        try:
+            try:
+                obj = self.get_object1(self.kwargs['pk'])
+                if obj:
+                    get_default_setting(obj)
+            except MetaInfo.DoesNotExist:
+                return Response({'Error': 'obj Does Not Exist.'}, status=404)
+            # return Response({"status": "success"}, status=200)
+        except Exception as e:
+            logger.error(f'Error getting obj detail with error: {e}')
+            return Response({'Error': 'Database error, return to previous page'}, status=500)
+        return redirect('elastics:cluster-remote-list')
 
