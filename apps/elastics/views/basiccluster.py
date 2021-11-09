@@ -5,7 +5,8 @@
 @Author  : xxlaila
 @Software: PyCharm
 """
-
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic import (
     TemplateView, CreateView, UpdateView, DeleteView, DetailView
 )
@@ -22,7 +23,7 @@ from rest_framework.views import APIView, Response
 from django.shortcuts import (
     render, redirect
 )
-from ..utils import get_default_setting
+from ..utils import get_default_setting,check_setting_connent, cluster_remote_connent
 
 __all__ = (
     "BasicClusterListView", "ClusterRemoteListView", "ClusterSettingListView",
@@ -44,12 +45,18 @@ class BasicClusterListView(PermissionsMixin, SingleObjectMixin, TemplateView):
         data = self.get_object().basiccluster_set.all()
         return data
 
+    def get_cluster_setting(self):
+        # results = self.get_object().clustersetting_set.all().values('persis', 'tran', 'def_clus', 'def_xpack')
+        results = self.get_object().clustersetting_set.all()
+        return results
+
     def get_context_data(self, **kwargs):
         context = {
             'app': _('Elastics'),
             'action': _('Basic cluster list'),
             'object': self.get_object(),
             'cluster': self.cluster_data(),
+            'clustersettings': self.get_cluster_setting(),
         }
         kwargs.update(context)
         return super().get_context_data(**kwargs)
@@ -144,13 +151,14 @@ class BasicClusterUpdateView(SingleObjectMixin, APIView):
                 obj = self.get_object1(self.kwargs['pk'])
                 if obj:
                     get_default_setting(obj)
+                    check_setting_connent(obj)
             except MetaInfo.DoesNotExist:
                 return Response({'Error': 'obj Does Not Exist.'}, status=404)
-            # return Response({"status": "success"}, status=200)
+            return Response({"status": "success"}, status=200)
         except Exception as e:
             logger.error(f'Error getting obj detail with error: {e}')
             return Response({'Error': 'Database error, return to previous page'}, status=500)
-        return redirect('elastics:basic-cluster-list')
+        # return redirect('elastics:basic-cluster-list')
 
 class DefaultSettingsUpdateView(SingleObjectMixin, APIView):
     model = MetaInfo
@@ -168,11 +176,11 @@ class DefaultSettingsUpdateView(SingleObjectMixin, APIView):
             try:
                 obj = self.get_object1(self.kwargs['pk'])
                 if obj:
-                    get_default_setting(obj)
+                    check_setting_connent(obj)
             except MetaInfo.DoesNotExist:
                 return Response({'Error': 'obj Does Not Exist.'}, status=404)
-            # return Response({"status": "success"}, status=200)
-            return redirect('api-elastics:node-list')
+            return Response({"status": "success"}, status=200)
+            # return redirect('api-elastics:node-list')
         except Exception as e:
             logger.error(f'Error getting obj detail with error: {e}')
             return Response({'Error': 'Database error, return to previous page'}, status=500)
@@ -193,12 +201,12 @@ class ClusterRemoteInfoUpdateView(SingleObjectMixin, APIView):
             try:
                 obj = self.get_object1(self.kwargs['pk'])
                 if obj:
-                    get_default_setting(obj)
+                    cluster_remote_connent(obj)
             except MetaInfo.DoesNotExist:
                 return Response({'Error': 'obj Does Not Exist.'}, status=404)
-            # return Response({"status": "success"}, status=200)
+            return Response({"status": "success"}, status=200)
         except Exception as e:
             logger.error(f'Error getting obj detail with error: {e}')
             return Response({'Error': 'Database error, return to previous page'}, status=500)
-        return redirect('elastics:cluster-remote-list')
+        # return redirect('elastics:cluster-remote-list')
 

@@ -4,6 +4,32 @@
 {% block custom_head_css_js %}
 {#    <link rel="stylesheet" href="{% static 'css/customize/font-awesome.min.css' %}">#}
     <link rel="stylesheet" href="{% static 'css/customize/three-columns.css' %}">
+    <style>
+     pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+    .string { color: green; }
+    .number { color: darkorange; }
+    .boolean { color: blue; }
+    .null { color: magenta; }
+    .key { color: red; }
+
+    .showinfo{
+        position: absolute;
+        background-color: #eef1f8;
+        width: 200px;
+        padding: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        display: none;
+    }
+    .showinfo pre{
+        padding: 5px;
+        border: 1px solid #ccc;
+        margin:0;
+    }
+    table,th,td{
+        border:1px solid blue;
+    }
+</style>
 {% endblock %}
 
 
@@ -39,7 +65,8 @@
                                 </a>
                             </li>
                             <li class="pull-right">
-                                <a class="btn btn-outline btn-default" href="{% url 'elastics:basic-cluster-update' %}"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
+                                <a href="{% url 'elastics:basic-cluster-update' pk=object.id %}"
+                                   class="btn btn-outline btn-default"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
                             </li>
                         </ul>
                     </div>
@@ -47,7 +74,7 @@
                         <div class="col-sm-12" style="padding-left: 0;">
                             <div class="" id="content_start">
                             </div>
-                            <div class="ibox float-e-margins">
+                            <div class="ibox float-e-margins disabled">
                                 <div class="ibox-title">
                                     <span style="float: left"><b>{% trans 'Basic cluster list' %}</b></span>
                                     <div class="ibox-tools">
@@ -127,6 +154,86 @@
                             </div>
                         </div>
                     </div>
+                    <!---->
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span style="float: left"><b>{% trans 'Permanent parameters' %}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle"
+                                           data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    {% for i in  clustersettings%}
+                                    <div class="box">
+                                        <p id="show"><span  >{% trans 'Permanent parameters' %} </span>: {{ i.persis.cluster.routing }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p id="show"><span>{% trans 'Xpack' %} </span>: {{ i.persis.xpack }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p id="show"><span>{% trans 'Temporary parameters' %} </span>: {{ i.tran }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p id="show"><span>{% trans 'Security' %} </span>: {{ i.def_xpack }}</p>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span style="float: left"><b>{% trans 'Default cluster parameters' %}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle"
+                                           data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                {% for i in  clustersettings%}
+                                <div>
+                                    <p class="show-rough"><span>{% trans 'Default cluster parameters' %} </span>: <a >{{ i.persis.cluster.routing }}</a></p>
+                                </div>
+                                {% endfor %}
+                                    <div id="show-info" class="showinfo">
+                                        <pre id="show-pre">
+
+                                    </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
                 </div>
             </div>
         </div>
@@ -135,6 +242,43 @@
 {% endblock %}
 {% block content_bottom_left %}{% endblock %}
 {% block custom_foot_js %}
+<script href="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script>
+$(document).ready(function(){
+        $(".show-rough").mouseover(function(){
+            var left = $(this).offset().left + $(this).width() +20;//计算div显示位置
+            var top = $(this).offset().top + 20;
+            var _jsonDate = $.parseJSON($(this).text());
+            var showJson = syntaxHighlight(_jsonDate);
+            $("#show-info").css({"left":left,"top":top}).show();
+            $("#show-pre").html(showJson);
+        });
+        $(".show-rough").mouseout(function(){
+            $("#show-info").hide().html();
+            $("#show-pre").html();
+        })
+    });
+    //处理json数据，采用正则过滤出不同类型参数
+    function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+        json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+};
 </script>
 {% endblock %}

@@ -39,7 +39,8 @@
                                 </a>
                             </li>
                             <li class="pull-right">
-                                <a class="btn btn-outline btn-default" href="{% url 'elastics:cluster-remote-update' %}"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
+                                <a href="{% url 'elastics:cluster-remote-update' pk=object.id%}"
+                                   class="btn btn-outline btn-default"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
                             </li>
                         </ul>
                     </div>

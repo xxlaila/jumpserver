@@ -58,7 +58,6 @@ class NodeDetailView(PermissionsMixin, DetailView):
         context = {
             'app': _('Elastics'),
             'action': _('Node detail'),
-            # 'nodes': self.object()
         }
         kwargs.update(context)
         return super().get_context_data(**kwargs)

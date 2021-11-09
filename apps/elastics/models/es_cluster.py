@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from common.fields.model import JsonDictTextField
 from orgs.mixins.models import OrgModelMixin
 from ..models import MetaInfo
+from jsonfield import JSONField
 
 __all__ = ['BasicCluster', 'ClusterSetting', 'ClusterRemote']
 logger = logging.getLogger(__name__)
@@ -48,15 +49,15 @@ class BasicCluster(models.Model):
 
 class ClusterSetting(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    persis = models.TextField(null=True, blank=True, verbose_name=_('Permanent parameters'))
-    tran = models.TextField(null=True, blank=True, verbose_name=_('Temporary parameters'))
-    def_clus = models.TextField(null=True, blank=True, verbose_name=_('Default cluster parameters'))
-    def_xpack= models.TextField(null=True, blank=True, verbose_name=_('Security'))
+    persis = JSONField(null=True, blank=True, verbose_name=_('Permanent parameters'))
+    tran = JSONField(null=True, blank=True, verbose_name=_('Temporary parameters'))
+    def_clus = JSONField(null=True, blank=True, verbose_name=_('Default cluster parameters'))
+    def_xpack = JSONField(null=True, blank=True, verbose_name=_('Security'))
     metainfo = models.ForeignKey(MetaInfo, on_delete=models.CASCADE, verbose_name=_("Metainfo"))
     date_updated = models.DateTimeField(auto_now=True, null=True, verbose_name=_('Date updated'))
 
     def __int__(self):
-        return '{0.id}({0.label})'.format(self)
+        return '{0.id}({0.date_updated})'.format(self)
 
     class Meta:
         ordering = ['date_updated']

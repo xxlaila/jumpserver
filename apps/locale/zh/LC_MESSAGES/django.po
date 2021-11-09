@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 13:57+0800\n"
+"POT-Creation-Date: 2021-11-09 14:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -117,17 +117,17 @@ msgstr "运行参数"
 #: assets/templates/assets/platform_list.html:16
 #: assets/templates/assets/system_user_detail.html:62
 #: assets/templates/assets/system_user_list.html:24
-#: elastics/models/cloudinfor.py:19 elastics/models/es_cluster.py:22
-#: elastics/models/es_cluster.py:67 elastics/models/esnode.py:22
+#: elastics/models/cloudinfor.py:19 elastics/models/es_cluster.py:23
+#: elastics/models/es_cluster.py:68 elastics/models/esnode.py:22
 #: elastics/models/metainfo.py:33
-#: elastics/templates/elastics/basic_cluster_list.html:71
+#: elastics/templates/elastics/basic_cluster_list.html:98
 #: elastics/templates/elastics/cloud_info_detail.html:48
 #: elastics/templates/elastics/cloud_info_list.html:21
-#: elastics/templates/elastics/cluster_remote_list.html:71
+#: elastics/templates/elastics/cluster_remote_list.html:72
 #: elastics/templates/elastics/meta_info_detail.html:62
 #: elastics/templates/elastics/meta_info_list.html:21
-#: elastics/templates/elastics/node_detail.html:70
-#: elastics/templates/elastics/node_list.html:70 ops/mixin.py:24
+#: elastics/templates/elastics/node_detail.html:41
+#: elastics/templates/elastics/node_list.html:74 ops/mixin.py:24
 #: ops/templates/ops/task_detail.html:58 ops/templates/ops/task_list.html:11
 #: orgs/models.py:12 perms/models/base.py:48
 #: perms/templates/perms/asset_permission_detail.html:57
@@ -267,7 +267,7 @@ msgstr "备注"
 #: perms/templates/perms/database_app_permission_list.html:17
 #: perms/templates/perms/database_app_permission_user.html:23
 #: perms/utils/database_app_permission.py:77 templates/_nav.html:66
-#: templates/_nav.html:99 templates/_nav_user.html:22
+#: templates/_nav.html:101 templates/_nav_user.html:22
 #: users/templates/users/user_database_app_permission.html:39
 #: users/templates/users/user_database_app_permission.html:64
 msgid "DatabaseApp"
@@ -330,7 +330,7 @@ msgstr "创建者"
 #: elastics/models/metainfo.py:49
 #: elastics/templates/elastics/cloud_info_detail.html:64
 #: elastics/templates/elastics/meta_info_detail.html:122
-#: elastics/templates/elastics/node_detail.html:115 ops/models/adhoc.py:38
+#: elastics/templates/elastics/node_detail.html:86 ops/models/adhoc.py:38
 #: ops/templates/ops/adhoc_detail.html:88 ops/templates/ops/task_detail.html:62
 #: orgs/models.py:17 perms/models/base.py:55
 #: perms/templates/perms/asset_permission_detail.html:89
@@ -350,7 +350,7 @@ msgstr "创建日期"
 #: perms/templates/perms/remote_app_permission_remote_app.html:22
 #: perms/templates/perms/remote_app_permission_user.html:22
 #: perms/utils/remote_app_permission.py:76 templates/_nav.html:64
-#: templates/_nav.html:95 templates/_nav_user.html:16
+#: templates/_nav.html:97 templates/_nav_user.html:16
 #: users/templates/users/user_remote_app_permission.html:39
 #: users/templates/users/user_remote_app_permission.html:64
 msgid "RemoteApp"
@@ -482,14 +482,15 @@ msgstr "详情"
 #: assets/templates/assets/platform_list.html:40
 #: assets/templates/assets/system_user_detail.html:30
 #: assets/templates/assets/system_user_list.html:55 audits/models.py:34
-#: elastics/templates/elastics/basic_cluster_list.html:42
+#: elastics/templates/elastics/basic_cluster_list.html:69
 #: elastics/templates/elastics/cloud_info_detail.html:16
 #: elastics/templates/elastics/cloud_info_detail.html:99
 #: elastics/templates/elastics/cloud_info_list.html:47
-#: elastics/templates/elastics/cluster_remote_list.html:42
+#: elastics/templates/elastics/cluster_remote_list.html:43
 #: elastics/templates/elastics/meta_info_detail.html:30
 #: elastics/templates/elastics/meta_info_list.html:48
-#: elastics/templates/elastics/node_list.html:106
+#: elastics/templates/elastics/node_list.html:63
+#: elastics/templates/elastics/node_list.html:110
 #: perms/templates/perms/asset_permission_detail.html:25
 #: perms/templates/perms/asset_permission_list.html:144
 #: perms/templates/perms/database_app_permission_detail.html:25
@@ -542,7 +543,7 @@ msgstr "更新"
 #: elastics/templates/elastics/cloud_info_list.html:48
 #: elastics/templates/elastics/meta_info_detail.html:34
 #: elastics/templates/elastics/meta_info_list.html:49
-#: elastics/templates/elastics/node_list.html:107
+#: elastics/templates/elastics/node_list.html:111
 #: ops/templates/ops/task_list.html:74
 #: perms/templates/perms/asset_permission_detail.html:29
 #: perms/templates/perms/asset_permission_list.html:145
@@ -590,7 +591,7 @@ msgstr "创建数据库应用"
 #: authentication/templates/authentication/_access_key_modal.html:34
 #: elastics/templates/elastics/cloud_info_list.html:26
 #: elastics/templates/elastics/meta_info_list.html:27
-#: elastics/templates/elastics/node_list.html:78
+#: elastics/templates/elastics/node_list.html:82
 #: ops/templates/ops/adhoc_history.html:57 ops/templates/ops/task_adhoc.html:62
 #: ops/templates/ops/task_history.html:63 ops/templates/ops/task_list.html:17
 #: perms/forms/asset_permission.py:20
@@ -945,8 +946,8 @@ msgstr "内部的"
 #: assets/templates/assets/domain_gateway_list.html:63
 #: assets/templates/assets/user_asset_list.html:76
 #: audits/templates/audits/login_log_list.html:60 elastics/models/esnode.py:21
-#: elastics/templates/elastics/node_detail.html:73
-#: elastics/templates/elastics/node_list.html:71
+#: elastics/templates/elastics/node_detail.html:44
+#: elastics/templates/elastics/node_list.html:75
 #: perms/templates/perms/asset_permission_list.html:187
 #: settings/forms/terminal.py:16 users/templates/users/_granted_assets.html:26
 #: users/templates/users/user_asset_permission.html:156
@@ -1035,8 +1036,8 @@ msgid "Memory"
 msgstr "内存"
 
 #: assets/models/asset.py:215 elastics/models/esnode.py:23
-#: elastics/templates/elastics/node_detail.html:76
-#: elastics/templates/elastics/node_list.html:72
+#: elastics/templates/elastics/node_detail.html:47
+#: elastics/templates/elastics/node_list.html:76
 msgid "Disk total"
 msgstr "硬盘大小"
 
@@ -1164,9 +1165,9 @@ msgstr "部门"
 #: assets/models/asset_expansion.py:65 assets/models/balanced.py:38
 #: assets/models/diskinfo.py:62 audits/models.py:88
 #: audits/templates/audits/login_log_list.html:64
-#: elastics/models/es_cluster.py:23 elastics/models/es_cluster.py:69
-#: elastics/templates/elastics/basic_cluster_list.html:74
-#: elastics/templates/elastics/cluster_remote_list.html:77
+#: elastics/models/es_cluster.py:24 elastics/models/es_cluster.py:70
+#: elastics/templates/elastics/basic_cluster_list.html:101
+#: elastics/templates/elastics/cluster_remote_list.html:78
 #: tickets/templates/tickets/ticket_detail.html:34
 #: tickets/templates/tickets/ticket_list.html:36
 #: tickets/templates/tickets/ticket_list.html:104
@@ -1190,11 +1191,11 @@ msgstr "开始时间"
 #: assets/models/base.py:239 assets/models/diskinfo.py:65
 #: assets/models/gathered_user.py:20
 #: assets/templates/assets/cmd_filter_detail.html:68 common/mixins/models.py:51
-#: elastics/models/es_cluster.py:40 elastics/models/es_cluster.py:56
-#: elastics/models/es_cluster.py:77 elastics/models/esnode.py:36
-#: elastics/templates/elastics/basic_cluster_list.html:122
-#: elastics/templates/elastics/cluster_remote_list.html:98
-#: elastics/templates/elastics/node_detail.html:112 ops/models/adhoc.py:39
+#: elastics/models/es_cluster.py:41 elastics/models/es_cluster.py:57
+#: elastics/models/es_cluster.py:78 elastics/models/esnode.py:36
+#: elastics/templates/elastics/basic_cluster_list.html:149
+#: elastics/templates/elastics/cluster_remote_list.html:99
+#: elastics/templates/elastics/node_detail.html:83 ops/models/adhoc.py:39
 msgid "Date updated"
 msgstr "更新日期"
 
@@ -1214,9 +1215,8 @@ msgstr "最新版本"
 
 #: assets/models/authbook.py:29
 #: assets/templates/assets/_asset_user_list.html:22
-#: elastics/models/esnode.py:32
-#: elastics/templates/elastics/node_detail.html:103
-#: elastics/templates/elastics/node_list.html:75
+#: elastics/models/esnode.py:32 elastics/templates/elastics/node_detail.html:74
+#: elastics/templates/elastics/node_list.html:79
 #: ops/templates/ops/adhoc_history.html:56
 #: ops/templates/ops/adhoc_history_detail.html:55
 #: ops/templates/ops/task_adhoc.html:56 ops/templates/ops/task_history.html:62
@@ -1979,7 +1979,7 @@ msgid "If use nat, set the ssh real port"
 msgstr "如果使用了nat端口映射，请设置为ssh真实监听的端口"
 
 #: assets/templates/assets/_node_detail_modal.html:11
-#: assets/templates/assets/asset_list.html:124 elastics/views/esnode.py:50
+#: assets/templates/assets/asset_list.html:124 elastics/views/esnode.py:60
 msgid "Node detail"
 msgstr "节点详情"
 
@@ -2372,8 +2372,8 @@ msgstr "创建网关"
 
 #: assets/templates/assets/domain_gateway_list.html:94
 #: assets/templates/assets/domain_gateway_list.html:96
-#: elastics/templates/elastics/node_list.html:108
-#: elastics/templates/elastics/node_list.html:110
+#: elastics/templates/elastics/node_list.html:112
+#: elastics/templates/elastics/node_list.html:114
 #: settings/templates/settings/email_setting.html:45
 #: settings/templates/settings/ldap_setting.html:46
 msgid "Test connection"
@@ -2759,23 +2759,23 @@ msgid "Handlers"
 msgstr "操作者"
 
 #: audits/views.py:86 audits/views.py:131 audits/views.py:168
-#: audits/views.py:213 audits/views.py:245 templates/_nav.html:159
+#: audits/views.py:213 audits/views.py:245 templates/_nav.html:161
 msgid "Audits"
 msgstr "日志审计"
 
-#: audits/views.py:87 templates/_nav.html:163
+#: audits/views.py:87 templates/_nav.html:165
 msgid "FTP log"
 msgstr "FTP日志"
 
-#: audits/views.py:132 templates/_nav.html:164
+#: audits/views.py:132 templates/_nav.html:166
 msgid "Operate log"
 msgstr "操作日志"
 
-#: audits/views.py:169 templates/_nav.html:165
+#: audits/views.py:169 templates/_nav.html:167
 msgid "Password change log"
 msgstr "改密日志"
 
-#: audits/views.py:214 templates/_nav.html:162
+#: audits/views.py:214 templates/_nav.html:164
 msgid "Login log"
 msgstr "登录日志"
 
@@ -3145,182 +3145,185 @@ msgstr "告警"
 msgid "CloudInfor"
 msgstr "云管中心"
 
-#: elastics/models/es_cluster.py:24
-#: elastics/templates/elastics/basic_cluster_list.html:77
+#: elastics/models/es_cluster.py:25
+#: elastics/templates/elastics/basic_cluster_list.html:104
 msgid "Total shard"
 msgstr "总分片"
 
-#: elastics/models/es_cluster.py:25
-#: elastics/templates/elastics/basic_cluster_list.html:80
+#: elastics/models/es_cluster.py:26
+#: elastics/templates/elastics/basic_cluster_list.html:107
 msgid "Primary shard"
 msgstr "主分片"
 
-#: elastics/models/es_cluster.py:26
-#: elastics/templates/elastics/basic_cluster_list.html:83
+#: elastics/models/es_cluster.py:27
+#: elastics/templates/elastics/basic_cluster_list.html:110
 msgid "Total index"
 msgstr "总索引"
 
-#: elastics/models/es_cluster.py:27
-#: elastics/templates/elastics/basic_cluster_list.html:86
+#: elastics/models/es_cluster.py:28
+#: elastics/templates/elastics/basic_cluster_list.html:113
 msgid "Total docs"
 msgstr "总文档数"
 
-#: elastics/models/es_cluster.py:28
-#: elastics/templates/elastics/basic_cluster_list.html:89
+#: elastics/models/es_cluster.py:29
+#: elastics/templates/elastics/basic_cluster_list.html:116
 msgid "Total use space"
 msgstr "总使用空间"
 
-#: elastics/models/es_cluster.py:29
-#: elastics/templates/elastics/basic_cluster_list.html:92
+#: elastics/models/es_cluster.py:30
+#: elastics/templates/elastics/basic_cluster_list.html:119
 msgid "Total node"
 msgstr "总节点"
 
-#: elastics/models/es_cluster.py:30
-#: elastics/templates/elastics/basic_cluster_list.html:95
+#: elastics/models/es_cluster.py:31
+#: elastics/templates/elastics/basic_cluster_list.html:122
 msgid "Read-only node"
 msgstr "只读节点"
 
-#: elastics/models/es_cluster.py:31
-#: elastics/templates/elastics/basic_cluster_list.html:98
+#: elastics/models/es_cluster.py:32
+#: elastics/templates/elastics/basic_cluster_list.html:125
 msgid "Data node"
 msgstr "数据节点"
 
-#: elastics/models/es_cluster.py:32
-#: elastics/templates/elastics/basic_cluster_list.html:101
+#: elastics/models/es_cluster.py:33
+#: elastics/templates/elastics/basic_cluster_list.html:128
 msgid "Ingest node"
 msgstr "Ingest节点"
 
-#: elastics/models/es_cluster.py:33
-#: elastics/templates/elastics/basic_cluster_list.html:104
+#: elastics/models/es_cluster.py:34
+#: elastics/templates/elastics/basic_cluster_list.html:131
 msgid "Master node"
 msgstr "主节点"
 
-#: elastics/models/es_cluster.py:34
-#: elastics/templates/elastics/basic_cluster_list.html:107
+#: elastics/models/es_cluster.py:35
+#: elastics/templates/elastics/basic_cluster_list.html:134
 msgid "Client node"
 msgstr "Client节点"
 
-#: elastics/models/es_cluster.py:35 elastics/models/esnode.py:27
-#: elastics/templates/elastics/basic_cluster_list.html:110
-#: elastics/templates/elastics/node_detail.html:88
-#: elastics/templates/elastics/node_list.html:73
+#: elastics/models/es_cluster.py:36 elastics/models/esnode.py:27
+#: elastics/templates/elastics/basic_cluster_list.html:137
+#: elastics/templates/elastics/node_detail.html:59
+#: elastics/templates/elastics/node_list.html:77
 msgid "Total memory"
 msgstr "总内存"
 
-#: elastics/models/es_cluster.py:36
-#: elastics/templates/elastics/basic_cluster_list.html:113
+#: elastics/models/es_cluster.py:37
+#: elastics/templates/elastics/basic_cluster_list.html:140
 msgid "Free memory"
 msgstr "空闲内存"
 
-#: elastics/models/es_cluster.py:37
-#: elastics/templates/elastics/basic_cluster_list.html:116
+#: elastics/models/es_cluster.py:38
+#: elastics/templates/elastics/basic_cluster_list.html:143
 msgid "Use memory"
 msgstr "使用内存"
 
-#: elastics/models/es_cluster.py:38
-#: elastics/templates/elastics/basic_cluster_list.html:119
+#: elastics/models/es_cluster.py:39
+#: elastics/templates/elastics/basic_cluster_list.html:146
 msgid "Install"
 msgstr "安装"
 
-#: elastics/models/es_cluster.py:39 elastics/models/es_cluster.py:55
-#: elastics/models/es_cluster.py:76 elastics/models/esnode.py:35
+#: elastics/models/es_cluster.py:40 elastics/models/es_cluster.py:56
+#: elastics/models/es_cluster.py:77 elastics/models/esnode.py:35
 msgid "Metainfo"
 msgstr "源信息"
 
-#: elastics/models/es_cluster.py:47
+#: elastics/models/es_cluster.py:48
 msgid "BasicCluster"
 msgstr "基本集群"
 
-#: elastics/models/es_cluster.py:51
+#: elastics/models/es_cluster.py:52
+#: elastics/templates/elastics/basic_cluster_list.html:164
+#: elastics/templates/elastics/basic_cluster_list.html:183
 msgid "Permanent parameters"
 msgstr "永久参数"
 
-#: elastics/models/es_cluster.py:52
+#: elastics/models/es_cluster.py:53
+#: elastics/templates/elastics/basic_cluster_list.html:189
 msgid "Temporary parameters"
 msgstr "临时参数"
 
-#: elastics/models/es_cluster.py:53
+#: elastics/models/es_cluster.py:54
+#: elastics/templates/elastics/basic_cluster_list.html:205
+#: elastics/templates/elastics/basic_cluster_list.html:224
 msgid "Default cluster parameters"
 msgstr "默认集群参数"
 
-#: elastics/models/es_cluster.py:54
+#: elastics/models/es_cluster.py:55
+#: elastics/templates/elastics/basic_cluster_list.html:192
 msgid "Security"
 msgstr "安全"
 
-#: elastics/models/es_cluster.py:68
-#: elastics/templates/elastics/cluster_remote_list.html:74
+#: elastics/models/es_cluster.py:69
+#: elastics/templates/elastics/cluster_remote_list.html:75
 msgid "Connection mode"
 msgstr "连接方式"
 
-#: elastics/models/es_cluster.py:70
-#: elastics/templates/elastics/cluster_remote_list.html:80
+#: elastics/models/es_cluster.py:71
+#: elastics/templates/elastics/cluster_remote_list.html:81
 msgid "Connection timed out"
 msgstr "连接超时时间"
 
-#: elastics/models/es_cluster.py:71
-#: elastics/templates/elastics/cluster_remote_list.html:83
+#: elastics/models/es_cluster.py:72
+#: elastics/templates/elastics/cluster_remote_list.html:84
 msgid "Skip cluster"
 msgstr "跳过集群"
 
-#: elastics/models/es_cluster.py:72
-#: elastics/templates/elastics/cluster_remote_list.html:86
+#: elastics/models/es_cluster.py:73
+#: elastics/templates/elastics/cluster_remote_list.html:87
 msgid "Connection address"
 msgstr "连接地址"
 
-#: elastics/models/es_cluster.py:73
-#: elastics/templates/elastics/cluster_remote_list.html:89
+#: elastics/models/es_cluster.py:74
+#: elastics/templates/elastics/cluster_remote_list.html:90
 msgid "Number of nodes"
 msgstr "节点数"
 
-#: elastics/models/es_cluster.py:74
-#: elastics/templates/elastics/cluster_remote_list.html:92
+#: elastics/models/es_cluster.py:75
+#: elastics/templates/elastics/cluster_remote_list.html:93
 msgid "Maximum connection"
 msgstr "最大连接数"
 
-#: elastics/models/es_cluster.py:75
-#: elastics/templates/elastics/cluster_remote_list.html:95
+#: elastics/models/es_cluster.py:76
+#: elastics/templates/elastics/cluster_remote_list.html:96
 msgid "Proxy model"
 msgstr "代理模式"
 
-#: elastics/models/esnode.py:24 elastics/templates/elastics/node_detail.html:79
+#: elastics/models/esnode.py:24 elastics/templates/elastics/node_detail.html:50
 msgid "Disk used"
 msgstr "禁用用户"
 
-#: elastics/models/esnode.py:25 elastics/templates/elastics/node_detail.html:82
+#: elastics/models/esnode.py:25 elastics/templates/elastics/node_detail.html:53
 msgid "Disk avail"
 msgstr "硬盘大小"
 
-#: elastics/models/esnode.py:26 elastics/templates/elastics/node_detail.html:85
+#: elastics/models/esnode.py:26 elastics/templates/elastics/node_detail.html:56
 msgid "Used total memory"
 msgstr "总内存"
 
-#: elastics/models/esnode.py:28 elastics/templates/elastics/node_detail.html:91
+#: elastics/models/esnode.py:28 elastics/templates/elastics/node_detail.html:62
 msgid "Node roles"
 msgstr "节点角色"
 
-#: elastics/models/esnode.py:29 elastics/templates/elastics/node_detail.html:94
+#: elastics/models/esnode.py:29 elastics/templates/elastics/node_detail.html:65
 msgid "Process id"
 msgstr "进程ID"
 
-#: elastics/models/esnode.py:30 elastics/templates/elastics/node_detail.html:97
+#: elastics/models/esnode.py:30 elastics/templates/elastics/node_detail.html:68
 msgid "Transmission port"
 msgstr "广播端口"
 
-#: elastics/models/esnode.py:31
-#: elastics/templates/elastics/node_detail.html:100
-#: elastics/templates/elastics/node_list.html:77
+#: elastics/models/esnode.py:31 elastics/templates/elastics/node_detail.html:71
+#: elastics/templates/elastics/node_list.html:81
 msgid "Http monitoring"
 msgstr "Http监听"
 
-#: elastics/models/esnode.py:33
-#: elastics/templates/elastics/node_detail.html:106
-#: elastics/templates/elastics/node_list.html:76
+#: elastics/models/esnode.py:33 elastics/templates/elastics/node_detail.html:77
+#: elastics/templates/elastics/node_list.html:80
 msgid "Jdk version"
 msgstr "Java版本"
 
-#: elastics/models/esnode.py:34
-#: elastics/templates/elastics/node_detail.html:109
-#: elastics/templates/elastics/node_list.html:74
+#: elastics/models/esnode.py:34 elastics/templates/elastics/node_detail.html:80
+#: elastics/templates/elastics/node_list.html:78
 msgid "Running uptime"
 msgstr "运行时间"
 
@@ -3382,45 +3385,49 @@ msgstr "源信息"
 msgid "test server network: {}"
 msgstr ""
 
-#: elastics/templates/elastics/basic_cluster_list.html:20
+#: elastics/templates/elastics/basic_cluster_list.html:46
 #: elastics/templates/elastics/cluster_remote_list.html:20
 #: elastics/templates/elastics/meta_info_detail.html:18
 #: elastics/templates/elastics/node_list.html:15 elastics/views/meteinfo.py:85
 msgid "Meta info detail"
 msgstr "源集群详情"
 
-#: elastics/templates/elastics/basic_cluster_list.html:26
 #: elastics/templates/elastics/basic_cluster_list.html:52
+#: elastics/templates/elastics/basic_cluster_list.html:79
 #: elastics/templates/elastics/cluster_remote_list.html:26
 #: elastics/templates/elastics/meta_info_detail.html:21
 #: elastics/templates/elastics/node_list.html:21
-#: elastics/views/basiccluster.py:40
+#: elastics/views/basiccluster.py:56
 msgid "Basic cluster list"
 msgstr "基本集群信息"
 
-#: elastics/templates/elastics/basic_cluster_list.html:32
+#: elastics/templates/elastics/basic_cluster_list.html:58
 #: elastics/templates/elastics/cluster_remote_list.html:32
 #: elastics/templates/elastics/meta_info_detail.html:24
 #: elastics/templates/elastics/node_list.html:27
-#: elastics/views/basiccluster.py:65
+#: elastics/views/basiccluster.py:82
 msgid "Cluster remote list"
 msgstr "跨集群列表"
 
-#: elastics/templates/elastics/basic_cluster_list.html:38
+#: elastics/templates/elastics/basic_cluster_list.html:64
 #: elastics/templates/elastics/cluster_remote_list.html:38
 #: elastics/templates/elastics/meta_info_detail.html:27
-#: elastics/templates/elastics/node_detail.html:52
+#: elastics/templates/elastics/node_detail.html:23
 #: elastics/templates/elastics/node_list.html:33
-#: elastics/templates/elastics/node_list.html:44 elastics/views/esnode.py:34
+#: elastics/templates/elastics/node_list.html:44 elastics/views/esnode.py:44
 msgid "Node list"
 msgstr "节点角色"
+
+#: elastics/templates/elastics/basic_cluster_list.html:186
+msgid "Xpack"
+msgstr ""
 
 #: elastics/templates/elastics/cloud_info_list.html:13
 #: elastics/views/cloudinfor.py:50
 msgid "Create cloud info"
 msgstr "创建云信息"
 
-#: elastics/templates/elastics/cluster_remote_list.html:53
+#: elastics/templates/elastics/cluster_remote_list.html:54
 msgid "Remote cluster"
 msgstr "远程集群"
 
@@ -3476,18 +3483,18 @@ msgstr "端口可连接性探测"
 msgid "Create meta info"
 msgstr "创建原集群"
 
-#: elastics/views/basiccluster.py:39 elastics/views/basiccluster.py:64
-#: elastics/views/basiccluster.py:88 elastics/views/basiccluster.py:112
+#: elastics/views/basiccluster.py:55 elastics/views/basiccluster.py:81
+#: elastics/views/basiccluster.py:105 elastics/views/basiccluster.py:129
 #: elastics/views/cloudinfor.py:33 elastics/views/cloudinfor.py:49
 #: elastics/views/cloudinfor.py:66 elastics/views/cloudinfor.py:80
-#: elastics/views/esnode.py:33 elastics/views/esnode.py:49
+#: elastics/views/esnode.py:43 elastics/views/esnode.py:59
 #: elastics/views/meteinfo.py:34 elastics/views/meteinfo.py:52
 #: elastics/views/meteinfo.py:69 elastics/views/meteinfo.py:84
 #: templates/_nav.html:76
 msgid "Elastics"
 msgstr "搜索引擎"
 
-#: elastics/views/basiccluster.py:89 elastics/views/basiccluster.py:113
+#: elastics/views/basiccluster.py:106 elastics/views/basiccluster.py:130
 #, fuzzy
 #| msgid "Interface settings"
 msgid "Cluster setting list"
@@ -3904,7 +3911,7 @@ msgstr "磁盘使用率超过 80%: {} => {}"
 msgid "Ops"
 msgstr "作业中心"
 
-#: ops/views/adhoc.py:32 templates/_nav.html:137
+#: ops/views/adhoc.py:32 templates/_nav.html:139
 msgid "Task list"
 msgstr "任务列表"
 
@@ -3986,7 +3993,7 @@ msgstr "上传下载"
 msgid "Actions"
 msgstr "动作"
 
-#: perms/models/asset_permission.py:87 templates/_nav.html:91
+#: perms/models/asset_permission.py:87 templates/_nav.html:93
 #: tickets/templates/tickets/ticket_list.html:22
 #: users/templates/users/_user_detail_nav_header.html:31
 #: users/views/user.py:221
@@ -4221,7 +4228,7 @@ msgstr "添加用户组"
 #: perms/views/remote_app_permission.py:66
 #: perms/views/remote_app_permission.py:84
 #: perms/views/remote_app_permission.py:116
-#: perms/views/remote_app_permission.py:149 templates/_nav.html:88
+#: perms/views/remote_app_permission.py:149 templates/_nav.html:90
 msgid "Perms"
 msgstr "权限管理"
 
@@ -4808,7 +4815,7 @@ msgstr "认证成功: {}"
 
 #: settings/views.py:19 settings/views.py:46 settings/views.py:73
 #: settings/views.py:105 settings/views.py:134 settings/views.py:161
-#: templates/_nav.html:200
+#: templates/_nav.html:202
 msgid "Settings"
 msgstr "系统设置"
 
@@ -4999,7 +5006,15 @@ msgstr "命令过滤"
 msgid "MetaInfo Cluster"
 msgstr "源集群"
 
-#: templates/_nav.html:110 terminal/views/command.py:21
+#: templates/_nav.html:81
+msgid "Index management"
+msgstr "索引管理"
+
+#: templates/_nav.html:82
+msgid "Failure center"
+msgstr "故障中心"
+
+#: templates/_nav.html:112 terminal/views/command.py:21
 #: terminal/views/session.py:48 terminal/views/session.py:59
 #: terminal/views/session.py:74 terminal/views/session.py:97
 #: terminal/views/terminal.py:32 terminal/views/terminal.py:48
@@ -5007,59 +5022,59 @@ msgstr "源集群"
 msgid "Sessions"
 msgstr "会话管理"
 
-#: templates/_nav.html:113
+#: templates/_nav.html:115
 msgid "Session online"
 msgstr "在线会话"
 
-#: templates/_nav.html:114 terminal/views/session.py:60
+#: templates/_nav.html:116 terminal/views/session.py:60
 msgid "Session offline"
 msgstr "历史会话"
 
-#: templates/_nav.html:115 terminal/templates/terminal/session_commands.html:21
+#: templates/_nav.html:117 terminal/templates/terminal/session_commands.html:21
 #: terminal/templates/terminal/session_detail.html:21
 msgid "Commands"
 msgstr "命令记录"
 
-#: templates/_nav.html:118 templates/_nav_user.html:42
+#: templates/_nav.html:120 templates/_nav_user.html:42
 msgid "Web terminal"
 msgstr "Web终端"
 
-#: templates/_nav.html:119 templates/_nav_user.html:47
+#: templates/_nav.html:121 templates/_nav_user.html:47
 msgid "File manager"
 msgstr "文件管理"
 
-#: templates/_nav.html:123 terminal/views/storage.py:27
+#: templates/_nav.html:125 terminal/views/storage.py:27
 #: terminal/views/storage.py:42 terminal/views/storage.py:96
 #: terminal/views/storage.py:120 terminal/views/storage.py:149
 #: terminal/views/storage.py:175
 msgid "Terminal"
 msgstr "终端管理"
 
-#: templates/_nav.html:134
+#: templates/_nav.html:136
 msgid "Job Center"
 msgstr "作业中心"
 
-#: templates/_nav.html:138 templates/_nav.html:166
+#: templates/_nav.html:140 templates/_nav.html:168
 msgid "Batch command"
 msgstr "批量命令"
 
-#: templates/_nav.html:140
+#: templates/_nav.html:142
 msgid "Task monitor"
 msgstr "任务监控"
 
-#: templates/_nav.html:150 tickets/views.py:19 tickets/views.py:37
+#: templates/_nav.html:152 tickets/views.py:19 tickets/views.py:37
 msgid "Tickets"
 msgstr "工单管理"
 
-#: templates/_nav.html:176
+#: templates/_nav.html:178
 msgid "XPack"
 msgstr ""
 
-#: templates/_nav.html:184
+#: templates/_nav.html:186
 msgid "Account list"
 msgstr "账户列表"
 
-#: templates/_nav.html:185
+#: templates/_nav.html:187
 msgid "Sync instance"
 msgstr "同步实例"
 
