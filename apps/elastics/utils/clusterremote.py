@@ -26,10 +26,11 @@ def get_cluster_remote():
         obj = []
         for k in basics:
             try:
-                data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.remote_info()
+                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.remote_info()
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.remote_info()
+                    data = default_conn.EsConnection(k.address, k.username,
+                                                     k.password).connentauth().cluster.remote_info()
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
                 else:

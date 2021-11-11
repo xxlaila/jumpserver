@@ -33,12 +33,12 @@ def get_nodes_connenct(basics=None):
             basics = MetaInfo.objects.filter(node=True)
         for k in basics:
             try:
-                data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cat.nodes(
-                    h=display, params=params)
+                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cat.nodes(h=display,
+                                                                                                            params=params)
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cat.nodes(
-                        ph=display, params=params)
+                    data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cat.nodes(
+                        h=display, params=params)
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
                 else:

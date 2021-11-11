@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-09 14:59+0800\n"
+"POT-Creation-Date: 2021-11-10 21:41+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -119,11 +119,12 @@ msgstr "运行参数"
 #: assets/templates/assets/system_user_list.html:24
 #: elastics/models/cloudinfor.py:19 elastics/models/es_cluster.py:23
 #: elastics/models/es_cluster.py:68 elastics/models/esnode.py:22
-#: elastics/models/metainfo.py:33
+#: elastics/models/index.py:21 elastics/models/metainfo.py:33
 #: elastics/templates/elastics/basic_cluster_list.html:98
 #: elastics/templates/elastics/cloud_info_detail.html:48
 #: elastics/templates/elastics/cloud_info_list.html:21
 #: elastics/templates/elastics/cluster_remote_list.html:72
+#: elastics/templates/elastics/index_list.html:21
 #: elastics/templates/elastics/meta_info_detail.html:62
 #: elastics/templates/elastics/meta_info_list.html:21
 #: elastics/templates/elastics/node_detail.html:41
@@ -487,6 +488,7 @@ msgstr "详情"
 #: elastics/templates/elastics/cloud_info_detail.html:99
 #: elastics/templates/elastics/cloud_info_list.html:47
 #: elastics/templates/elastics/cluster_remote_list.html:43
+#: elastics/templates/elastics/index_list.html:49
 #: elastics/templates/elastics/meta_info_detail.html:30
 #: elastics/templates/elastics/meta_info_list.html:48
 #: elastics/templates/elastics/node_list.html:63
@@ -541,6 +543,7 @@ msgstr "更新"
 #: elastics/templates/elastics/cloud_info_detail.html:20
 #: elastics/templates/elastics/cloud_info_detail.html:100
 #: elastics/templates/elastics/cloud_info_list.html:48
+#: elastics/templates/elastics/index_list.html:50
 #: elastics/templates/elastics/meta_info_detail.html:34
 #: elastics/templates/elastics/meta_info_list.html:49
 #: elastics/templates/elastics/node_list.html:111
@@ -590,6 +593,7 @@ msgstr "创建数据库应用"
 #: audits/templates/audits/operate_log_list.html:71
 #: authentication/templates/authentication/_access_key_modal.html:34
 #: elastics/templates/elastics/cloud_info_list.html:26
+#: elastics/templates/elastics/index_list.html:28
 #: elastics/templates/elastics/meta_info_list.html:27
 #: elastics/templates/elastics/node_list.html:82
 #: ops/templates/ops/adhoc_history.html:57 ops/templates/ops/task_adhoc.html:62
@@ -714,6 +718,7 @@ msgstr "节点"
 #: assets/templates/assets/admin_user_list.html:62
 #: assets/templates/assets/asset_detail.html:72
 #: elastics/templates/elastics/cloud_info_list.html:63
+#: elastics/templates/elastics/index_list.html:66
 #: elastics/templates/elastics/meta_info_list.html:65 templates/_nav.html:44
 msgid "Admin user"
 msgstr "管理用户"
@@ -1166,8 +1171,10 @@ msgstr "部门"
 #: assets/models/diskinfo.py:62 audits/models.py:88
 #: audits/templates/audits/login_log_list.html:64
 #: elastics/models/es_cluster.py:24 elastics/models/es_cluster.py:70
+#: elastics/models/index.py:29
 #: elastics/templates/elastics/basic_cluster_list.html:101
 #: elastics/templates/elastics/cluster_remote_list.html:78
+#: elastics/templates/elastics/index_list.html:27
 #: tickets/templates/tickets/ticket_detail.html:34
 #: tickets/templates/tickets/ticket_list.html:36
 #: tickets/templates/tickets/ticket_list.html:104
@@ -1193,6 +1200,7 @@ msgstr "开始时间"
 #: assets/templates/assets/cmd_filter_detail.html:68 common/mixins/models.py:51
 #: elastics/models/es_cluster.py:41 elastics/models/es_cluster.py:57
 #: elastics/models/es_cluster.py:78 elastics/models/esnode.py:36
+#: elastics/models/index.py:31
 #: elastics/templates/elastics/basic_cluster_list.html:149
 #: elastics/templates/elastics/cluster_remote_list.html:99
 #: elastics/templates/elastics/node_detail.html:83 ops/models/adhoc.py:39
@@ -2103,6 +2111,7 @@ msgstr "确认"
 
 #: assets/templates/assets/admin_user_list.html:4
 #: elastics/templates/elastics/cloud_info_list.html:4
+#: elastics/templates/elastics/index_list.html:4
 #: elastics/templates/elastics/meta_info_list.html:4
 msgid ""
 "Admin users are asset (charged server) on the root, or have NOPASSWD: ALL "
@@ -2112,6 +2121,7 @@ msgstr ""
 
 #: assets/templates/assets/admin_user_list.html:5
 #: elastics/templates/elastics/cloud_info_list.html:5
+#: elastics/templates/elastics/index_list.html:5
 #: elastics/templates/elastics/meta_info_list.html:5
 msgid ""
 "JumpServer users of the system using the user to `push system user`,  `get "
@@ -3150,8 +3160,9 @@ msgstr "云管中心"
 msgid "Total shard"
 msgstr "总分片"
 
-#: elastics/models/es_cluster.py:26
+#: elastics/models/es_cluster.py:26 elastics/models/index.py:23
 #: elastics/templates/elastics/basic_cluster_list.html:107
+#: elastics/templates/elastics/index_list.html:22
 msgid "Primary shard"
 msgstr "主分片"
 
@@ -3160,8 +3171,9 @@ msgstr "主分片"
 msgid "Total index"
 msgstr "总索引"
 
-#: elastics/models/es_cluster.py:28
+#: elastics/models/es_cluster.py:28 elastics/models/index.py:25
 #: elastics/templates/elastics/basic_cluster_list.html:113
+#: elastics/templates/elastics/index_list.html:24
 msgid "Total docs"
 msgstr "总文档数"
 
@@ -3224,6 +3236,7 @@ msgstr "安装"
 
 #: elastics/models/es_cluster.py:40 elastics/models/es_cluster.py:56
 #: elastics/models/es_cluster.py:77 elastics/models/esnode.py:35
+#: elastics/models/index.py:30
 msgid "Metainfo"
 msgstr "源信息"
 
@@ -3333,6 +3346,34 @@ msgstr "运行时间"
 msgid "EsNode"
 msgstr "节点"
 
+#: elastics/models/index.py:22
+msgid "Uuid"
+msgstr "uuid"
+
+#: elastics/models/index.py:24 elastics/templates/elastics/index_list.html:23
+msgid "Replica Set"
+msgstr "副本"
+
+#: elastics/models/index.py:26
+msgid "Store size"
+msgstr "实际占用空间"
+
+#: elastics/models/index.py:27 elastics/templates/elastics/index_list.html:25
+msgid "Pri store size"
+msgstr "主分片空间"
+
+#: elastics/models/index.py:28 elastics/models/metainfo.py:42
+#: elastics/templates/elastics/index_list.html:26
+#: elastics/templates/elastics/meta_info_create_update.html:29
+msgid "Health"
+msgstr "健康"
+
+#: elastics/models/index.py:38 elastics/models/metainfo.py:45
+#: elastics/templates/elastics/meta_info_create_update.html:63
+#: terminal/forms/storage.py:161
+msgid "Index"
+msgstr "索引"
+
 #: elastics/models/metainfo.py:34
 #: elastics/templates/elastics/meta_info_detail.html:66
 #: elastics/templates/elastics/meta_info_list.html:22
@@ -3356,11 +3397,6 @@ msgstr "kafka地址"
 msgid "Cloud"
 msgstr "云"
 
-#: elastics/models/metainfo.py:42
-#: elastics/templates/elastics/meta_info_create_update.html:29
-msgid "Health"
-msgstr "健康"
-
 #: elastics/models/metainfo.py:43
 msgid "Setting "
 msgstr "设置"
@@ -3369,12 +3405,6 @@ msgstr "设置"
 #: elastics/templates/elastics/meta_info_create_update.html:45
 msgid "Alter"
 msgstr "告警"
-
-#: elastics/models/metainfo.py:45
-#: elastics/templates/elastics/meta_info_create_update.html:63
-#: terminal/forms/storage.py:161
-msgid "Index"
-msgstr "索引"
 
 #: elastics/models/metainfo.py:70
 msgid "MetaInfo"
@@ -3430,6 +3460,10 @@ msgstr "创建云信息"
 #: elastics/templates/elastics/cluster_remote_list.html:54
 msgid "Remote cluster"
 msgstr "远程集群"
+
+#: elastics/templates/elastics/index_list.html:13
+msgid "Create index"
+msgstr "创建索引"
 
 #: elastics/templates/elastics/meta_info_create_update.html:25
 msgid "Default Enable"
@@ -3488,6 +3522,7 @@ msgstr "创建原集群"
 #: elastics/views/cloudinfor.py:33 elastics/views/cloudinfor.py:49
 #: elastics/views/cloudinfor.py:66 elastics/views/cloudinfor.py:80
 #: elastics/views/esnode.py:43 elastics/views/esnode.py:59
+#: elastics/views/index.py:30 elastics/views/index.py:44
 #: elastics/views/meteinfo.py:34 elastics/views/meteinfo.py:52
 #: elastics/views/meteinfo.py:69 elastics/views/meteinfo.py:84
 #: templates/_nav.html:76
@@ -3511,6 +3546,14 @@ msgstr "创建云信息"
 #: elastics/views/cloudinfor.py:81
 msgid "Cloud info detail"
 msgstr "云信息详情"
+
+#: elastics/views/index.py:31
+msgid "Index list"
+msgstr "索引列表"
+
+#: elastics/views/index.py:45
+msgid "Index detail"
+msgstr "索引详情"
 
 #: elastics/views/meteinfo.py:37
 msgid "Meta info list"

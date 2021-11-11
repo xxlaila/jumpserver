@@ -42,7 +42,7 @@ class MetaInfo(OrgModelMixin):
     health = models.BooleanField(default=True, verbose_name=_('Health'))
     setting = models.BooleanField(default=False, verbose_name=_('Setting '))
     alter = models.BooleanField(default=False, verbose_name=_('Alter'))
-    index = models.BooleanField(default=False, verbose_name=_('Index'))
+    indexes = models.BooleanField(default=False, verbose_name=_('Index'))
     node = models.BooleanField(default=True, verbose_name=_('Node'))
     comment = models.TextField(blank=True, verbose_name=_('Comment'))
     labels = models.CharField(null=True, blank=True, max_length=32, verbose_name=_("Labels"))

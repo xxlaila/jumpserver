@@ -33,8 +33,11 @@ urlpatterns = [
          name='default-settings-update'),
     path('basic-cluster/<uuid:pk>/update/', views.BasicClusterUpdateView.as_view(),
          name='basic-cluster-update'),
+    path('index/', views.IndexListView.as_view(), name='index-list'),
+    path('index/<uuid:pk>/', views.IndexDetailView.as_view(), name='index-detail'),
 
 
-    path('meta-info/health', utils.get_nodes_connenct, name='meta-info-health'),
+
+    path('meta-info/health/', utils.get_indexs_connent, name='meta-info-health'),
 
 ]

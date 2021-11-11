@@ -10,3 +10,4 @@ from .metainfo import *
 from .basiccluster import *
 from .esnode import *
 from .checkserver import *
+from .index import *

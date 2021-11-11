@@ -26,10 +26,10 @@ def get_default_setting(basics=None):
             basics = MetaInfo.objects.filter(setting=True)
         for k in basics:
             try:
-                data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.stats()
+                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.stats()
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.stats()
+                    data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.stats()
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
                 else:
@@ -79,10 +79,12 @@ def check_setting_connent(_settins=None):
             _settins = MetaInfo.objects.filter(setting=True)
         for k in _settins:
             try:
-                data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.get_settings(include_defaults='true')
+                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.get_settings(
+                    include_defaults='true')
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.get_settings(include_defaults='true')
+                    data = default_conn.EsConnection(
+                        k.address, k.username, k.password).connentauth().cluster.get_settings(include_defaults='true')
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
                 else:
@@ -97,8 +99,6 @@ def check_setting_connent(_settins=None):
         return False
 
 def get_check_setting_data(results, k):
-    print("ok")
-    print(results, k)
     f_data = {"persis": results["persistent"], "tran": results["transient"],
               "def_clus": results["defaults"]["cluster"],
               "def_xpack": results["defaults"]["xpack"]["flattened"],
@@ -123,10 +123,11 @@ def cluster_remote_connent(_settins=None):
             _settins = MetaInfo.objects.filter(setting=True)
         for k in _settins:
             try:
-                data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.remote_info()
+                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.remote_info()
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.remote_info()
+                    data = default_conn.EsConnection(k.address, k.username,
+                                                     k.password).connentauth().cluster.remote_info()
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
                 else:
@@ -143,8 +144,10 @@ def cluster_remote_connent(_settins=None):
 def get_cluster_remote(results, k):
     if results is not None:
         for key, vaule in results.items():
-            data = {"name": key, "mode": vaule["mode"], "conn": vaule["connected"], "conn_timeout": vaule["initial_connect_timeout"],
-                    "skip_una": vaule["skip_unavailable"], "seeds": vaule["seeds"], "num_nodes": vaule["num_nodes_connected"],
+            data = {"name": key, "mode": vaule["mode"], "conn": vaule["connected"],
+                    "conn_timeout": vaule["initial_connect_timeout"],
+                    "skip_una": vaule["skip_unavailable"], "seeds": vaule["seeds"],
+                    "num_nodes": vaule["num_nodes_connected"],
                     "max_conn": vaule["max_connections_per_cluster"], "proxy_add": "", "metainfo_id": k.id}
             try:
                 obj, created = ClusterRemote.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)

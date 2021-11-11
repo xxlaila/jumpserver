@@ -19,7 +19,7 @@ class MetaInfoSerializer(BulkOrgResourceModelSerializer):
         fields = [
             'id', 'name', 'env', 'org_name', 'address', 'username',
             'password', 'kibana', 'kafka', 'cloud', 'labels', 'comment',
-            'health', 'setting', 'alter', 'index', 'node',
+            'health', 'setting', 'alter', 'indexes', 'node',
             'created_by', 'date_created'
         ]
 

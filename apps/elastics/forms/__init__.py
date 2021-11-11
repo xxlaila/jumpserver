@@ -8,3 +8,4 @@
 
 from .cloudinfor import *
 from .meteinfo import *
+from .index import *

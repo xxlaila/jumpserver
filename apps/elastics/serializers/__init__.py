@@ -9,3 +9,4 @@ from .cloudinfo import *
 from .metainfo import *
 from .basiccluster import *
 from .esnode import *
+from .index import *

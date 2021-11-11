@@ -14,33 +14,6 @@ import base64, random
 from ..models import MetaInfo
 from elasticsearch import TransportError
 
-
-class EsConnection:
-
-    def __init__(self, names, labels):
-        cl_inf = self.GetDataAuth(names, labels)
-        self.conn_pool = Transport(hosts=cl_inf["address"],  http_auth=(cl_inf['username'], base64.b64decode(cl_inf['password']).decode()), connection_class=RequestsHttpConnection).connection_pool
-
-    def GetDataAuth(self, names, labels):
-        data = {}
-        try:
-            e_infos = MetaInfo.objects.filter(name=names, label=labels).values()
-        except MetaInfo.DoesNotExist:
-            return False
-        for e_info in e_infos:
-            data['name'] = e_info['name']
-            data['env'] = e_info['env']
-            data['address'] = e_info['address']
-            data['username'] = e_info['username']
-            data['password'] = e_info['password']
-            data['labels'] = e_info['labels']
-            data['kibana'] = e_info['kibana']
-        return data
-
-    def get_conn(self):
-        conn = self.conn_pool.get_connection()
-        return conn
-
 class ElasticsAuth:
 
     def __init__(self, names, labels):
@@ -74,3 +47,17 @@ class ElasticsAuth:
         yesterday = (datetime.date.today()).strftime("%Y.%m.%d")
         inds = self.connentauth().cat.indices(index="*" + '-' + yesterday)
         return inds
+
+class EsConnection:
+
+    def __init__(self, address, user, pwd):
+        self.address = address
+        self.user = user
+        self.pwd = pwd
+
+    def connentauth(self):
+        # conn_pool = Transport(hosts=self.address, http_auth=(self.user, self.pwd),
+        #                                connection_class=RequestsHttpConnection).connection_pool
+        conn_pool = Elasticsearch(hosts=self.address, http_auth=(self.user, self.pwd), timeout=100000)
+        return conn_pool
+

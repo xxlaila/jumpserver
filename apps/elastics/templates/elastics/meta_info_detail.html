@@ -108,7 +108,7 @@
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Index status' %}:</td>
-                                            <td><b>{{ meteinfo.index|yesno:"Yes,No" }}</b></td>
+                                            <td><b>{{ meteinfo.indexes|yesno:"Yes,No" }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Node status' %}:</td>
@@ -399,7 +399,7 @@ $(document).ready(function () {
     var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
     var checked = $(this).prop('checked');
     var body = {
-        'index': checked
+        'indexes': checked
     };
     var success = '{% trans "Update successfully!" %}';
     var status = $(".ibox-content > table > tbody > tr:nth-child(13) > td:last >b").text();
