@@ -58,12 +58,15 @@ def write_indexs_data(results, k):
 
 
 def delete_index(datas):
+    """
+    delete index
+    :param datas:
+    :return:
+    """
     for data in datas:
         try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                       data.metainfo.password).connentauth().indices.delete(index=data.name)
-            # default_conn.ElasticsAuth(data.metainfo.name, data.metainfo.labels).connentauth().indices.delete(
-            #     index=data.name)
         except TransportError as e:
             if e.status_code in [503, 502, 500]:
                 result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
@@ -76,6 +79,192 @@ def delete_index(datas):
                 raise ValueError("connent timeout")
         if 'acknowledged' in result:
             return "seccess"
+
+def create_index(datas, index_name, mappings=None, settings=None, aliases=None, include_type_name=None):
+    """
+    create index
+    :param datas:
+    :param index_name:
+    :param mappings:
+    :param settings:
+    :param aliases:
+    :param include_type_name:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                      data.metainfo.password).connentauth().indices.create(
+                index=index_name, mappings=mappings,settings=settings,aliases=aliases, include_type_name=include_type_name)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(
+                    data.metainfo.address, data.metainfo.username, data.metainfo.password).connentauth().indices.create(
+                    index=index_name)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def close_index(datas):
+    """
+    close index
+    :param datas:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.close(index=data.name)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.close(index=data.name)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def open_index(datas):
+    """
+    open index
+    :param datas:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.open(index=data.name)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.open(index=data.name)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def freeze_index(datas):
+    """
+    Freeze index
+    :param datas:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.freeze(index=data.name)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.freeze(index=data.name)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def unfreeze_index(datas):
+    """
+    UnFreeze index
+    :param datas:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.unfreeze(index=data.name)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().index.unfreeze(index=data.name)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def put_settings_index(datas, body):
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.put_settings(
+                index=data.name, body=body)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.put_settings(
+                    index=data.name, body=body)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            elif e.status_code in [404]:
+                return ("%s Index does not exist!" % data.name)
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def create_templates(datas, template_name, params):
+    """
+    create templates
+    :param datas:
+    :param template_name:
+    :param params:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.put_template(
+                name=template_name, params=params)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.put_template(
+                    name=template_name, params=params)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+
+def delete_templates(datas, template_name):
+    """
+    delete template
+    :param datas:
+    :param template_name:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().indices.delete_template(
+                name=template_name)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.delete_template(
+                    name=template_name)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+
+
+
 
 
 

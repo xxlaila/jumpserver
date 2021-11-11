@@ -20,11 +20,12 @@ from ops.celery.decorator import (
 
 @shared_task
 @register_as_period_task(interval=600)
-def get_cluster_remote():
+def cluster_remote_connent(_settins=None):
     try:
-        basics = MetaInfo.objects.filter(setting=True)
         obj = []
-        for k in basics:
+        if _settins is None:
+            _settins = MetaInfo.objects.filter(setting=True)
+        for k in _settins:
             try:
                 data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.remote_info()
             except TransportError as e:
@@ -35,20 +36,17 @@ def get_cluster_remote():
                     raise ValueError("Incorrect account password")
                 else:
                     raise ValueError("connent timeout")
-            result = write_cluster_remote(data, k)
+            result = get_cluster_remote(data, k)
             if result:
                 obj.append(result)
             else:
                 obj.append("error")
-        # return JsonResponse({"status": obj})
         return Response({"status": obj})
     except MetaInfo.DoesNotExist:
         return False
 
-def write_cluster_remote(results, k):
+def get_cluster_remote(results, k):
     if results is not None:
-        value = {}
-        ack = []
         for key, vaule in results.items():
             data = {"name": key, "mode": vaule["mode"], "conn": vaule["connected"],
                     "conn_timeout": vaule["initial_connect_timeout"],
@@ -56,12 +54,9 @@ def write_cluster_remote(results, k):
                     "num_nodes": vaule["num_nodes_connected"],
                     "max_conn": vaule["max_connections_per_cluster"], "proxy_add": "", "metainfo_id": k.id}
             try:
-                obj, created = ClusterRemote.objects.update_or_create(name=data['name'], metainfo_id=k.id,
-                                                                     defaults=data)
+                obj, created = ClusterRemote.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)
                 if obj:
-                    ack.append(obj.name)
-                value[obj.metainfo.name] = ack
+                    return Response({"status": "%s update success: %s" % (data['name'], obj)})
             except Exception as e:
                 return Response({"status": "Clusremote error", "message": 'Error: ' + str(e)})
-        return value
     return False

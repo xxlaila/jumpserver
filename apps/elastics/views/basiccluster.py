@@ -210,3 +210,4 @@ class ClusterRemoteInfoUpdateView(SingleObjectMixin, APIView):
             return Response({'Error': 'Database error, return to previous page'}, status=500)
         # return redirect('elastics:cluster-remote-list')
 
+

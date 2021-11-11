@@ -18,23 +18,24 @@ from ops.celery.decorator import (
 
 logger = get_logger(__name__)
 
-display = ('id', 'ip', 'name', 'disk.total', 'disk.used', 'disk.avail', 'ram.current', 'ram.percent', 'ram.max',
-           'cpu', 'hp', 'fm', 'sm', 'sc', 'qcm', 'sqti', 'uptime', 'pid', 'nodeRole', 'jdk', 'port', 'http',
-           'version'
-          )
-params = {'format': 'json', 'full_id': 'true', 'master_timeout': '180s', 'bytes': 'gb'}
+
 
 @shared_task
 @register_as_period_task(interval=600)
 def get_nodes_connenct(basics=None):
+    display = ('id', 'ip', 'name', 'disk.total', 'disk.used', 'disk.avail', 'ram.current', 'ram.percent', 'ram.max',
+               'cpu', 'hp', 'fm', 'sm', 'sc', 'qcm', 'sqti', 'uptime', 'pid', 'nodeRole', 'jdk', 'port', 'http',
+               'version'
+               )
+    params = {'format': 'json', 'full_id': 'true', 'master_timeout': '180s', 'bytes': 'gb'}
     try:
         obj = []
         if basics is None:
             basics = MetaInfo.objects.filter(node=True)
         for k in basics:
             try:
-                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cat.nodes(h=display,
-                                                                                                            params=params)
+                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cat.nodes(
+                    h=display, params=params)
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
                     data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cat.nodes(
@@ -80,3 +81,55 @@ def write_node_params(results, k):
                 return {'Error': 'obj Does Not Exist.'}
         return value
     return False
+
+def get_node_info(datas):
+    """
+    Node info
+    :param datas:
+    :return:
+    """
+    metric = ('process', 'thread_pool', 'os', 'indices', 'settings')
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().nodes.info(
+                node_id=data.name, metric=metric)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().nodes.info(
+                    node_id=data.name, metric=metric)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            elif e.status_code in [404]:
+                return ("%s Index does not exist!" % data.name)
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
+def get_node_stats(datas):
+    """
+    Node stats
+    :param datas:
+    :return:
+    """
+    metric = ('indices','fs','breaker','process','thread_pool')
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().nodes.stats(
+                node_id=data.name, metric=metric)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().nodes.stats(
+                    node_id=data.name, metric=metric)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            elif e.status_code in [404]:
+                return ("%s Index does not exist!" % data.name)
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass

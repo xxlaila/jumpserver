@@ -114,45 +114,28 @@ def get_check_setting_data(results, k):
         logging.error("Settinginfo error")
         raise ValueError(e)
 
-@shared_task
-@register_as_period_task(interval=600)
-def cluster_remote_connent(_settins=None):
-    try:
-        obj = []
-        if _settins is None:
-            _settins = MetaInfo.objects.filter(setting=True)
-        for k in _settins:
-            try:
-                data = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.remote_info()
-            except TransportError as e:
-                if e.status_code in [503, 502, 500]:
-                    data = default_conn.EsConnection(k.address, k.username,
-                                                     k.password).connentauth().cluster.remote_info()
-                elif e.status_code in [401]:
-                    raise ValueError("Incorrect account password")
-                else:
-                    raise ValueError("connent timeout")
-            result = get_cluster_remote(data, k)
-            if result:
-                obj.append(result)
-            else:
-                obj.append("error")
-        return Response({"status": obj})
-    except MetaInfo.DoesNotExist:
-        return False
 
-def get_cluster_remote(results, k):
-    if results is not None:
-        for key, vaule in results.items():
-            data = {"name": key, "mode": vaule["mode"], "conn": vaule["connected"],
-                    "conn_timeout": vaule["initial_connect_timeout"],
-                    "skip_una": vaule["skip_unavailable"], "seeds": vaule["seeds"],
-                    "num_nodes": vaule["num_nodes_connected"],
-                    "max_conn": vaule["max_connections_per_cluster"], "proxy_add": "", "metainfo_id": k.id}
-            try:
-                obj, created = ClusterRemote.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)
-                if obj:
-                    return Response({"status": "%s update success: %s" % (data['name'], obj)})
-            except Exception as e:
-                return Response({"status": "Clusremote error", "message": 'Error: ' + str(e)})
-    return False
+def put_settings_cluster(datas, body):
+    """
+    edit cluster settings
+    :param datas:
+    :param body:
+    :return:
+    """
+    for data in datas:
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().cluster.put_settings(
+                index=data.name, body=body)
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().cluster.put_settings(
+                    index=data.name, body=body)
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            pass
+
