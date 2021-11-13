@@ -19,6 +19,6 @@ class EsNodeSerializer(BulkOrgResourceModelSerializer):
         list_serializer_class = AdaptedBulkListSerializer
         fields = [
             'id', 'ip', 'name', 'disktotal', 'org_name', 'diskused', 'diskavail', 'ramcurrent',
-            'rammax', 'noderole', 'pid', 'port', 'http_address', 'version', 'jdk', 'uptime', 'metainfo',
+            'rammax', 'noderole', 'pid', 'port', 'http_address', 'version', 'jdk', 'status', 'uptime', 'metainfo',
             'date_created', 'date_updated'
         ]

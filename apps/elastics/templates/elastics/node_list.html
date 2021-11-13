@@ -79,6 +79,7 @@
                                             <th class="text-center">{% trans 'Version' %}</th>
                                             <th class="text-center">{% trans 'Jdk version' %}</th>
                                             <th class="text-center">{% trans 'Http monitoring' %}</th>
+                                            <th class="text-center">{% trans 'Status' %}</th>
                                             <th class="text-center">{% trans 'Action' %}</th>
                                         </tr>
                                         </thead>
@@ -106,12 +107,13 @@ function initTable() {
                 var detail_btn = '<a href="{% url "elastics:node-detail" pk=DEFAULT_PK %}">' + cellData + '</a>';
                 return detail_btn.replace('{{ DEFAULT_PK }}', rowData.id);
             }},
-            {targets: 9, createdCell: function (td, cellData, rowData) {
+            {targets: 10, createdCell: function (td, cellData, rowData) {
                 var update_btn = '<a href="{% url "assets:domain-gateway-update" pk=DEFAULT_PK %}" class="btn btn-xs btn-info">{% trans "Update" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
                 var del_btn = '<a class="btn btn-xs btn-danger m-l-xs btn-delete" data-uid="{{ DEFAULT_PK }}">{% trans "Delete" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
-                var test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" data-uid="{{ DEFAULT_PK }}" data-port="PORT">{% trans "Test connection" %}</a>'.replace('{{ DEFAULT_PK }}', cellData).replace("PORT", rowData.port);
-                if(rowData.protocol === 'rdp'){
-                    test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" disabled data-uid="{{ DEFAULT_PK }}">{% trans "Test connection" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
+                if(rowData.status === true){
+                    test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" data-uid="{{ DEFAULT_PK }}">{% trans "Offline" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
+                }else{
+                    test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" data-uid="{{ DEFAULT_PK }}" data-port="PORT">{% trans "Online" %}</a>'.replace('{{ DEFAULT_PK }}', cellData).replace("PORT", rowData.port);
                 }
                 $(td).html(update_btn + test_btn + del_btn)
              }}
@@ -119,7 +121,8 @@ function initTable() {
         ajax_url: '{% url "api-elastics:node-list" %}?metainfo={{ object.id }}',
         columns: [
             {data: "id"}, {data: "name" }, {data: 'ip'}, {data: 'disktotal'}, {data: "rammax"},
-            {data: "uptime"}, {data: "version" },{data: "jdk" },{data: "http_address" }, {data: "id", orderable: false}
+            {data: "uptime"}, {data: "version" },{data: "jdk" },{data: "http_address" }, {data: "status"},
+            {data: "id", orderable: false}
         ],
         op_html: $('#actions').html()
     };

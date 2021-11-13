@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 08:27+0800\n"
+"POT-Creation-Date: 2021-11-13 11:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -327,7 +327,7 @@ msgstr "创建者"
 #: assets/templates/assets/cmd_filter_detail.html:64
 #: assets/templates/assets/domain_detail.html:63
 #: assets/templates/assets/system_user_detail.html:104
-#: common/mixins/models.py:50 elastics/models/esnode.py:37
+#: common/mixins/models.py:50 elastics/models/esnode.py:38
 #: elastics/models/metainfo.py:49
 #: elastics/templates/elastics/cloud_info_detail.html:64
 #: elastics/templates/elastics/meta_info_detail.html:122
@@ -494,7 +494,7 @@ msgstr "详情"
 #: elastics/templates/elastics/meta_info_detail.html:30
 #: elastics/templates/elastics/meta_info_list.html:48
 #: elastics/templates/elastics/node_list.html:63
-#: elastics/templates/elastics/node_list.html:110
+#: elastics/templates/elastics/node_list.html:111
 #: perms/templates/perms/asset_permission_detail.html:25
 #: perms/templates/perms/asset_permission_list.html:144
 #: perms/templates/perms/database_app_permission_detail.html:25
@@ -548,7 +548,7 @@ msgstr "更新"
 #: elastics/templates/elastics/index_list.html:53
 #: elastics/templates/elastics/meta_info_detail.html:34
 #: elastics/templates/elastics/meta_info_list.html:49
-#: elastics/templates/elastics/node_list.html:111
+#: elastics/templates/elastics/node_list.html:112
 #: ops/templates/ops/task_list.html:74
 #: perms/templates/perms/asset_permission_detail.html:29
 #: perms/templates/perms/asset_permission_list.html:145
@@ -597,7 +597,7 @@ msgstr "创建数据库应用"
 #: elastics/templates/elastics/cloud_info_list.html:26
 #: elastics/templates/elastics/index_list.html:29
 #: elastics/templates/elastics/meta_info_list.html:27
-#: elastics/templates/elastics/node_list.html:82
+#: elastics/templates/elastics/node_list.html:83
 #: ops/templates/ops/adhoc_history.html:57 ops/templates/ops/task_adhoc.html:62
 #: ops/templates/ops/task_history.html:63 ops/templates/ops/task_list.html:17
 #: perms/forms/asset_permission.py:20
@@ -1172,10 +1172,11 @@ msgstr "部门"
 #: assets/models/diskinfo.py:62 audits/models.py:88
 #: audits/templates/audits/login_log_list.html:64
 #: elastics/models/es_cluster.py:24 elastics/models/es_cluster.py:70
-#: elastics/models/index.py:29
+#: elastics/models/esnode.py:35 elastics/models/index.py:29
 #: elastics/templates/elastics/basic_cluster_list.html:75
 #: elastics/templates/elastics/cluster_remote_list.html:78
 #: elastics/templates/elastics/index_list.html:23
+#: elastics/templates/elastics/node_list.html:82
 #: tickets/templates/tickets/ticket_detail.html:34
 #: tickets/templates/tickets/ticket_list.html:36
 #: tickets/templates/tickets/ticket_list.html:104
@@ -1200,7 +1201,7 @@ msgstr "开始时间"
 #: assets/models/gathered_user.py:20
 #: assets/templates/assets/cmd_filter_detail.html:68 common/mixins/models.py:51
 #: elastics/models/es_cluster.py:41 elastics/models/es_cluster.py:57
-#: elastics/models/es_cluster.py:78 elastics/models/esnode.py:36
+#: elastics/models/es_cluster.py:78 elastics/models/esnode.py:37
 #: elastics/models/index.py:31
 #: elastics/templates/elastics/basic_cluster_list.html:123
 #: elastics/templates/elastics/cluster_remote_list.html:99
@@ -2379,8 +2380,6 @@ msgstr "创建网关"
 
 #: assets/templates/assets/domain_gateway_list.html:94
 #: assets/templates/assets/domain_gateway_list.html:96
-#: elastics/templates/elastics/node_list.html:112
-#: elastics/templates/elastics/node_list.html:114
 #: settings/templates/settings/email_setting.html:45
 #: settings/templates/settings/ldap_setting.html:46
 msgid "Test connection"
@@ -3133,8 +3132,6 @@ msgid "This field must be unique."
 msgstr "字段必须唯一"
 
 #: elastics/models/alter.py:19
-#, fuzzy
-#| msgid "Is active"
 msgid "Is active "
 msgstr "激活"
 
@@ -3143,8 +3140,6 @@ msgid "Frequency"
 msgstr ""
 
 #: elastics/models/alter.py:25
-#, fuzzy
-#| msgid "Alter"
 msgid "AlterWeaken"
 msgstr "告警"
 
@@ -3232,7 +3227,7 @@ msgid "Install"
 msgstr "安装"
 
 #: elastics/models/es_cluster.py:40 elastics/models/es_cluster.py:56
-#: elastics/models/es_cluster.py:77 elastics/models/esnode.py:35
+#: elastics/models/es_cluster.py:77 elastics/models/esnode.py:36
 #: elastics/models/index.py:30
 msgid "Metainfo"
 msgstr "源信息"
@@ -3335,7 +3330,7 @@ msgstr "Java版本"
 msgid "Running uptime"
 msgstr "运行时间"
 
-#: elastics/models/esnode.py:44
+#: elastics/models/esnode.py:45
 #, fuzzy
 #| msgid "Node"
 msgid "EsNode"
@@ -3519,6 +3514,14 @@ msgstr "端口可连接性探测"
 #: elastics/views/meteinfo.py:53
 msgid "Create meta info"
 msgstr "创建原集群"
+
+#: elastics/templates/elastics/node_list.html:114
+msgid "Offline"
+msgstr "下线"
+
+#: elastics/templates/elastics/node_list.html:116
+msgid "Online"
+msgstr "上线"
 
 #: elastics/views/basiccluster.py:55 elastics/views/basiccluster.py:81
 #: elastics/views/basiccluster.py:105 elastics/views/basiccluster.py:129

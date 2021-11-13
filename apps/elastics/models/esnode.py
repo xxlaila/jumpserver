@@ -32,6 +32,7 @@ class EsNode(OrgModelMixin):
     version = models.CharField(max_length=64, verbose_name=_('Version'))
     jdk = models.CharField(max_length=64, db_index=True, verbose_name=_('Jdk version'))
     uptime = models.CharField(max_length=64, db_index=True, verbose_name=_('Running uptime'))
+    status = models.BooleanField(default=True, verbose_name=_('Status'))
     metainfo = models.ForeignKey(MetaInfo, on_delete=models.CASCADE, verbose_name=_('Metainfo'))
     date_updated = models.DateTimeField(auto_now=True, null=True, verbose_name=_('Date updated'))
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name=_('Date created'))
