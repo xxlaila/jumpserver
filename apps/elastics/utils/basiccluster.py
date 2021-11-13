@@ -54,7 +54,7 @@ def write_default_setting(results, k):
                 "instore": indi['store']['size_in_bytes'], "nt": node['total'], 'nc': node['coordinating_only'],
                 'nd': node['data'], 'ni': node['ingest'], "nm": node['master'], "nr": node['remote_cluster_client'],
                 'mt': mem['total_in_bytes'], "mf": mem['free_in_bytes'], 'mu': mem['used_in_bytes'],
-                'pt': results['nodes']['packaging_types'], "metainfo_id": k.id}
+                'pt': results['nodes']['os']['packaging_types']['type'], "metainfo_id": k.id}
         try:
             obj = BasicCluster.objects.filter(date_updated__gte=datetime.datetime.now().date(),
                                               metainfo_id=k.id).first()
@@ -101,7 +101,7 @@ def check_setting_connent(_settins=None):
 def get_check_setting_data(results, k):
     f_data = {"persis": results["persistent"], "tran": results["transient"],
               "def_clus": results["defaults"]["cluster"],
-              "def_xpack": results["defaults"]["xpack"]["flattened"],
+              "def_xpack": results["defaults"]["xpack"],
               "metainfo_id": k.id}
     try:
         data = ClusterSetting.objects.filter(metainfo_id=k.id).first()
@@ -126,12 +126,12 @@ def put_settings_cluster(datas, body):
         try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                                data.metainfo.password).connentauth().cluster.put_settings(
-                index=data.name, body=body)
+                body=body)
         except TransportError as e:
             if e.status_code in [503, 502, 500]:
                 result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                                    data.metainfo.password).connentauth().cluster.put_settings(
-                    index=data.name, body=body)
+                    body=body)
             elif e.status_code in [401]:
                 raise ValueError("Incorrect account password")
             else:

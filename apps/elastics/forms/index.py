@@ -21,4 +21,4 @@ class IndexForm(OrgModelForm):
 
     class Meta:
         model = Index
-        fields = []
+        fields = ['name']

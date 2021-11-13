@@ -35,6 +35,7 @@ urlpatterns = [
          name='basic-cluster-update'),
     path('index/', views.IndexListView.as_view(), name='index-list'),
     path('index/<uuid:pk>/', views.IndexDetailView.as_view(), name='index-detail'),
+    path('index/create/', views.IndexCreateView.as_view(), name='index-create'),
 
 
 

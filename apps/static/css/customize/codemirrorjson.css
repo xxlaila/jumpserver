@@ -1,0 +1,43 @@
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; width: 500px;}
+  .string { color: green; }
+  .number { color: darkorange; }
+  .boolean { color: blue; }
+  .null { color: magenta; }
+  .key { color: red; }
+*{margin:0;padding:0;}
+#main{
+    width:100%;
+    margin-bottom:10px;
+    overflow:hidden;
+}
+#main .main-left{
+    width:49%;
+    height:auto;
+    float:left;
+}
+#main .main-right{
+    width:49%;
+    height: auto;
+    float:right;
+}
+#content{
+    width:100%;
+    overflow:hidden;
+}
+#content .content-left{
+    width: 49%;
+    height: auto;
+    float:left;
+}
+#content .content-right-sup{
+    width: 49%;
+    height:auto;
+    float:right;
+}
+#content .content-right-sub{
+    width:300px;
+    height:240px;
+    background:purple;
+    margin-top:20px;
+    float:right;
+}

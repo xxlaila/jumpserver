@@ -262,9 +262,3 @@ def delete_templates(datas, template_name):
         if result:
             pass
 
-
-
-
-
-
-

@@ -21,7 +21,7 @@ from rest_framework.views import APIView, Response
 
 
 __all__ = (
-    "IndexListView", "IndexDetailView"
+    "IndexListView", "IndexDetailView", "IndexCreateView"
 )
 logger = get_logger(__name__)
 
