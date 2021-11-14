@@ -18,13 +18,15 @@ from ..models import EsNode, MetaInfo
 from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
-from ..utils import get_nodes_connenct
+from ..utils import get_nodes_connenct,exclude_node
 from django.shortcuts import (
     render, redirect
 )
+from django.http import JsonResponse
+
 
 __all__ = (
-    "NodeListView", "NodeDetailView", "NodeUpdateView"
+    "NodeListView", "NodeDetailView", "NodeUpdateView", "NodeOffOnlineView"
 )
 logger = get_logger(__name__)
 
@@ -86,4 +88,16 @@ class NodeUpdateView(SingleObjectMixin, APIView):
         except Exception as e:
             logger.error(f'Error getting obj detail with error: {e}')
             return Response({'Error': 'Database error, return to previous page'}, status=500)
+
+class NodeOffOnlineView(APIView):
+    model = EsNode
+
+    def get_objects(self, k):
+        results = self.model.objects.filter(id=k)
+        return results
+
+    def post(self, request, *args, **kwargs):
+        k_head = request.META.get('Node_Line')
+        datas = exclude_node(self.get_objects(self.kwargs['pk']), k_head)
+        return JsonResponse({"status": datas})
 

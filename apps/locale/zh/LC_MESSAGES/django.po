@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 11:47+0800\n"
+"POT-Creation-Date: 2021-11-14 20:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -128,7 +128,7 @@ msgstr "运行参数"
 #: elastics/templates/elastics/meta_info_detail.html:62
 #: elastics/templates/elastics/meta_info_list.html:21
 #: elastics/templates/elastics/node_detail.html:41
-#: elastics/templates/elastics/node_list.html:74 ops/mixin.py:24
+#: elastics/templates/elastics/node_list.html:78 ops/mixin.py:24
 #: ops/templates/ops/task_detail.html:58 ops/templates/ops/task_list.html:11
 #: orgs/models.py:12 perms/models/base.py:48
 #: perms/templates/perms/asset_permission_detail.html:57
@@ -493,8 +493,8 @@ msgstr "详情"
 #: elastics/templates/elastics/index_list.html:52
 #: elastics/templates/elastics/meta_info_detail.html:30
 #: elastics/templates/elastics/meta_info_list.html:48
-#: elastics/templates/elastics/node_list.html:63
-#: elastics/templates/elastics/node_list.html:111
+#: elastics/templates/elastics/node_list.html:38
+#: elastics/templates/elastics/node_list.html:115
 #: perms/templates/perms/asset_permission_detail.html:25
 #: perms/templates/perms/asset_permission_list.html:144
 #: perms/templates/perms/database_app_permission_detail.html:25
@@ -548,7 +548,7 @@ msgstr "更新"
 #: elastics/templates/elastics/index_list.html:53
 #: elastics/templates/elastics/meta_info_detail.html:34
 #: elastics/templates/elastics/meta_info_list.html:49
-#: elastics/templates/elastics/node_list.html:112
+#: elastics/templates/elastics/node_list.html:121
 #: ops/templates/ops/task_list.html:74
 #: perms/templates/perms/asset_permission_detail.html:29
 #: perms/templates/perms/asset_permission_list.html:145
@@ -597,7 +597,7 @@ msgstr "创建数据库应用"
 #: elastics/templates/elastics/cloud_info_list.html:26
 #: elastics/templates/elastics/index_list.html:29
 #: elastics/templates/elastics/meta_info_list.html:27
-#: elastics/templates/elastics/node_list.html:83
+#: elastics/templates/elastics/node_list.html:87
 #: ops/templates/ops/adhoc_history.html:57 ops/templates/ops/task_adhoc.html:62
 #: ops/templates/ops/task_history.html:63 ops/templates/ops/task_list.html:17
 #: perms/forms/asset_permission.py:20
@@ -953,7 +953,7 @@ msgstr "内部的"
 #: assets/templates/assets/user_asset_list.html:76
 #: audits/templates/audits/login_log_list.html:60 elastics/models/esnode.py:21
 #: elastics/templates/elastics/node_detail.html:44
-#: elastics/templates/elastics/node_list.html:75
+#: elastics/templates/elastics/node_list.html:79
 #: perms/templates/perms/asset_permission_list.html:187
 #: settings/forms/terminal.py:16 users/templates/users/_granted_assets.html:26
 #: users/templates/users/user_asset_permission.html:156
@@ -1043,7 +1043,7 @@ msgstr "内存"
 
 #: assets/models/asset.py:215 elastics/models/esnode.py:23
 #: elastics/templates/elastics/node_detail.html:47
-#: elastics/templates/elastics/node_list.html:76
+#: elastics/templates/elastics/node_list.html:80
 msgid "Disk total"
 msgstr "硬盘大小"
 
@@ -1176,7 +1176,7 @@ msgstr "部门"
 #: elastics/templates/elastics/basic_cluster_list.html:75
 #: elastics/templates/elastics/cluster_remote_list.html:78
 #: elastics/templates/elastics/index_list.html:23
-#: elastics/templates/elastics/node_list.html:82
+#: elastics/templates/elastics/node_list.html:86
 #: tickets/templates/tickets/ticket_detail.html:34
 #: tickets/templates/tickets/ticket_list.html:36
 #: tickets/templates/tickets/ticket_list.html:104
@@ -1226,7 +1226,7 @@ msgstr "最新版本"
 #: assets/models/authbook.py:29
 #: assets/templates/assets/_asset_user_list.html:22
 #: elastics/models/esnode.py:32 elastics/templates/elastics/node_detail.html:74
-#: elastics/templates/elastics/node_list.html:79
+#: elastics/templates/elastics/node_list.html:83
 #: ops/templates/ops/adhoc_history.html:56
 #: ops/templates/ops/adhoc_history_detail.html:55
 #: ops/templates/ops/task_adhoc.html:56 ops/templates/ops/task_history.html:62
@@ -1985,7 +1985,7 @@ msgid "If use nat, set the ssh real port"
 msgstr "如果使用了nat端口映射，请设置为ssh真实监听的端口"
 
 #: assets/templates/assets/_node_detail_modal.html:11
-#: assets/templates/assets/asset_list.html:124 elastics/views/esnode.py:60
+#: assets/templates/assets/asset_list.html:124 elastics/views/esnode.py:62
 msgid "Node detail"
 msgstr "节点详情"
 
@@ -2386,6 +2386,7 @@ msgid "Test connection"
 msgstr "测试连接"
 
 #: assets/templates/assets/domain_gateway_list.html:136
+#: elastics/templates/elastics/node_list.html:163
 msgid "Can be connected"
 msgstr "可连接"
 
@@ -3207,7 +3208,7 @@ msgstr "Client节点"
 #: elastics/models/es_cluster.py:36 elastics/models/esnode.py:27
 #: elastics/templates/elastics/basic_cluster_list.html:111
 #: elastics/templates/elastics/node_detail.html:59
-#: elastics/templates/elastics/node_list.html:77
+#: elastics/templates/elastics/node_list.html:81
 msgid "Total memory"
 msgstr "总内存"
 
@@ -3316,17 +3317,17 @@ msgid "Transmission port"
 msgstr "广播端口"
 
 #: elastics/models/esnode.py:31 elastics/templates/elastics/node_detail.html:71
-#: elastics/templates/elastics/node_list.html:81
+#: elastics/templates/elastics/node_list.html:85
 msgid "Http monitoring"
 msgstr "Http监听"
 
 #: elastics/models/esnode.py:33 elastics/templates/elastics/node_detail.html:77
-#: elastics/templates/elastics/node_list.html:80
+#: elastics/templates/elastics/node_list.html:84
 msgid "Jdk version"
 msgstr "Java版本"
 
 #: elastics/models/esnode.py:34 elastics/templates/elastics/node_detail.html:80
-#: elastics/templates/elastics/node_list.html:78
+#: elastics/templates/elastics/node_list.html:82
 msgid "Running uptime"
 msgstr "运行时间"
 
@@ -3434,7 +3435,7 @@ msgstr "跨集群列表"
 #: elastics/templates/elastics/meta_info_detail.html:27
 #: elastics/templates/elastics/node_detail.html:23
 #: elastics/templates/elastics/node_list.html:33
-#: elastics/templates/elastics/node_list.html:44 elastics/views/esnode.py:44
+#: elastics/templates/elastics/node_list.html:48 elastics/views/esnode.py:46
 msgid "Node list"
 msgstr "节点角色"
 
@@ -3515,11 +3516,19 @@ msgstr "端口可连接性探测"
 msgid "Create meta info"
 msgstr "创建原集群"
 
-#: elastics/templates/elastics/node_list.html:114
+#: elastics/templates/elastics/node_list.html:67
+msgid "Add to node"
+msgstr "添加节点"
+
+#: elastics/templates/elastics/node_list.html:118
 msgid "Offline"
 msgstr "下线"
 
-#: elastics/templates/elastics/node_list.html:116
+#: elastics/templates/elastics/node_list.html:119
+msgid "Safeguard "
+msgstr "维护"
+
+#: elastics/templates/elastics/node_list.html:122
 msgid "Online"
 msgstr "上线"
 
@@ -3527,7 +3536,7 @@ msgstr "上线"
 #: elastics/views/basiccluster.py:105 elastics/views/basiccluster.py:129
 #: elastics/views/cloudinfor.py:33 elastics/views/cloudinfor.py:49
 #: elastics/views/cloudinfor.py:66 elastics/views/cloudinfor.py:80
-#: elastics/views/esnode.py:43 elastics/views/esnode.py:59
+#: elastics/views/esnode.py:45 elastics/views/esnode.py:61
 #: elastics/views/index.py:35 elastics/views/index.py:49
 #: elastics/views/index.py:65 elastics/views/meteinfo.py:34
 #: elastics/views/meteinfo.py:52 elastics/views/meteinfo.py:69
@@ -7287,9 +7296,6 @@ msgstr "用户授权数据库应用"
 
 #~ msgid "Have assets, cancel"
 #~ msgstr "存在资产，不能删除"
-
-#~ msgid "Add to node"
-#~ msgstr "添加到节点"
 
 #~ msgid "Test ldap success"
 #~ msgstr "连接LDAP成功"

@@ -53,32 +53,29 @@ def write_node_params(results, k):
     if results is not None:
         value = {}
         ack = []
+        old_ip = []
+        old_result = EsNode.objects.filter(metainfo_id=k.id).values('ip')
+        for old in old_result:
+            old_ip.append(old['ip'])
         for result in results:
             data = {"name": result['name'], "ip": result['ip'], "disktotal": result['disk.total'],
                     "diskused": result['disk.used'], "diskavail": result['disk.avail'], "ramcurrent": result['ram.current'],
                     "rammax": result['ram.max'], 'noderole': result['nodeRole'], 'pid': result['pid'], 'port': result['port'],
                     "http_address": result['http'], "version": result['version'], 'jdk': result['jdk'],
-                    "uptime": result['uptime'], "metainfo_id": k.id}
-            try:
-                # obj = Node.objects.filter(date_updated__gte=datetime.datetime.now().date(), metainfo_id=k.id, ip=data['ip']).first()
-                obj = EsNode.objects.filter(metainfo_id=k.id, ip=data['ip']).first()
-                if obj:
-                    try:
-                        EsNode.objects.filter(id=obj.id).update(**data)
-                    except Exception as e:
-                        logger.error(f'Update data error: {e}')
-                        return ({"status": "EsNode error"})
-                else:
-                    try:
-                        EsNode.objects.create(**data)
-                    except Exception as e:
-                        logger.error(f'Create data error: {e}')
-                        return ({"status": "EsNode error"})
-                ack.append(obj.name)
-                value[obj.metainfo.name] = ack
-            except Exception as e:
-                logger.error(f'Error getting result detail with error: {e}')
-                return {'Error': 'obj Does Not Exist.'}
+                    "uptime": result['uptime'], "status": True, "metainfo_id": k.id}
+            if data['ip'] in old_ip:
+                old_ip.remove(data['ip'])
+                try:
+                    obj, create = EsNode.objects.update_or_create(metainfo_id=k.id, defaults=data, ip=data['ip'])
+                    if obj:
+                        ack.append(obj.name)
+                        value[obj.metainfo.name] = ack
+                except Exception as e:
+                    logger.error(f'error: {e}')
+                    raise ValueError("EsNode error: %s" % data['ip'])
+        if old_ip:
+            for ele in old_ip:
+                EsNode.objects.filter(metainfo_id=k.id, ip=ele).update(status=False)
         return value
     return False
 
@@ -114,7 +111,7 @@ def get_node_stats(datas):
     :param datas:
     :return:
     """
-    metric = ('indices','fs','breaker','process','thread_pool')
+    metric = ('indices', 'fs', 'breaker', 'process', 'thread_pool')
     for data in datas:
         try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
@@ -133,3 +130,38 @@ def get_node_stats(datas):
                 raise ValueError("connent timeout")
         if result:
             pass
+
+def exclude_body(data):
+    data = {
+        "transient": {
+            "cluster.routing.allocation.exclude._name": "%s" % data
+        }
+    }
+    return data
+
+def exclude_node(datas, k_head):
+    result = ''
+    for data in datas:
+        old_result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                           data.metainfo.password).connentauth().cluster.get_settings()
+        # _name = result['transient']['cluster']['routing']['allocation']['exclude']['_name']
+        _ip = old_result['transient']['cluster']['routing']['allocation']['exclude']['ip']
+        if k_head == 'online':
+            if data.ip in _ip.split(','):
+                _ip = _ip.replace(data.ip)
+        else:
+            _ip = _ip + ''.join(data.ip)
+        try:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().cluster.put_settings(
+                body=exclude_body(_ip))
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().cluster.put_settings(
+                    body=exclude_body(_ip))
+    if 'acknowledged' in result:
+        return "seccess"
+    else:
+        logger.error(result)
+        raise ValueError("eroor")
