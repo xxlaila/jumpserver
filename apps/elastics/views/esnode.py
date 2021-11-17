@@ -26,7 +26,8 @@ from django.http import JsonResponse
 
 
 __all__ = (
-    "NodeListView", "NodeDetailView", "NodeUpdateView", "NodeOffOnlineView"
+    "NodeListView", "NodeDetailView", "NodeUpdateView", "NodeOnlineView",
+    "NodeOfflineView"
 )
 logger = get_logger(__name__)
 
@@ -89,15 +90,37 @@ class NodeUpdateView(SingleObjectMixin, APIView):
             logger.error(f'Error getting obj detail with error: {e}')
             return Response({'Error': 'Database error, return to previous page'}, status=500)
 
-class NodeOffOnlineView(APIView):
-    model = EsNode
+class NodeOnlineView(SingleObjectMixin, APIView):
 
-    def get_objects(self, k):
-        results = self.model.objects.filter(id=k)
-        return results
+    permission_classes = (IsOrgAdmin,)
+    object = None
 
     def post(self, request, *args, **kwargs):
-        k_head = request.META.get('Node_Line')
-        datas = exclude_node(self.get_objects(self.kwargs['pk']), k_head)
-        return JsonResponse({"status": datas})
+        # print(request.data)
+        # print(self.request.data.get('status'))
+        datas = self.get_object(EsNode.objects.filter(id=self.kwargs['pk']))
+        ok, e = exclude_node(datas)
+        if datas.status == False:
+            datas.status = True
+        else:
+            datas.status = False
+        datas.save()
+        if ok:
+            return Response("ok")
+        else:
+            return Response({"error": e}, status=400)
 
+class NodeOfflineView(SingleObjectMixin, APIView):
+    permission_classes = (IsOrgAdmin,)
+    object = None
+
+    # def get_objects(self, k):
+    #     results = self.model.objects.filter(id=k)
+    #     return results
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object(EsNode.objects.filter(id=self.kwargs['pk']))
+
+        print(self.request.data.get('status'))
+        datas = exclude_node(self.object, "off")
+        return JsonResponse({"status": datas})

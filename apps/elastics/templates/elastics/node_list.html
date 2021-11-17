@@ -119,7 +119,7 @@ function initTable() {
                     var test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" data-uid="{{ DEFAULT_PK }}">{% trans "Safeguard " %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
                 }else{
                     del_btn = '<a class="btn btn-xs btn-danger m-l-xs btn-delete" data-uid="{{ DEFAULT_PK }}">{% trans "Delete" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
-                    test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" data-uid="{{ DEFAULT_PK }}" data-port="PORT">{% trans "Online" %}</a>'.replace('{{ DEFAULT_PK }}', cellData).replace("PORT", rowData.port);
+                    test_btn = '<a class="btn btn-xs btn-warning m-l-xs btn-test" data-uid="{{ DEFAULT_PK }}">{% trans "Online" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
                 }
                 $(td).html(update_btn + test_btn + del_btn)
              }}
@@ -148,10 +148,21 @@ $(document).ready(function(){
         $data_table.ajax.reload();
     }, 3000);
 }).on('click', '.btn-test', function () {
-    $("#ssh_test_port").val($(this).data('port'));
-    $("#gateway_id").val($(this).data('uid'));
-    $("#gateway_test").modal('show');
-
+    var $data_table = $('#domain_list_table').DataTable();
+    var $this = $(this);
+    var uid = $this.data('uid');
+    var data = {status: "{{ object.status }}"};
+    var the_url = '{% url "elastics:node-online" pk=DEFAULT_PK %}'.replace('{{ DEFAULT_PK }}', uid);
+    requestApi({
+        url: the_url,
+        method: "POST",
+        body: JSON.stringify(data),
+        {#headers: {"node-line": "online", "Content-Type":"text/plain;charset=UTF-8"},#}
+        success_message: "{% trans 'Successfully joined the cluster' %}",
+     });
+    setTimeout( function () {
+        $data_table.ajax.reload();
+    }, 3000);
 }).on('click', '#btn_gateway_test', function () {
     var data = $("#test_gateway_form").serializeObject();
     var uid = data.gateway_id;

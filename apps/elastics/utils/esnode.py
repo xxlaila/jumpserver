@@ -132,36 +132,53 @@ def get_node_stats(datas):
             pass
 
 def exclude_body(data):
-    data = {
+    result = {
         "transient": {
-            "cluster.routing.allocation.exclude._name": "%s" % data
+            "cluster.routing.allocation.exclude._ip": "%s" % data
         }
     }
-    return data
+    return result
 
-def exclude_node(datas, k_head):
+def nodes_online_offline(ip, ele):
+    print(ele)
+    a = EsNode.objects.filter(ip=ip).update(status=ele)
+    print(a)
+    return True
+
+def find_json_key(key, dictionary):
+    for k, v in dictionary.items():
+        if k == key:
+            yield v
+        elif isinstance(v, dict):
+            for result in find_json_key(key, v):
+                yield result
+
+def exclude_node(data):
     result = ''
-    for data in datas:
-        old_result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+    _ip = ''
+    old_result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                            data.metainfo.password).connentauth().cluster.get_settings()
-        # _name = result['transient']['cluster']['routing']['allocation']['exclude']['_name']
-        _ip = old_result['transient']['cluster']['routing']['allocation']['exclude']['ip']
-        if k_head == 'online':
-            if data.ip in _ip.split(','):
-                _ip = _ip.replace(data.ip)
-        else:
-            _ip = _ip + ''.join(data.ip)
-        try:
+    # _ip = old_result['transient']['cluster']['routing']['allocation']['exclude']['_ip']
+    if 'transient' in old_result.keys():
+        for my_element in find_json_key('_ip', old_result['transient']):
+            if data.ip == my_element:
+                _ip = ''
+            elif data.ip in my_element:
+                _ip = _ip.pattern(data.ip)
+            else:
+                _ip = data.ip
+    else:
+        _ip = data.ip
+    try:
+        result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                           data.metainfo.password).connentauth().cluster.put_settings(
+            body=exclude_body(_ip))
+    except TransportError as e:
+        if e.status_code in [503, 502, 500]:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                                data.metainfo.password).connentauth().cluster.put_settings(
                 body=exclude_body(_ip))
-        except TransportError as e:
-            if e.status_code in [503, 502, 500]:
-                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                                   data.metainfo.password).connentauth().cluster.put_settings(
-                    body=exclude_body(_ip))
     if 'acknowledged' in result:
-        return "seccess"
+        return True, None
     else:
-        logger.error(result)
-        raise ValueError("eroor")
+        return False, str(result)
