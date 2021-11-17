@@ -96,8 +96,6 @@ class NodeOnlineView(SingleObjectMixin, APIView):
     object = None
 
     def post(self, request, *args, **kwargs):
-        # print(request.data)
-        # print(self.request.data.get('status'))
         datas = self.get_object(EsNode.objects.filter(id=self.kwargs['pk']))
         ok, e = exclude_node(datas)
         if datas.status == False:
@@ -109,18 +107,3 @@ class NodeOnlineView(SingleObjectMixin, APIView):
             return Response("ok")
         else:
             return Response({"error": e}, status=400)
-
-class NodeOfflineView(SingleObjectMixin, APIView):
-    permission_classes = (IsOrgAdmin,)
-    object = None
-
-    # def get_objects(self, k):
-    #     results = self.model.objects.filter(id=k)
-    #     return results
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object(EsNode.objects.filter(id=self.kwargs['pk']))
-
-        print(self.request.data.get('status'))
-        datas = exclude_node(self.object, "off")
-        return JsonResponse({"status": datas})

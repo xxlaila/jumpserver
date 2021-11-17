@@ -140,9 +140,7 @@ def exclude_body(data):
     return result
 
 def nodes_online_offline(ip, ele):
-    print(ele)
     a = EsNode.objects.filter(ip=ip).update(status=ele)
-    print(a)
     return True
 
 def find_json_key(key, dictionary):
