@@ -11,6 +11,7 @@ from elasticsearch import TransportError
 from ..utils import default_conn
 from ..utils.feishualter import FeishuAlter
 from django.conf import settings
+from .check_node import *
 
 
 def dataalter(*args):
@@ -35,14 +36,17 @@ def dataalter(*args):
     FeishuAlter().SendMessage(message)
 
 def check_health():
+    params = {'format': 'json'}
     try:
         healths = MetaInfo.objects.filter(health=True)
         for k in healths:
             try:
-                results = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.health()
+                results = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.health(
+                    params=params)
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    results = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cluster.health()
+                    results = default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.health(
+                        params=params)
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
                 else:
@@ -51,6 +55,7 @@ def check_health():
                 data = [k.name, k.kibana, k.env, k.cloud.name, results['status']]
             elif results['status'] == 'yellow':
                 data = [k.name, k.kibana, k.env, k.cloud.name, results['status']]
+                EsProcessCheck().get_health(k,results)
             else:
                 data = [k.name, k.kibana, k.env, k.cloud.name, results['status']]
             if data:

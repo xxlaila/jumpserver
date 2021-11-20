@@ -14,11 +14,11 @@ from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from common.permissions import PermissionsMixin, IsOrgAdmin
 from common.utils import get_logger
-from ..models import EsNode, MetaInfo
+from ..models import EsNode, MetaInfo, IndiceNode
 from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
-from ..utils import get_nodes_connenct,exclude_node
+from ..utils import get_nodes_connenct,exclude_node, get_node_stats
 from django.shortcuts import (
     render, redirect
 )
@@ -27,7 +27,7 @@ from django.http import JsonResponse
 
 __all__ = (
     "NodeListView", "NodeDetailView", "NodeUpdateView", "NodeOnlineView",
-    "NodeOfflineView"
+    "NodeStatsDetailView"
 )
 logger = get_logger(__name__)
 
@@ -61,6 +61,27 @@ class NodeDetailView(PermissionsMixin, DetailView):
         context = {
             'app': _('Elastics'),
             'action': _('Node detail'),
+        }
+        kwargs.update(context)
+        return super().get_context_data(**kwargs)
+
+class NodeStatsDetailView(PermissionsMixin, DetailView):
+    model = EsNode
+    template_name = 'elastics/node_stats_indices_detail.html'
+    permission_classes = [IsOrgAdmin]
+    object = None
+
+    def nodes_stats(self, id):
+        datas = self.model.objects.filter(id=id)
+        nodes = get_node_stats(datas)
+        return nodes
+
+    def get_context_data(self, **kwargs):
+        print(self.nodes_stats(self.kwargs['pk']))
+        context = {
+            'app': _('Elastics'),
+            'action': _('Node indices'),
+            'nodes_stats': self.nodes_stats(self.kwargs['pk'])
         }
         kwargs.update(context)
         return super().get_context_data(**kwargs)

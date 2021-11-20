@@ -1,4 +1,4 @@
-pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; width: 500px; height: 100px;}
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; width: 500px; height: 200px;}
   .string { color: green; }
   .number { color: darkorange; }
   .boolean { color: blue; }
@@ -12,12 +12,12 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; width: 500px; height: 1
 }
 #main .main-left{
     width: 49%;
-    height: 200px;
+    height: 210px;
     float:left;
 }
 #main .main-right{
     width:49%;
-    height: 200px;
+    height: 210px;
     float:right;
 }
 #content{
@@ -26,12 +26,12 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; width: 500px; height: 1
 }
 #content .content-left{
     width: 49%;
-    height: 200px;
+    height: 210px;
     float:left;
 }
 #content .content-right-sup{
     width: 49%;
-    height: 200px;
+    height: 210px;
     float:right;
 }
 #content .content-right-sub{

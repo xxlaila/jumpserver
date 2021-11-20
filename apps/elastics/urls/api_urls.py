@@ -22,6 +22,7 @@ router.register(r'meta-infos', api.MetaInfoViewSet, 'meta-info')
 router.register(r'basicclusters', api.BasicclusterViewSet, 'basiccluster')
 router.register(r'nodes', api.EsNodeViewSet, 'node')
 router.register(r'indexs', api.IndexViewSet, 'index')
+router.register(r'indicenodes', api.IndiceNodeViewSet, 'indicenodes')
 
 urlpatterns = [
     path('metainfo/<uuid:pk>/tasks/', api.MetaInfoTaskCreateApi.as_view(), name='metainfo-task-create'),

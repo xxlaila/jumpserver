@@ -9,13 +9,13 @@ from django.shortcuts import get_object_or_404
 from common.utils import get_logger
 from orgs.mixins.api import OrgBulkModelViewSet
 from ..hands import IsOrgAdmin
-from ..models import EsNode
+from ..models import EsNode, IndiceNode
 from .. import serializers
 
 logger = get_logger(__file__)
 
 __all__ = [
-    'EsNodeViewSet'
+    'EsNodeViewSet', 'IndiceNodeViewSet'
 ]
 
 class EsNodeViewSet(OrgBulkModelViewSet):
@@ -24,3 +24,11 @@ class EsNodeViewSet(OrgBulkModelViewSet):
     search_fields = ("metainfo__name", "name", "ip")
     permission_classes = (IsOrgAdmin,)
     serializer_class = serializers.EsNodeSerializer
+
+
+class IndiceNodeViewSet(OrgBulkModelViewSet):
+    model = IndiceNode
+    filter_fields = ("esnode__name", "indices__name", "refresh", "flush", "recovery")
+    search_fields = ("esnode__name", "indices__name",)
+    permission_classes = (IsOrgAdmin,)
+    serializer_class = serializers.IndiceNodeSerializer

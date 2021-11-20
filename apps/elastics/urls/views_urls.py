@@ -28,6 +28,7 @@ urlpatterns = [
     path('meta-info/<uuid:pk>/node/', views.NodeListView.as_view(), name='node-list'),
     path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
     path('node/<uuid:pk>/update/', views.NodeUpdateView.as_view(), name='node-update'),
+    path('node/<uuid:pk>/indices/', views.NodeStatsDetailView.as_view(), name='node-indices'),
     path('node/<uuid:pk>/online/', views.NodeOnlineView.as_view(), name='node-online'),
     path('cluterremote/<uuid:pk>/update/', views.ClusterRemoteInfoUpdateView.as_view(), name='cluster-remote-update'),
     path('default-settings/<uuid:pk>/update/', views.DefaultSettingsUpdateView.as_view(),

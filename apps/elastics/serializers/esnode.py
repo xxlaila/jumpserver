@@ -8,7 +8,7 @@
 
 from django.utils.translation import ugettext_lazy as _
 from common.serializers import AdaptedBulkListSerializer
-from ..models import EsNode
+from ..models import EsNode, IndiceNode
 from orgs.mixins.serializers import BulkOrgResourceModelSerializer
 
 
@@ -22,3 +22,13 @@ class EsNodeSerializer(BulkOrgResourceModelSerializer):
             'rammax', 'noderole', 'pid', 'port', 'http_address', 'version', 'jdk', 'status', 'uptime', 'metainfo',
             'date_created', 'date_updated'
         ]
+        
+class IndiceNodeSerializer(BulkOrgResourceModelSerializer):
+    class Meta:
+        model = IndiceNode
+        list_serializer_class = AdaptedBulkListSerializer
+        fields = [
+            'id', 'esnode', 'indices', 'refresh', 'flush', 'recovery',
+            'date_created', 'date_updated'
+        ]
+

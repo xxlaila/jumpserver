@@ -14,40 +14,6 @@ import base64, random
 from ..models import MetaInfo
 from elasticsearch import TransportError
 
-class ElasticsAuth:
-
-    def __init__(self, names, labels):
-        self.names = names
-        self.labels = labels
-
-    def GetDataAuth(self):
-        data = {}
-        try:
-            e_infos = MetaInfo.objects.filter(name=self.names, labels=self.labels).values()
-            for e_info in e_infos:
-                data['name'] = e_info['name']
-                data['env'] = e_info['env']
-                data['address'] = e_info['address']
-                data['username'] = e_info['username']
-                data['password'] = e_info['password']
-                data['labels'] = e_info['labels']
-                data['kibana'] = e_info['kibana']
-            return data
-        except MetaInfo.DoesNotExist:
-            raise ValueError("The cluster does not exist, or the query is wrong")
-
-    def connentauth(self):
-        cl_inf = self.GetDataAuth()
-        if cl_inf:
-            dolphins = Elasticsearch(cl_inf["address"], http_auth=(cl_inf['username'], cl_inf['password']),
-                              timeout=10000)
-            return dolphins
-
-    def GetIndexsAll(self):
-        yesterday = (datetime.date.today()).strftime("%Y.%m.%d")
-        inds = self.connentauth().cat.indices(index="*" + '-' + yesterday)
-        return inds
-
 class EsConnection:
 
     def __init__(self, address, user, pwd):

@@ -18,7 +18,7 @@ logger = get_logger(__name__)
 
 params = {'bytes': 'gb', 'format': 'json', 'include_unloaded_segments': 'true', 'local': 'false'}
 
-def get_indexs_connent(request, basics=None):
+def get_indexs_connent(basics=None):
     try:
         obj = {}
         if basics is None:

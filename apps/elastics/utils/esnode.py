@@ -6,10 +6,9 @@
 @Software: PyCharm
 """
 from elasticsearch import TransportError
-from ..models import EsNode, MetaInfo
+from ..models import EsNode, MetaInfo, IndiceNode, IndiceShard, NodeFs, Index
 from ..utils import default_conn
 import datetime,time
-from django.http import JsonResponse
 from common.utils import get_logger
 from celery import shared_task
 from ops.celery.decorator import (
@@ -18,12 +17,10 @@ from ops.celery.decorator import (
 
 logger = get_logger(__name__)
 
-
-
 @shared_task
 @register_as_period_task(interval=600)
 def get_nodes_connenct(basics=None):
-    display = ('id', 'ip', 'name', 'disk.total', 'disk.used', 'disk.avail', 'ram.current', 'ram.percent', 'ram.max',
+    display = ('id', 'ip', 'name','disk.total', 'disk.used', 'disk.avail', 'ram.current', 'ram.percent', 'ram.max',
                'cpu', 'hp', 'fm', 'sm', 'sc', 'qcm', 'sqti', 'uptime', 'pid', 'nodeRole', 'jdk', 'port', 'http',
                'version'
                )
@@ -58,11 +55,11 @@ def write_node_params(results, k):
         for old in old_result:
             old_ip.append(old['ip'])
         for result in results:
-            data = {"name": result['name'], "ip": result['ip'], "disktotal": result['disk.total'],
+            data = {"name": result['name'], "uuid": result["id"], "ip": result['ip'], "disktotal": result['disk.total'],
                     "diskused": result['disk.used'], "diskavail": result['disk.avail'], "ramcurrent": result['ram.current'],
                     "rammax": result['ram.max'], 'noderole': result['nodeRole'], 'pid': result['pid'], 'port': result['port'],
                     "http_address": result['http'], "version": result['version'], 'jdk': result['jdk'],
-                    "uptime": result['uptime'], "status": True, "metainfo_id": k.id}
+                    "uptime": result['uptime'], "metainfo_id": k.id}
             if data['ip'] in old_ip:
                 old_ip.remove(data['ip'])
                 try:
@@ -79,49 +76,24 @@ def write_node_params(results, k):
         return value
     return False
 
-def get_node_info(datas):
-    """
-    Node info
-    :param datas:
-    :return:
-    """
-    metric = ('process', 'thread_pool', 'os', 'indices', 'settings')
-    for data in datas:
-        try:
-            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                               data.metainfo.password).connentauth().nodes.info(
-                node_id=data.name, metric=metric)
-        except TransportError as e:
-            if e.status_code in [503, 502, 500]:
-                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                                   data.metainfo.password).connentauth().nodes.info(
-                    node_id=data.name, metric=metric)
-            elif e.status_code in [401]:
-                raise ValueError("Incorrect account password")
-            elif e.status_code in [404]:
-                return ("%s Index does not exist!" % data.name)
-            else:
-                raise ValueError("connent timeout")
-        if result:
-            pass
-
 def get_node_stats(datas):
     """
     Node stats
     :param datas:
     :return:
     """
-    metric = ('indices', 'fs', 'breaker', 'process', 'thread_pool')
+    metric = ('fs', 'indices')
+    index_metric = ('docs', 'store', 'recovery', 'refresh', 'flush')
     for data in datas:
         try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                               data.metainfo.password).connentauth().nodes.stats(
-                node_id=data.name, metric=metric)
+                                                   data.metainfo.password).connentauth().nodes.stats(
+                    node_id=data.name, metric=metric, index_metric=index_metric, level='indices')
         except TransportError as e:
             if e.status_code in [503, 502, 500]:
                 result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                                    data.metainfo.password).connentauth().nodes.stats(
-                    node_id=data.name, metric=metric)
+                    node_id=data.name, metric=metric, index_metric=index_metric, level='indices')
             elif e.status_code in [401]:
                 raise ValueError("Incorrect account password")
             elif e.status_code in [404]:
@@ -129,7 +101,24 @@ def get_node_stats(datas):
             else:
                 raise ValueError("connent timeout")
         if result:
-            pass
+            for i in result['nodes']:
+                for k, v in result['nodes'][i]['indices']['indices'].items():
+                    try:
+                        inds = Index.objects.get(name=k, metainfo_id=data.metainfo.id)
+                        ojb = {"esnode_id": data.id, "indices_id": inds.id, "refresh": v['refresh']['total'],
+                               "flush": v['flush']['total'], "recovery": v['recovery']['current_as_source']}
+                        try:
+                            obj, create = IndiceNode.objects.update_or_create(esnode_id=data.id, indices_id=inds.id,
+                                                                          defaults=ojb)
+
+                            if obj:
+                                return ({"status": "%s update success: %s" % (data['name'], obj)})
+                        except Exception as e:
+                            return ({"status": "Clusremote error", "message": 'Error: ' + str(e)})
+                    except Exception as e:
+                        print(e)
+        else:
+            return str(result)
 
 def exclude_body(data):
     result = {
@@ -138,10 +127,6 @@ def exclude_body(data):
         }
     }
     return result
-
-def nodes_online_offline(ip, ele):
-    a = EsNode.objects.filter(ip=ip).update(status=ele)
-    return True
 
 def find_json_key(key, dictionary):
     for k, v in dictionary.items():

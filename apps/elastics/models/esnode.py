@@ -13,11 +13,12 @@ from django.utils.translation import ugettext_lazy as _
 from orgs.mixins.models import OrgModelMixin
 from ..models import MetaInfo
 
-__all__ = ['EsNode']
+__all__ = ['EsNode', 'NodeFs']
 logger = logging.getLogger(__name__)
 
 class EsNode(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+    uuid = models.CharField(null=True, blank=True, max_length=256, verbose_name=_('Uuid'))
     ip = models.GenericIPAddressField(max_length=128, verbose_name=_('IP'), db_index=True)
     name = models.CharField(max_length=128, verbose_name=_('Name'))
     disktotal = models.BigIntegerField(verbose_name=_('Disk total'))
@@ -40,6 +41,27 @@ class EsNode(OrgModelMixin):
     def __str__(self):
         return '{0.name}({0.ip})'.format(self)
 
+    @property
+    def nodes_amount(self):
+        return self.ip.all().count()
+
     class Meta:
         ordering = ['ip']
         verbose_name = _("EsNode")
+
+class NodeFs(OrgModelMixin):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+    esnode = models.ForeignKey(EsNode, db_index=True, on_delete=models.CASCADE, verbose_name=_('Esnode'))
+    path = models.CharField(null=True, blank=True, max_length=512, verbose_name=_('Data path'))
+    mount = models.CharField(null=True, blank=True, max_length=512, verbose_name=_('Mount path'))
+    filesystem = models.CharField(null=True, max_length=64, verbose_name=_('File system'))
+    total = models.BigIntegerField(verbose_name=_('Total size'))
+    free = models.BigIntegerField(verbose_name=_('Free size'))
+    available = models.BigIntegerField(verbose_name=_('Available'))
+    date_updated = models.DateTimeField(auto_now=True, null=True, verbose_name=_('Date updated'))
+
+    def __str__(self):
+        return '{0.id}'.format(self)
+
+    class Meta:
+        verbose_name = _("NodeFs")
