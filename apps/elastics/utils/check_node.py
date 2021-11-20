@@ -26,7 +26,7 @@ class EsProcessCheck:
     #     # self.conn_pool = Transport(hosts=address, http_auth=(user, pwd), connection_class=RequestsHttpConnection).connection_pool
     #     self.conn_pool = Elasticsearch(hosts=address, http_auth=(user, pwd), timeout=100000)
         self.params = {'format': 'json'}
-        self.display = ('ip', 'name', 'pid', 'port')
+        self.display = ('ip')
         self.command = 'sudo systemctl start elasticsearch'
 
     def execute_command(cmdstring, cwd=None, timeout=None, shell=False):
@@ -76,7 +76,7 @@ class EsProcessCheck:
                     if ports is not None:
                         data = [k.name, k.kibana, k.env, k.cloud.name, ports]
                         health.dataalter(data)
-                        self.execute_command("ssh -P56358 hll_user@%s " % i + self.command)
+                        self.execute_command("ssh -P56358 user@%s " % i + self.command)
                         time.sleep(3000)
                         ports = self.scoketconnet(i, '39900')
                         if ports is not None:

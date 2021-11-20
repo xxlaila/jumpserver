@@ -114,7 +114,7 @@ def get_node_stats(datas):
                             if obj:
                                 return ({"status": "%s update success: %s" % (data['name'], obj)})
                         except Exception as e:
-                            return ({"status": "Clusremote error", "message": 'Error: ' + str(e)})
+                            return ({"status": "IndiceNode error", "message": 'Error: ' + str(e)})
                     except Exception as e:
                         print(e)
         else:
