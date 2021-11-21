@@ -66,10 +66,10 @@ class EsProcessCheck:
             old_data.append(node_re.ip)
         for node_new in node_news:
             new_data.append(node_new['ip'])
-        if results['status'] in ['yellow', 'red'] and results['relocating'] == 0 and results['unassigned'] > 0:
+        if results['status'] in ['yellow'] and results['relocating'] == 0 and results['unassigned'] > 0:
             default_conn.EsConnection(k.address, k.username, k.password).connentauth().cluster.reroute(
                 params={"retry_failed": "true"})
-        elif results['status'] in ['yellow', 'red']:
+        elif results['status'] in ['red']:
             if results['number_of_nodes'] != len(old_data):
                 for i in list(set(old_data).difference(new_data)):
                     ports = self.scoketconnet(i, '39900')

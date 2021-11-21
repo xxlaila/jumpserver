@@ -25,5 +25,33 @@ class EsConnection:
         # conn_pool = Transport(hosts=self.address, http_auth=(self.user, self.pwd),
         #                                connection_class=RequestsHttpConnection).connection_pool
         conn_pool = Elasticsearch(hosts=self.address, http_auth=(self.user, self.pwd), timeout=100000)
+        a = Elasticsearch
         return conn_pool
+
+class EsConnectionPool:
+
+    def __init__(self):
+        pass
+
+    def get_cluster(self):
+        ELASTICSEARCH = {}
+        for data in MetaInfo.objects.all():
+            ELASTICSEARCH.update({
+                data.name: {
+                    'hosts': [
+                        {
+                            'host': data.address.split(':')[0],
+                            'port': data.address.split(':')[-1],
+                            'verify_certs': False,
+                            'use_ssl': False,
+                            'http_auth': (
+                                data.username,
+                                data.password
+                            )
+                        }
+                    ]
+                }
+            })
+
+        return ELASTICSEARCH
 

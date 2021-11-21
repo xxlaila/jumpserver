@@ -56,8 +56,8 @@ def write_default_setting(results, k):
                 'mt': mem['total_in_bytes'], "mf": mem['free_in_bytes'], 'mu': mem['used_in_bytes'],
                 'pt': results['nodes']['os']['packaging_types']['type'], "metainfo_id": k.id}
         try:
-            obj = BasicCluster.objects.filter(date_updated__gte=datetime.datetime.now().date(),
-                                              metainfo_id=k.id).first()
+            obj = BasicCluster.objects.filter(
+                date_updated__gte=datetime.datetime.now().date(), metainfo_id=k.id).first()
             if obj:
                 BasicCluster.objects.filter(id=obj.id).update(**data)
                 ack.update({"update ": obj.name})

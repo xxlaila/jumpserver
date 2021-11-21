@@ -165,3 +165,34 @@ def exclude_node(data):
         return True, None
     else:
         return False, str(result)
+
+
+def index_node_shards(data):
+    try:
+        result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                           data.metainfo.password).connentauth().nodes.stats(
+            node_id=data.uuid, level='shards')
+    except TransportError as e:
+        if e.status_code in [503, 502, 500]:
+            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                               data.metainfo.password).connentauth().nodes.stats(
+                node_id=data.uuid, level='shards')
+        # if result:
+    for k, v in result['nodes'][data.uuid]['indices']['shards'].items():
+        if datetime.datetime.now().strftime('%Y.%m.%d') in k:
+            for ele in v:
+                for shad, values in ele.items():
+                    __data = {"shardid": shad, "esnode_id": values['routing']['node'], "indices_id": k,
+                           "state": values['routing']['state'], "pri": values['routing']['primary'],
+                           "relocating_node": values['routing']['relocating_node'],
+                           'docs': values['docs']['count'], 'store': values['store']['size_in_bytes'],
+                           'recovery': values['recovery']['current_as_source'],
+                           'shard_path': values['shard_path']['state_path'], 'data_path': values['shard_path']['data_path'],
+                           }
+                    try:
+                        old, create = IndiceShard.objects.update_or_create(
+                            indices_id=k, shardid=shad, date_updated__range=datetime.datetime.now().date(),
+                            defaults=__data)
+                    except Exception as e:
+                        logger.error(e)
+                        return None

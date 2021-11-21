@@ -25,11 +25,13 @@ def get_indexs_connent(basics=None):
             basics = MetaInfo.objects.filter(indexes=True)
         for k in basics:
             try:
-                data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cat.indices(
+                data = default_conn.EsConnection(k.metainfo.address, k.metainfo.username,
+                                                   k.metainfo.password).connentauth().cat.indices(
                     index='*-%s' % datetime.datetime.now().strftime('%Y.%m.%d'), params=params)
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.ElasticsAuth(k.name, k.labels).connentauth().cat.nodes(
+                    data = default_conn.EsConnection(k.metainfo.address, k.metainfo.username,
+                                                   k.metainfo.password).connentauth().cat.nodes(
                         index='*-%s' % datetime.datetime.now().strftime('%Y.%m.%d'), params=params)
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
@@ -94,13 +96,15 @@ def create_index(datas, index_name, mappings=None, settings=None, aliases=None, 
     for data in datas:
         try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                      data.metainfo.password).connentauth().indices.create(
-                index=index_name, mappings=mappings,settings=settings,aliases=aliases, include_type_name=include_type_name)
+                                               data.metainfo.password).connentauth().indices.create(
+                index=index_name, mappings=mappings, settings=settings, aliases=aliases,
+                include_type_name=include_type_name, ignore=[400, 404])
         except TransportError as e:
             if e.status_code in [503, 502, 500]:
-                result = default_conn.EsConnection(
-                    data.metainfo.address, data.metainfo.username, data.metainfo.password).connentauth().indices.create(
-                    index=index_name)
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().indices.create(
+                    index=index_name, mappings=mappings, settings=settings, aliases=aliases,
+                    include_type_name=include_type_name, ignore=[400, 404])
             elif e.status_code in [401]:
                 raise ValueError("Incorrect account password")
             else:
@@ -117,11 +121,11 @@ def close_index(datas):
     for data in datas:
         try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                               data.metainfo.password).connentauth().indices.close(index=data.name)
+                                               data.metainfo.password).connentauth().indices.close(index=data.name, ignore=[400, 404])
         except TransportError as e:
             if e.status_code in [503, 502, 500]:
                 result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                                   data.metainfo.password).connentauth().indices.close(index=data.name)
+                                                   data.metainfo.password).connentauth().indices.close(index=data.name, ignore=[400, 404])
             elif e.status_code in [401]:
                 raise ValueError("Incorrect account password")
             else:
