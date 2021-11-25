@@ -24,11 +24,12 @@ class EsNodeSerializer(BulkOrgResourceModelSerializer):
         ]
         
 class IndiceNodeSerializer(BulkOrgResourceModelSerializer):
+    
     class Meta:
         model = IndiceNode
         list_serializer_class = AdaptedBulkListSerializer
         fields = [
-            'id', 'esnode', 'indices', 'refresh', 'flush', 'recovery',
+            'id', 'esnode', 'index', 'refresh', 'flush', 'recovery', 'org_name',
             'date_created', 'date_updated'
         ]
 

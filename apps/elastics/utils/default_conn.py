@@ -25,7 +25,6 @@ class EsConnection:
         # conn_pool = Transport(hosts=self.address, http_auth=(self.user, self.pwd),
         #                                connection_class=RequestsHttpConnection).connection_pool
         conn_pool = Elasticsearch(hosts=self.address, http_auth=(self.user, self.pwd), timeout=100000)
-        a = Elasticsearch
         return conn_pool
 
 class EsConnectionPool:

@@ -10,28 +10,31 @@ from elasticsearch import TransportError
 from ..models import MetaInfo
 from ..utils import default_conn, EsConnection
 from common.utils import get_logger
+from ..serializers import IndiceShardSerializer
 import datetime
-from ..models import Index
+from ..models import Index, IndiceShard, EsNode
 from django.http import JsonResponse
+from django.db.models import Q
+
 
 logger = get_logger(__name__)
 
 params = {'bytes': 'gb', 'format': 'json', 'include_unloaded_segments': 'true', 'local': 'false'}
 
-def get_indexs_connent(basics=None):
+def get_indexs_connent(request, basics=None):
     try:
         obj = {}
         if basics is None:
             basics = MetaInfo.objects.filter(indexes=True)
         for k in basics:
             try:
-                data = default_conn.EsConnection(k.metainfo.address, k.metainfo.username,
-                                                   k.metainfo.password).connentauth().cat.indices(
+                data = default_conn.EsConnection(k.address, k.username,
+                                                   k.password).connentauth().cat.indices(
                     index='*-%s' % datetime.datetime.now().strftime('%Y.%m.%d'), params=params)
             except TransportError as e:
                 if e.status_code in [503, 502, 500]:
-                    data = default_conn.EsConnection(k.metainfo.address, k.metainfo.username,
-                                                   k.metainfo.password).connentauth().cat.nodes(
+                    data = default_conn.EsConnection(k.address, k.username,
+                                                   k.password).connentauth().cat.nodes(
                         index='*-%s' % datetime.datetime.now().strftime('%Y.%m.%d'), params=params)
                 elif e.status_code in [401]:
                     raise ValueError("Incorrect account password")
@@ -45,13 +48,25 @@ def get_indexs_connent(basics=None):
         return False
 
 def write_indexs_data(results, k):
+    params = {'bytes': 'gb', 'format': 'json'}
+    display = ('id', 's', 'i', 'p', 'st', 'dc', 'sto', 'ip', 'node', 'ur', 'ud')
     if results is not None:
         for result in results:
             data = {"name": result['index'], "uuid": result['uuid'], "pri": result['pri'], "rep": result['rep'],
                     "dc": result['docs.count'], "ssize": result['store.size'], "pss": result['pri.store.size'],
                     'health': result['health'], 'status': result['status'], "metainfo_id": k.id}
+            shards = default_conn.EsConnection(
+                k.address, k.username, k.password).connentauth().cat.shards(
+                index=result['index'], h=display, params=params, ignore=['404'])
             try:
-                Index.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)
+                obj, create = Index.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)
+                for ele in shards:
+                    s_data = {"shard": ele['s'], "pr": ele['p'], "st": ele['st'], "dc": ele['dc'],
+                              "sto": ele['sto'], "esnode_id": (EsNode.objects.get(ip=ele['ip'])).id, 'uid': ele['id']}
+                    inds_id = Index.objects.get(name=ele['i'], metainfo_id=k.id)
+                    IndiceShard.objects.filter(**s_data).update_or_create(defaults=s_data)
+                    shard_list = IndiceShard.objects.filter(**s_data)
+                    inds_id.indiceshard_set.add(*shard_list)
             except Exception as e:
                 logger.error(f'error: {e}')
                 raise ValueError("Index error: %s" % result['index'])

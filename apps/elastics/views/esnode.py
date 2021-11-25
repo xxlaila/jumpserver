@@ -18,16 +18,15 @@ from ..models import EsNode, MetaInfo, IndiceNode
 from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
-from ..utils import get_nodes_connenct,exclude_node, get_node_stats
+from ..utils import get_nodes_connenct,exclude_node, get_node_stats, index_node_shards
 from django.shortcuts import (
     render, redirect
 )
-from django.http import JsonResponse
-
+from django.shortcuts import get_object_or_404, reverse
 
 __all__ = (
     "NodeListView", "NodeDetailView", "NodeUpdateView", "NodeOnlineView",
-    "NodeStatsDetailView"
+    "NodeIndiceListView"
 )
 logger = get_logger(__name__)
 
@@ -65,22 +64,27 @@ class NodeDetailView(PermissionsMixin, DetailView):
         kwargs.update(context)
         return super().get_context_data(**kwargs)
 
-class NodeStatsDetailView(PermissionsMixin, DetailView):
-    model = EsNode
+class NodeIndiceListView(PermissionsMixin, SingleObjectMixin, TemplateView):
     template_name = 'elastics/node_stats_indices_detail.html'
-    permission_classes = [IsOrgAdmin]
+    model = EsNode
     object = None
-
+    permission_classes = [IsOrgAdmin]
+    
     def nodes_stats(self, id):
         datas = self.model.objects.filter(id=id)
         nodes = get_node_stats(datas)
+        a = index_node_shards(datas)
         return nodes
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=self.model.objects.all())
+        return super().get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
-        print(self.nodes_stats(self.kwargs['pk']))
         context = {
             'app': _('Elastics'),
             'action': _('Node indices'),
+            'object': self.get_object(),
             'nodes_stats': self.nodes_stats(self.kwargs['pk'])
         }
         kwargs.update(context)
@@ -92,6 +96,11 @@ class NodeUpdateView(SingleObjectMixin, APIView):
     template_name = 'elastics/node_list.html'
     success_message = update_success_msg
     permission_classes = [IsOrgAdmin]
+    
+    # def get_success_url(self):
+    #     return reverse('assets:elastics:node-list', kwargs={
+    #         'pk': self.cmd_filter.id
+    #     })
 
     def get_object1(self, k):
         result = self.model.objects.filter(id=k, node=True)

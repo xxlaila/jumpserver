@@ -13,8 +13,20 @@ from django.utils.translation import ugettext_lazy as _
 from orgs.mixins.models import OrgModelMixin
 from ..models import MetaInfo, EsNode
 
-__all__ = ['Index', 'IndiceShard', 'IndiceNode',]
+__all__ = ['Index', 'IndiceNode', 'IndiceShard']
 logger = logging.getLogger(__name__)
+
+PRIREP_CHOICES = (
+        ("p", "Primary"),
+        ("r", "Replica"),
+    )
+
+STATE_CHOICES = (
+        ("INITIALIZING", "The shard is recovering from a peer shard or gateway."),
+        ("RELOCATING", "The shard is relocating."),
+        ("STARTED", "The shard has started."),
+        ("UNASSIGNED", "The shard is not assigned to any node."),
+    )
 
 class Index(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
@@ -41,33 +53,30 @@ class Index(OrgModelMixin):
         ordering = ['name', 'date_updated']
         verbose_name = _("Index")
 
-
 class IndiceShard(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+    index = models.ManyToManyField(Index, verbose_name=_('Index'))
+    shard = models.IntegerField(null=True, verbose_name=_('Shard'))
+    pr = models.CharField(choices=PRIREP_CHOICES, max_length=32, null=True, verbose_name=_('Primary or Replica'))
+    st = models.CharField(choices=STATE_CHOICES, max_length=128, null=True, verbose_name=_('State'))
+    dc = models.BigIntegerField(null=True, blank=True, verbose_name=_('Shard docs'))
+    sto = models.BigIntegerField(null=True, blank=True, verbose_name=_('Shard store size'))
     esnode = models.ForeignKey(EsNode, on_delete=models.CASCADE, verbose_name=_('Esnode'))
-    indices = models.ManyToManyField(Index, verbose_name=_('Indices'))
-    shardid = models.IntegerField(verbose_name=_('Shardid'))
-    state = models.CharField(null=True, blank=True, max_length=64, verbose_name=_('State'))
-    pri = models.CharField(null=True, blank=True, max_length=64, verbose_name=_('Primary shard'))
-    relocating_node = models.CharField(null=True, blank=True, max_length=512, verbose_name=_('Relocating node'))
-    docs = models.BigIntegerField(verbose_name=_('Docs'))
-    store = models.IntegerField(verbose_name=_('Store'))
-    recovery = models.IntegerField(verbose_name=_('Recovery'))
-    shard_path = models.CharField(null=True, blank=True, max_length=512, verbose_name=_('shard path'))
-    data_path = models.CharField(null=True, blank=True, max_length=512, verbose_name=_('Data path'))
+    uid = models.CharField(null=True, blank=True, max_length=128, verbose_name=_('Uid'))
     date_updated = models.DateTimeField(auto_now=True, null=True, verbose_name=_('Date updated'))
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         ordering = ['date_updated']
         verbose_name = _("IndiceShard")
 
+
 class IndiceNode(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     esnode = models.ForeignKey(EsNode, on_delete=models.CASCADE, verbose_name=_('Esnode'))
-    indices = models.ForeignKey(Index, on_delete=models.CASCADE, verbose_name=_('Index'))
+    index = models.ForeignKey(Index, on_delete=models.CASCADE, verbose_name=_('Index'))
     refresh = models.IntegerField(verbose_name=_('Refresh'))
     flush = models.IntegerField(verbose_name=_('Flush'))
     recovery = models.IntegerField(verbose_name=_('Recovery'))
@@ -75,7 +84,8 @@ class IndiceNode(OrgModelMixin):
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name=_('Date created'))
 
     def __str__(self):
-        return '{0.id}'.format(self)
+        return self.id
 
     class Meta:
+        ordering = ['esnode']
         verbose_name = _("IndiceNode")

@@ -73,7 +73,8 @@ class EsProcessCheck:
             if results['number_of_nodes'] != len(old_data):
                 for i in list(set(old_data).difference(new_data)):
                     ports = self.scoketconnet(i, '39900')
-                    if ports is not None:
+                    if not all([ports]):
+                    # if ports is not None:
                         data = [k.name, k.kibana, k.env, k.cloud.name, ports]
                         health.dataalter(data)
                         self.execute_command("ssh -P56358 user@%s " % i + self.command)

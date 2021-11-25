@@ -14,6 +14,7 @@ from celery import shared_task
 from ops.celery.decorator import (
     register_as_period_task, after_app_ready_start, after_app_shutdown_clean_periodic
 )
+from rest_framework.views import Response
 
 logger = get_logger(__name__)
 
@@ -42,7 +43,7 @@ def get_nodes_connenct(basics=None):
                 else:
                     raise ValueError("connent timeout")
             obj.append(write_node_params(data, k))
-        return ({"status": obj})
+        return Response({"status": obj}, status=200)
     except MetaInfo.DoesNotExist:
         return False
 
@@ -59,17 +60,17 @@ def write_node_params(results, k):
                     "diskused": result['disk.used'], "diskavail": result['disk.avail'], "ramcurrent": result['ram.current'],
                     "rammax": result['ram.max'], 'noderole': result['nodeRole'], 'pid': result['pid'], 'port': result['port'],
                     "http_address": result['http'], "version": result['version'], 'jdk': result['jdk'],
-                    "uptime": result['uptime'], "metainfo_id": k.id}
+                    "uptime": result['uptime'], "status": True, "metainfo_id": k.id}
             if data['ip'] in old_ip:
                 old_ip.remove(data['ip'])
-                try:
-                    obj, create = EsNode.objects.update_or_create(metainfo_id=k.id, defaults=data, ip=data['ip'])
-                    if obj:
-                        ack.append(obj.name)
-                        value[obj.metainfo.name] = ack
-                except Exception as e:
-                    logger.error(f'error: {e}')
-                    raise ValueError("EsNode error: %s" % data['ip'])
+            try:
+                obj, create = EsNode.objects.update_or_create(metainfo_id=k.id, defaults=data, ip=data['ip'])
+                if obj:
+                    ack.append(obj.name)
+                    value[obj.metainfo.name] = ack
+            except Exception as e:
+                logger.error(f'error: {e}')
+                raise ValueError("EsNode error: %s" % data['ip'])
         if old_ip:
             for ele in old_ip:
                 EsNode.objects.filter(metainfo_id=k.id, ip=ele).update(status=False)
@@ -103,20 +104,16 @@ def get_node_stats(datas):
         if result:
             for i in result['nodes']:
                 for k, v in result['nodes'][i]['indices']['indices'].items():
-                    try:
-                        inds = Index.objects.get(name=k, metainfo_id=data.metainfo.id)
-                        ojb = {"esnode_id": data.id, "indices_id": inds.id, "refresh": v['refresh']['total'],
-                               "flush": v['flush']['total'], "recovery": v['recovery']['current_as_source']}
+                    if datetime.datetime.now().strftime('%Y.%m.%d') in k:
                         try:
-                            obj, create = IndiceNode.objects.update_or_create(esnode_id=data.id, indices_id=inds.id,
-                                                                          defaults=ojb)
-
-                            if obj:
-                                return ({"status": "%s update success: %s" % (data['name'], obj)})
+                            inds = Index.objects.get(name=k, metainfo_id=data.metainfo.id)
+                            if inds:
+                                ojb = {"esnode_id": data.id, "index_id": inds.id, "refresh": v['refresh']['total'],
+                                   "flush": v['flush']['total'], "recovery": v['recovery']['current_as_source']}
+                                obj, create = IndiceNode.objects.update_or_create(
+                                    esnode_id=data.id, index_id=inds.id, defaults=ojb)
                         except Exception as e:
-                            return ({"status": "IndiceNode error", "message": 'Error: ' + str(e)})
-                    except Exception as e:
-                        print(e)
+                            print(e)
         else:
             return str(result)
 
@@ -167,32 +164,51 @@ def exclude_node(data):
         return False, str(result)
 
 
-def index_node_shards(data):
-    try:
-        result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                           data.metainfo.password).connentauth().nodes.stats(
-            node_id=data.uuid, level='shards')
-    except TransportError as e:
-        if e.status_code in [503, 502, 500]:
+def index_node_shards(datas):
+    for data in datas:
+        try:
             result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
                                                data.metainfo.password).connentauth().nodes.stats(
                 node_id=data.uuid, level='shards')
-        # if result:
-    for k, v in result['nodes'][data.uuid]['indices']['shards'].items():
-        if datetime.datetime.now().strftime('%Y.%m.%d') in k:
-            for ele in v:
-                for shad, values in ele.items():
-                    __data = {"shardid": shad, "esnode_id": values['routing']['node'], "indices_id": k,
-                           "state": values['routing']['state'], "pri": values['routing']['primary'],
-                           "relocating_node": values['routing']['relocating_node'],
-                           'docs': values['docs']['count'], 'store': values['store']['size_in_bytes'],
-                           'recovery': values['recovery']['current_as_source'],
-                           'shard_path': values['shard_path']['state_path'], 'data_path': values['shard_path']['data_path'],
-                           }
-                    try:
-                        old, create = IndiceShard.objects.update_or_create(
-                            indices_id=k, shardid=shad, date_updated__range=datetime.datetime.now().date(),
-                            defaults=__data)
-                    except Exception as e:
-                        logger.error(e)
-                        return None
+        except TransportError as e:
+            if e.status_code in [503, 502, 500]:
+                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
+                                                   data.metainfo.password).connentauth().nodes.stats(
+                    node_id=data.uuid, level='shards')
+            elif e.status_code in [401]:
+                raise ValueError("Incorrect account password")
+            elif e.status_code in [404]:
+                return ("%s Index does not exist!" % data.name)
+            else:
+                raise ValueError("connent timeout")
+        if result:
+            for k, v in result['nodes'][data.uuid]['indices']['shards'].items():
+                if datetime.datetime.now().strftime('%Y.%m.%d') in k:
+                    if Index.objects.get(name=k, metainfo_id=data.metainfo.id):
+                        for ele in v:
+                            for shad, values in ele.items():
+                                _data = {
+                                           "state": values['routing']['state'], "pri": values['routing']['primary'],
+                                           "relocating_node": values['routing']['relocating_node'],
+                                           'docs': values['docs']['count'], 'store': values['store']['size_in_bytes'],
+                                           'recovery': values['recovery']['current_as_source'],
+                                           'shard_path': values['shard_path']['state_path'],
+                                          'data_path': values['shard_path']['data_path'],
+                                       }
+                                ind_old = Index.objects.filter(name=k)
+                                try:
+                                    old = IndiceShard.objects.filter(
+                                        index=(Index.objects.get(name=k, metainfo_id=data.metainfo.id)).id,
+                                        esnode_id=data.id, shardid=shad)
+                                    if old.exists():
+                                        obj = IndiceShard.objects.update(esnode_id=data.id,
+                                                                         shardid=shad, **_data)
+                                    else:
+                                        obj = IndiceShard.objects.create(esnode_id=data.id,
+                                                                     shardid=shad, **_data)
+                                    obj.index.set(ind_old)
+                                except Exception as e:
+                                    logger.error(e)
+                                    return None
+        return
+    

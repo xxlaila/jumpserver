@@ -39,7 +39,7 @@ def get_default_setting(basics=None):
                 obj.append(result)
             else:
                 obj.append("error")
-        return Response({"status": obj})
+        return Response({"status": obj}, status=200)
     except MetaInfo.DoesNotExist:
         return False
 
@@ -54,7 +54,7 @@ def write_default_setting(results, k):
                 "instore": indi['store']['size_in_bytes'], "nt": node['total'], 'nc': node['coordinating_only'],
                 'nd': node['data'], 'ni': node['ingest'], "nm": node['master'], "nr": node['remote_cluster_client'],
                 'mt': mem['total_in_bytes'], "mf": mem['free_in_bytes'], 'mu': mem['used_in_bytes'],
-                'pt': results['nodes']['os']['packaging_types']['type'], "metainfo_id": k.id}
+                'pt': results['nodes']['packaging_types'][0]['type'], "metainfo_id": k.id}
         try:
             obj = BasicCluster.objects.filter(
                 date_updated__gte=datetime.datetime.now().date(), metainfo_id=k.id).first()
@@ -63,7 +63,7 @@ def write_default_setting(results, k):
                 ack.update({"update ": obj.name})
             else:
                 BasicCluster.objects.create(**data)
-                ack.update({"create  ": obj.name})
+                ack.update({"create  ": results['cluster_name']})
         except Exception as e:
             logging.error("Clubrief error")
             raise ValueError(e)
@@ -72,7 +72,7 @@ def write_default_setting(results, k):
 
 @shared_task
 @register_as_period_task(interval=600)
-def check_setting_connent(_settins=None):
+def check_setting_connent(request,_settins=None):
     try:
         obj = []
         if _settins is None:

@@ -28,7 +28,8 @@ class EsNodeViewSet(OrgBulkModelViewSet):
 
 class IndiceNodeViewSet(OrgBulkModelViewSet):
     model = IndiceNode
-    filter_fields = ("esnode__name", "indices__name", "refresh", "flush", "recovery")
-    search_fields = ("esnode__name", "indices__name",)
+    filter_fields = ("esnode__name", "esnode")
+    search_fields = ("esnode__name")
     permission_classes = (IsOrgAdmin,)
     serializer_class = serializers.IndiceNodeSerializer
+

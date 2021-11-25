@@ -26,8 +26,6 @@ ENV_CHOICES = (
         ("prd", "prd"),
     )
 
-
-
 class MetaInfo(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     name = models.CharField(null=True, blank=True, max_length=64, verbose_name=_('Name'), db_index=True)
