@@ -18,7 +18,7 @@ from ..models import EsNode, MetaInfo, IndiceNode
 from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
-from ..utils import get_nodes_connenct,exclude_node, get_node_stats, index_node_shards
+from ..utils import get_nodes_connenct,exclude_node, get_node_stats
 from django.shortcuts import (
     render, redirect
 )
@@ -73,7 +73,6 @@ class NodeIndiceListView(PermissionsMixin, SingleObjectMixin, TemplateView):
     def nodes_stats(self, id):
         datas = self.model.objects.filter(id=id)
         nodes = get_node_stats(datas)
-        a = index_node_shards(datas)
         return nodes
 
     def get(self, request, *args, **kwargs):

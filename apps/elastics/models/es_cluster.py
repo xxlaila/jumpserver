@@ -60,7 +60,7 @@ class ClusterSetting(models.Model):
         return '{0.id}({0.date_updated})'.format(self)
 
     class Meta:
-        ordering = ['date_updated']
+        ordering = ['-date_updated']
         verbose_name = ("ClusterSetting")
 
 class ClusterRemote(models.Model):
@@ -81,5 +81,5 @@ class ClusterRemote(models.Model):
         return '{0.id}({0.name})'.format(self)
 
     class Meta:
-        ordering = ['date_updated']
+        ordering = ['-date_updated']
         verbose_name = ("ClusterRemote")

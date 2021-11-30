@@ -45,12 +45,8 @@ class Index(OrgModelMixin):
     def __str__(self):
         return self.name
 
-    @property
-    def metainfo_display(self):
-        return ' '.join([metainfo.name for metainfo in self.metainfo.all()])
-
     class Meta:
-        ordering = ['name', 'date_updated']
+        ordering = ['-date_updated']
         verbose_name = _("Index")
 
 class IndiceShard(OrgModelMixin):
@@ -60,7 +56,7 @@ class IndiceShard(OrgModelMixin):
     pr = models.CharField(choices=PRIREP_CHOICES, max_length=32, null=True, verbose_name=_('Primary or Replica'))
     st = models.CharField(choices=STATE_CHOICES, max_length=128, null=True, verbose_name=_('State'))
     dc = models.BigIntegerField(null=True, blank=True, verbose_name=_('Shard docs'))
-    sto = models.BigIntegerField(null=True, blank=True, verbose_name=_('Shard store size'))
+    sto = models.BigIntegerField(null=True, blank=True, verbose_name=_('Shard store size(GB)'))
     esnode = models.ForeignKey(EsNode, on_delete=models.CASCADE, verbose_name=_('Esnode'))
     uid = models.CharField(null=True, blank=True, max_length=128, verbose_name=_('Uid'))
     date_updated = models.DateTimeField(auto_now=True, null=True, verbose_name=_('Date updated'))
@@ -69,7 +65,7 @@ class IndiceShard(OrgModelMixin):
         return str(self.id)
 
     class Meta:
-        ordering = ['date_updated']
+        ordering = ['-date_updated']
         verbose_name = _("IndiceShard")
 
 

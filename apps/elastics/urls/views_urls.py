@@ -40,7 +40,7 @@ urlpatterns = [
     path('index/', views.IndexListView.as_view(), name='index-list'),
     path('index/<uuid:pk>/', views.IndexDetailView.as_view(), name='index-detail'),
     path('index/create/', views.IndexCreateView.as_view(), name='index-create'),
-
+    path('index/<uuid:pk>/indexshard/', views.IndexShardsNodeView.as_view(), name='index-shards'),
 
 
     path('meta-info/health/', utils.get_indexs_connent, name='meta-info-health'),

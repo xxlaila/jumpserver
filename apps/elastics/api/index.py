@@ -25,7 +25,6 @@ class IndexViewSet(OrgBulkModelViewSet):
     search_fields = filter_fields
     serializer_classes = {
         'default': serializers.IndexSerializer,
-        'display': serializers.IndexDisplaySerializer
     }
     permission_classes = (IsOrgAdmin,)
 

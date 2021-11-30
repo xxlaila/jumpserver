@@ -16,7 +16,7 @@
     <thead>
     <tr>
         <th class="text-center">
-            <input type="checkbox" id="check_all" class="ipt_check_all" >
+            <input type="checkbox" id="" class="ipt_check_all" >
         </th>
         <th class="text-center">{% trans 'Name' %}</th>
         <th class="text-center">{% trans 'Health' %}</th>
@@ -43,9 +43,9 @@ function initTable() {
     var options = {
         ele: $('#index_list_table'),
         columnDefs: [
-            {targets: 1, render: function (cellData, tp, rowData, meta) {
+            {targets: 1, render: function (cellData, tp, rowData) {
                 cellData = htmlEscape(cellData);
-                var detail_btn = '<a href="{% url "elastics:index-detail" pk=DEFAULT_PK %}">' + cellData + '</a>';
+                var detail_btn = '<a href="{% url "elastics:index-shards" pk=DEFAULT_PK %}">' + cellData + '</a>';
                 return detail_btn.replace('{{ DEFAULT_PK }}', rowData.id);
             }},
             {targets: 9, createdCell: function (td, cellData, rowData) {
@@ -56,7 +56,7 @@ function initTable() {
         ajax_url: '{% url "api-elastics:index-list" %}',
         columns: [
             {data: "id" }, {data: "name" }, {data: "health"}, {data: "status"},
-            {data: "pri" }, {data: "rep"}, {data: "dc"}, {data: "pss" }, {data: "metainfo_display"},
+            {data: "pri" }, {data: "rep"}, {data: "dc"}, {data: "pss" }, {data: "metainfo_display", orderable: false},
             {data: "id", orderable: false, width: "120px"}
         ],
         op_html: $('#actions').html()

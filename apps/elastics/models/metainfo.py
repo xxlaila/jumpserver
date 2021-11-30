@@ -56,7 +56,7 @@ class MetaInfo(OrgModelMixin):
 
     @property
     def cloud_display(self):
-        return ' '.join([cloud.name for cloud in self.cloud.all()])
+        return self.cloud.name
 
     def is_member_of(self, cloud):
         if cloud in self.cloud.all():

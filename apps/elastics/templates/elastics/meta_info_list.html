@@ -52,7 +52,7 @@ function initTable() {
         ajax_url: '{% url "api-elastics:meta-info-list" %}',
         columns: [
             {data: "id" }, {data: "name" }, {data: "env" }, {data: "address"},
-            {data: "kibana"}, {data: "cloud", orderable: false}, {data: "comment" },
+            {data: "kibana"}, {data: "cloud_base", orderable: false}, {data: "comment" },
             {data: "id", orderable: false, width: "120px"}
         ],
         op_html: $('#actions').html()

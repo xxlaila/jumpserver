@@ -8,7 +8,7 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from common.permissions import PermissionsMixin, IsOrgAdmin, IsOrgAdminOrAppUser, IsValidUser
-from ..utils import get_indexs_connent,delete_index
+from ..utils import get_indexs_connent,delete_index, index_shards_num
 from common.utils import get_logger
 from django.urls import reverse_lazy
 from common.const import create_success_msg, update_success_msg
@@ -21,7 +21,7 @@ from rest_framework.views import APIView, Response
 
 
 __all__ = (
-    "IndexListView", "IndexDetailView", "IndexCreateView"
+    "IndexListView", "IndexDetailView", "IndexCreateView", "IndexShardsNodeView"
 )
 logger = get_logger(__name__)
 
@@ -80,6 +80,30 @@ class IndexDeleteView(PermissionsMixin, DeleteView):
         result = delete_index(old)
         return Response({"status": result}, status=200)
 
+class IndexShardsNodeView(PermissionsMixin, SingleObjectMixin, TemplateView):
+
+    template_name = 'elastics/index_detail.html'
+    model = Index
+    object = None
+    permission_classes = [IsOrgAdmin]
+
+    def index_shards(self):
+        data = self.model.objects.get(id=self.kwargs['pk'])
+        result = index_shards_num(data)
+        return result
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=self.model.objects.all())
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'app': _('Elastics'),
+            'action': _('Index shards'),
+            'shards': self.index_shards(),
+        }
+        kwargs.update(context)
+        return super().get_context_data(**kwargs)
 
 
 

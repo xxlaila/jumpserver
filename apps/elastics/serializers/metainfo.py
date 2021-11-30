@@ -10,15 +10,17 @@ from django.utils.translation import ugettext_lazy as _
 from common.serializers import AdaptedBulkListSerializer
 from ..models import MetaInfo
 from orgs.mixins.serializers import BulkOrgResourceModelSerializer
+from rest_framework import serializers
 
 class MetaInfoSerializer(BulkOrgResourceModelSerializer):
+    cloud_base = serializers.ReadOnlyField()
 
     class Meta:
         model = MetaInfo
         list_serializer_class = AdaptedBulkListSerializer
         fields = [
             'id', 'name', 'env', 'org_name', 'address', 'username',
-            'password', 'kibana', 'kafka', 'cloud', 'labels', 'comment',
+            'password', 'kibana', 'kafka', 'cloud_base', 'labels', 'comment',
             'health', 'setting', 'alter', 'indexes', 'node',
             'created_by', 'date_created'
         ]
