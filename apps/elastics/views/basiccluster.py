@@ -26,7 +26,7 @@ from django.shortcuts import (
 from ..utils import get_default_setting,check_setting_connent, cluster_remote_connent
 
 __all__ = (
-    "BasicClusterListView", "ClusterRemoteListView", "ClusterSettingListView",
+    "BasicClusterListView", "ClusterRemoteListView",
     "ClusterRemoteInfoUpdateView", "DefaultSettingsUpdateView", "BasicClusterUpdateView"
 )
 logger = get_logger(__name__)
@@ -41,13 +41,12 @@ class BasicClusterListView(PermissionsMixin, SingleObjectMixin, TemplateView):
         self.object = self.get_object(queryset=self.model.objects.all())
         return super().get(request, *args, **kwargs)
 
-    def cluster_data(self, **kwargs):
-        data = self.get_object().basiccluster_set.all()
+    def cluster_data(self):
+        data = self.get_object().basiccluster_set.all().first()
         return data
 
     def get_cluster_setting(self):
-        # results = self.get_object().clustersetting_set.all().values('persis', 'tran', 'def_clus', 'def_xpack')
-        results = self.get_object().clustersetting_set.all()
+        results = self.get_object().clustersetting_set.all().first()
         return results
 
     def get_context_data(self, **kwargs):
@@ -72,8 +71,8 @@ class ClusterRemoteListView(PermissionsMixin, SingleObjectMixin, TemplateView):
         self.object = self.get_object(queryset=self.model.objects.all())
         return super().get(request, *args, **kwargs)
 
-    def cluster_remote_data(self, **kwargs):
-        data = self.get_object().clusterremote_set.all()
+    def cluster_remote_data(self):
+        data = self.get_object().clusterremote_set.all().first()
         return data
 
     def get_context_data(self, **kwargs):
@@ -82,30 +81,6 @@ class ClusterRemoteListView(PermissionsMixin, SingleObjectMixin, TemplateView):
             'action': _('Cluster remote list'),
             'object': self.get_object(),
             'remotes': self.cluster_remote_data(),
-        }
-        kwargs.update(context)
-        return super().get_context_data(**kwargs)
-
-class ClusterSettingListView(PermissionsMixin, SingleObjectMixin, TemplateView):
-    template_name = 'elastics/cluster_setting_list.html'
-    model = MetaInfo
-    object = None
-    permission_classes = [IsOrgAdmin]
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=self.model.objects.all())
-        return super().get(request, *args, **kwargs)
-
-    def default_setting_data(self, **kwargs):
-        data = self.get_object().clustersetting_set.all()
-        return data
-
-    def get_context_data(self, **kwargs):
-        context = {
-            'app': _('Elastics'),
-            'action': _('Cluster setting list'),
-            'object': self.get_object(),
-            'settings': self.default_setting_data(),
         }
         kwargs.update(context)
         return super().get_context_data(**kwargs)

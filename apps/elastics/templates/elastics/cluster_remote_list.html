@@ -44,14 +44,13 @@
                             </li>
                         </ul>
                     </div>
-                    {% for i in remotes %}
                     <div class="tab-content">
                         <div class="col-sm-12" style="padding-left: 0;">
                             <div class="" id="content_start">
                             </div>
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <span style="float: left"><b>{% trans 'Remote cluster' %} : {{ i.name }}</b></span>
+                                    <span style="float: left"><b>{% trans 'Remote cluster' %} : {{ remotes.name }}</b></span>
                                     <div class="ibox-tools">
                                         <a class="collapse-link">
                                             <i class="fa fa-chevron-up"></i>
@@ -69,40 +68,39 @@
                                 </div>
                                 <div class="ibox-content">
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Name' %} </span>: {{ i.name }}</p>
+                                        <p><span class="font1">{% trans 'Name' %} </span>: {{ remotes.name }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Connection mode' %} </span>: {{ i.mode }}</p>
+                                        <p><span class="font1">{% trans 'Connection mode' %} </span>: {{ remotes.mode }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Status' %} </span>: {{ i.conn|yesno:"Yes,No"  }}</p>
+                                        <p><span class="font1">{% trans 'Status' %} </span>: {{ remotes.conn|yesno:"Yes,No"  }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Connection timed out' %} </span>: {{ i.conn_timeout }}</p>
+                                        <p><span class="font1">{% trans 'Connection timed out' %} </span>: {{ remotes.conn_timeout }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Skip cluster' %} </span>: {{ i.skip_una|yesno:"Yes,No" }}</p>
+                                        <p><span class="font1">{% trans 'Skip cluster' %} </span>: {{ remotes.skip_una|yesno:"Yes,No" }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Connection address' %} </span>: {{ i.seeds }}</p>
+                                        <p><span class="font1">{% trans 'Connection address' %} </span>: {{ remotes.seeds }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Number of nodes' %} </span>: {{ i.num_nodes }}</p>
+                                        <p><span class="font1">{% trans 'Number of nodes' %} </span>: {{ remotes.num_nodes }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Maximum connection' %} </span>: {{ i.max_conn }}</p>
+                                        <p><span class="font1">{% trans 'Maximum connection' %} </span>: {{ remotes.max_conn }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Proxy model' %} </span>: {{ i.proxy_add }}</p>
+                                        <p><span class="font1">{% trans 'Proxy model' %} </span>: {{ remotes.proxy_add }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Date updated' %} </span>: {{ i.date_updated|date:"Y-m-j H:i:s" }}</p>
+                                        <p><span class="font1">{% trans 'Date updated' %} </span>: {{ remotes.date_updated|date:"Y-m-j H:i:s" }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>

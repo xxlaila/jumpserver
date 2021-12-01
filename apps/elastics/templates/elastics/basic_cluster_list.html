@@ -67,63 +67,60 @@
                                     </div>
                                 </div>
                                 <div class="ibox-content">
-                                {% for i in cluster %}
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Name' %} </span>: {{ i.name }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Status' %} </span>: {{ i.status }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Total shard' %} </span>: {{ i.st }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Primary shard' %} </span>: {{ i.sp }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Total index' %} </span>: {{ i.incount }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Total docs' %} </span>: {{ i.indocs }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Total use space' %} </span>: {{ i.instore }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Total node' %} </span>: {{ i.nt }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Read-only node' %} </span>: {{ i.nc }}</p>
-                                </div>
-                                 <div class="box">
-                                    <p><span class="font1">{% trans 'Data node' %} </span>: {{ i.nd }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Ingest node' %} </span>: {{ i.ni }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Master node' %} </span>: {{ i.nm }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Client node' %} </span>: {{ i.nr }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Total memory' %} </span>: {{ i.mt }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Free memory' %} </span>: {{ i.mf }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Use memory' %} </span>: {{ i.mu }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Install' %} </span>: {{ i.pt }}</p>
-                                </div>
-                                <div class="box">
-                                    <p><span class="font1">{% trans 'Date updated' %} </span>: {{ i.date_updated|date:"Y-m-j H:i:s" }}</p>
-                                </div>
-
-                                {% endfor %}
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Name' %} </span>: {{ cluster.name }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Status' %} </span>: {{ cluster.status }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total shard' %} </span>: {{ cluster.st }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Primary shard' %} </span>: {{ cluster.sp }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total index' %} </span>: {{ cluster.incount }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total docs' %} </span>: {{ cluster.indocs }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total use space' %} </span>: {{ cluster.instore }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total node' %} </span>: {{ cluster.nt }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Read-only node' %} </span>: {{ cluster.nc }}</p>
+                                    </div>
+                                     <div class="box">
+                                        <p><span class="font1">{% trans 'Data node' %} </span>: {{ cluster.nd }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Ingest node' %} </span>: {{ cluster.ni }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Master node' %} </span>: {{ cluster.nm }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Client node' %} </span>: {{ cluster.nr }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Total memory' %} </span>: {{ cluster.mt }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Free memory' %} </span>: {{ cluster.mf }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Use memory' %} </span>: {{ cluster.mu }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Install' %} </span>: {{ cluster.pt }}</p>
+                                    </div>
+                                    <div class="box">
+                                        <p><span class="font1">{% trans 'Date updated' %} </span>: {{ cluster.date_updated|date:"Y-m-j H:i:s" }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +173,7 @@
                                         </div>
                                         <div class="content-right-sup">
                                             <p id="show"><span>{% trans 'Security' %} </span>:
-                                                <pre id="security_para">
+                                                <pre id="security_paras">
                                                 </pre>
                                             </p>
                                         </div>
@@ -232,38 +229,39 @@
 {% block custom_foot_js %}
 <script>
 function syntaxHighlight(json) {
-    if (typeof json != 'string') {
-        json = JSON.stringify(json, undefined, 2);
-    }
-    json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
-    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
-        var cls = 'number';
-        if (/^"/.test(match)) {
-            if (/:$/.test(match)) {
-                cls = 'key';
-            } else {
-                cls = 'string';
-            }
-        } else if (/true|false/.test(match)) {
-            cls = 'boolean';
-        } else if (/null/.test(match)) {
-            cls = 'null';
-        }
-        return '<span class="' + cls + '">' + match + '</span>';
-    });
-}
-{% for i in  clustersettings %}
-var res = {{ i.def_clus|safe }};
-var para_router = {{ i.persis.cluster.routing|safe }};
-var para_xpack = {{ i.persis.xpack|safe }};
-var temp_para = {{ i.tran|safe }};
-var security_para = {{ i.def_xpack|safe }};
+      if (typeof json != 'string') {
+          json = JSON.stringify(json, undefined, 2);
+      }
+      json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+          function(match) {
+              var cls = 'number';
+              if (/^"/.test(match)) {
+                 if (/:$/.test(match)) {
+                     cls = 'key';
+                 } else {
+                     cls = 'string';
+                 }
+              } else if (/true|false/.test(match)) {
+                 cls = 'boolean';
+              } else if (/null/.test(match)) {
+                 cls = 'null';
+              }
+             return '<span class="' + cls + '">' + match + '</span>';
+         }
+     );
+ }
+var res = {{ clustersettings.def_clus|safe }};
+var para_router = {{ clustersettings.persis.cluster.routing|safe }};
+var para_xpack = {{ clustersettings.persis.xpack|safe }};
+var temp_para = {{ clustersettings.tran|safe }};
+var security_para = {{ clustersettings.def_xpack|safe }};
+
 $('#result').html(syntaxHighlight(res));
 $('#para_router').html(syntaxHighlight(para_router));
 $('#para_xpack').html(syntaxHighlight(para_xpack));
 $('#temp_para').html(syntaxHighlight(temp_para));
-$('#security_para').html(syntaxHighlight(security_para));
-{% endfor %}
+$('#security_paras').html(syntaxHighlight(security_para));
 </script>
 
 {% endblock %}

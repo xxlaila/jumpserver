@@ -101,7 +101,7 @@ def check_setting_connent(request,_settins=None):
 def get_check_setting_data(results, k):
     f_data = {"persis": results["persistent"], "tran": results["transient"],
               "def_clus": results["defaults"]["cluster"],
-              "def_xpack": results["defaults"]["xpack"],
+              "def_xpack": json.dumps(results["defaults"]["xpack"]),
               "metainfo_id": k.id}
     try:
         data = ClusterSetting.objects.filter(metainfo_id=k.id).first()
