@@ -24,7 +24,7 @@ class MetaInfoForm(OrgModelForm):
     class Meta:
         model = MetaInfo
         fields = ['name', 'env', 'address', 'username', 'password',
-                  'kibana', 'kafka', 'cloud', 'comment', 'labels',
+                  'kibana', 'kafka', 'cloud', 'comment', 'labels', 'remote', 'scbcl',
                   'health', 'setting', 'alter', 'indexes', 'node']
 
     # widgets = {

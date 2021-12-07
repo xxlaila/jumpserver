@@ -17,6 +17,9 @@
                             <li>
                                 <a href="{% url 'elastics:meta-info-detail' pk=meteinfo.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Meta info detail' %} </a>
                             </li>
+                             <li>
+                                <a href="{% url 'elastics:cluster-dynamic-config' pk=object.id %}" class="text-center"><i class="fa fa-diamond"></i> {% trans 'Dynamic configuration' %}</a>
+                            </li>
                             <li>
                                 <a href="{% url 'elastics:basic-cluster-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %} </a>
                             </li>
@@ -113,6 +116,14 @@
                                         <tr>
                                             <td>{% trans 'Node status' %}:</td>
                                             <td><b>{{ meteinfo.node|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Remote cluster' %}:</td>
+                                            <td><b>{{ meteinfo.remote|yesno:"Yes,No" }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Sync across clusters' %}:</td>
+                                            <td><b>{{ meteinfo.scbcl|yesno:"Yes,No" }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>{% trans 'Created by' %}:</td>
@@ -243,6 +254,38 @@
                                                       <div class="onoffswitch">
                                                           <input type="checkbox" {% if meteinfo.node %} checked {% endif %}  class="onoffswitch-checkbox" id="node">
                                                           <label class="onoffswitch-label" for="node">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Remote cluster' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.remote %} checked {% endif %}  class="onoffswitch-checkbox" id="remote">
+                                                          <label class="onoffswitch-label" for="remote">
+                                                              <span class="onoffswitch-inner"></span>
+                                                              <span class="onoffswitch-switch"></span>
+                                                          </label>
+                                                      </div>
+                                                  </div>
+                                              </span>
+                                          </td>
+                                        </tr>
+                                        <tr class="no-borders-tr">
+                                          <td width="50%">{% trans 'Sync across clusters' %}:</td>
+                                            <td>
+                                              <span class="pull-right">
+                                                  <div class="switch">
+                                                      <div class="onoffswitch">
+                                                          <input type="checkbox" {% if meteinfo.scbcl %} checked {% endif %}  class="onoffswitch-checkbox" id="scbcl">
+                                                          <label class="onoffswitch-label" for="scbcl">
                                                               <span class="onoffswitch-inner"></span>
                                                               <span class="onoffswitch-switch"></span>
                                                           </label>
@@ -418,6 +461,42 @@ $(document).ready(function () {
     var checked = $(this).prop('checked');
     var body = {
         'node': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").html('False');
+    }
+}).on('click', '#remote', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'remote': checked
+    };
+    var success = '{% trans "Update successfully!" %}';
+    var status = $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").text();
+    requestApi({
+        url: the_url,
+        body: JSON.stringify(body),
+        success_message: success
+    });
+    if (status === "False") {
+        $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").html('True');
+    }else{
+        $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").html('False');
+    }
+}).on('click', '#scbcl', function () {
+    var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
+    var checked = $(this).prop('checked');
+    var body = {
+        'scbcl': checked
     };
     var success = '{% trans "Update successfully!" %}';
     var status = $(".ibox-content > table > tbody > tr:nth-child(14) > td:last >b").text();

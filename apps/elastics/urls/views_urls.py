@@ -24,6 +24,7 @@ urlpatterns = [
     path('meta-info/<uuid:pk>/', views.MetaInfoDetailView.as_view(), name='meta-info-detail'),
     path('meta-info/<uuid:pk>/delete/', views.MetaInfoDeleteView.as_view(), name='meta-info-delete'),
     path('meta-info/<uuid:pk>/basiccluster/', views.BasicClusterListView.as_view(), name='basic-cluster-list'),
+    path('meta-info/<uuid:pk>/dynamicconfig/', views.ClusterDynamicConfigView.as_view(), name='cluster-dynamic-config'),
     path('meta-info/<uuid:pk>/cluterremote/', views.ClusterRemoteListView.as_view(), name='cluster-remote-list'),
     path('meta-info/<uuid:pk>/node/', views.NodeListView.as_view(), name='node-list'),
     path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
@@ -43,6 +44,6 @@ urlpatterns = [
     path('index/<uuid:pk>/indexshard/', views.IndexShardsNodeView.as_view(), name='index-shards'),
 
 
-    path('meta-info/health/', utils.cluster_remote_connent, name='meta-info-health'),
+    path('meta-info/health/', utils.check_setting_connent, name='meta-info-health'),
 
 ]

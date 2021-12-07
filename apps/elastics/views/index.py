@@ -8,7 +8,7 @@
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from common.permissions import PermissionsMixin, IsOrgAdmin, IsOrgAdminOrAppUser, IsValidUser
-from ..utils import get_indexs_connent, delete_index, index_shards_num
+from ..utils import get_indexs_connent, delete_index, index_shards_num, create_index
 from common.utils import get_logger
 from django.urls import reverse_lazy
 from common.const import create_success_msg, update_success_msg
@@ -56,22 +56,61 @@ class IndexDetailView(PermissionsMixin, DetailView):
         kwargs.update(context)
         return super().get_context_data(**kwargs)
 
-class IndexCreateView(PermissionsMixin, CreateView):
-    model = MetaInfo
+from django.shortcuts import (
+    render, redirect
+)
+class IndexCreateView(PermissionsMixin, APIView):
+    
     form_class = IndexForm
     template_name = 'elastics/index_create.html'
-    success_url = reverse_lazy('elastics:index-list')
-    success_message = create_success_msg
-    permission_classes = [IsOrgAdmin]
+    
+    def get(self, request):
+        return render(request, self.template_name, {"form": self.form_class})
 
-    def get_context_data(self, **kwargs):
-        context = {
-            'app': _('Elastics'),
-            'action': _('Create index'),
-            'type': 'create'
-        }
-        kwargs.update(context)
-        return super().get_context_data(**kwargs)
+    def post(self, request, *args, **kwargs):
+        info_forms = self.form_class(request.POST)
+
+        if info_forms.is_valid():
+            print("ok")
+            name = info_forms.changed_data.get("name")
+            pri = info_forms.cleaned_data.get("pri")
+            rep = info_forms.cleaned_data.get("rep")
+            mapping = info_forms.cleaned_data.get('mapping')
+            # metainfo = info_forms.cleaned_data['metainfo']
+            metainfo = request.POST.getlist('metainfo')
+            print(name)
+            print(metainfo, mapping)
+
+            # settings = {
+            #     "settings": {
+            #         "number_of_shards": pri,
+            #         "number_of_replicas": rep
+            #     }
+            # }
+            # results = create_index(MetaInfo.objects.get(id=str(metainfo).replace("-", "")), name, body=settings)
+            # if results:
+            #     pass
+        else:
+            print("no")
+        from django.http import HttpResponse
+        return HttpResponse("ok")
+
+
+    # model = MetaInfo
+    # form_class = IndexForm
+    # template_name = 'elastics/index_create.html'
+    # success_url = reverse_lazy('elastics:index-list')
+    # success_message = create_success_msg
+    # permission_classes = [IsOrgAdmin]
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = {
+    #         'app': _('Elastics'),
+    #         'action': _('Create index'),
+    #         'type': 'create'
+    #     }
+    #     kwargs.update(context)
+    #     return super().get_context_data(**kwargs)
 
 class IndexDeleteView(PermissionsMixin, DeleteView):
     model = Index

@@ -42,6 +42,8 @@ class MetaInfo(OrgModelMixin):
     alter = models.BooleanField(default=False, verbose_name=_('Alter'))
     indexes = models.BooleanField(default=False, verbose_name=_('Index'))
     node = models.BooleanField(default=True, verbose_name=_('Node'))
+    remote = models.BooleanField(default=False, verbose_name=_('Remote cluster'))
+    scbcl = models.BooleanField(default=False, verbose_name=_('Sync across clusters'))
     comment = models.TextField(blank=True, verbose_name=_('Comment'))
     labels = models.CharField(null=True, blank=True, max_length=32, verbose_name=_("Labels"))
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name=_('Date created'))

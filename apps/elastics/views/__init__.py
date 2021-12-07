@@ -10,3 +10,4 @@ from .meteinfo import *
 from .esnode import *
 from .basiccluster import *
 from .index import *
+from .clusterconfig import *

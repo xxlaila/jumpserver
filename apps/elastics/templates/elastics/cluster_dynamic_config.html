@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block custom_head_css_js %}
+    <link rel="stylesheet" href="{% static 'css/customize/three-columns.css' %}">
+    <link rel="stylesheet" href="{% static 'css/customize/codemirrorjson.css' %}">
+{% endblock %}
+
+{% block content %}
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-laptop"></i> {% trans 'Meta info detail' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:cluster-dynamic-config' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-diamond"></i> {% trans 'Dynamic configuration' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:basic-cluster-list' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %}
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'elastics:cluster-remote-list' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-gavel"></i> {% trans 'Cluster remote list' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:node-list' pk=object.id %}"
+                                   class="text-center"><i
+                                        class="fa fa-server"></i> {% trans 'Node list' %}
+                                </a>
+                            </li>
+                            <li>
+                                <a class="text-center" href="">
+                                    <i class="fa fa-link"></i> {% trans 'DSL' %}
+                                </a>
+                            </li>
+                            <li class="pull-right">
+                                <a href="{% url 'elastics:basic-cluster-update' pk=object.id %}"
+                                   class="btn btn-outline btn-default"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <div class="ibox float-e-margins disabled">
+                                <div class="ibox-title">
+                                    <span style="float: left"><b>{% trans 'ROUTING' %}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle"
+                                           data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div id="main">
+                                        <form method="post" action="">
+                                            <table class="table table-striped"frame=ovid rules=none width="100%">
+                                                <thead>
+                                                {% for i,k in clustersettings.persis.cluster.routing.items %}
+                                                    <tr>
+                                                        <th width="40%">cluster.routing.rebalance.enable</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.persis.cluster.rebalance.enable }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">cluster.routing.allocation.cluster_concurrent_rebalance</th>
+                                                        <td  width="8%" contenteditable="true">{{ k.cluster_concurrent_rebalance }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">cluster.routing.allocation.node_concurrent_recoveries</th>
+                                                        <td width="8%" contenteditable="true">{{ k.cluster_concurrent_rebalance }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">cluster.routing.allocation.disk.watermark.low</th>
+                                                        <td width="8%" contenteditable="true">{{ k.disk.watermark.low }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">cluster.routing.allocation.disk.watermark.flood.stage</th>
+                                                        <td width="8%" contenteditable="true">{{ k.disk.watermark.flood_stage }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">cluster.routing.allocation.disk.watermark.high</th>
+                                                        <td width="8%" contenteditable="true">{{ k.disk.watermark.high }}</td>
+                                                       <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">cluster.routing.node_initial_primaries_recoveries</th>
+                                                        <td width="8%" contenteditable="true">{{ k.node_initial_primaries_recoveries }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">cluster.routing.allocation.enable</th>
+                                                        <td width="8%" contenteditable="true">{{ k.allocation.enable }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">cluster.routing.allocation.allow_rebalance</th>
+                                                        <td width="8%" contenteditable="true"></td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">cluster.routing.awareness.attributes</th>
+                                                        <td width="8%" contenteditable="true"></td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                {% endfor %}
+                                                </thead>
+                                            </table>
+                                            <div style="text-align: center;">
+                                                <button type="button" class="btn btn-sm btn-primary" id="loginBtn" style="float: right;">保存</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---!-->
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <div class="ibox float-e-margins disabled">
+                                <div class="ibox-title">
+                                    <span style="float: left"><b>{% trans 'BREAKER' %}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle"
+                                           data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <div id="main">
+                                        <form method="post" action="">
+                                            <table class="table table-striped"frame=ovid rules=none width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="40%">indices.breaker.fielddata.overhead</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.fielddata.overhead }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">indices.breaker.request.limit</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.request.limit }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">indices.network.breaker.inflight_requests.overhead</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.inflight_requests.overhead }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">indices.breaker.fielddata.limit</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.fielddata.limit }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">indices.breaker.request.overhead</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.request.overhead }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">network.breaker.inflight_requests.limit</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.inflight_requests.limit }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">indices.breaker.total.limit</th>
+                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.total.limit }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <div style="text-align: center;">
+                                                <button type="button" class="btn btn-sm btn-primary" id="loginBtn" style="float: right;">保存</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+{% endblock %}
+{% block content_bottom_left %}{% endblock %}
+{% block custom_foot_js %}
+<script>
+</script>
+{% endblock %}

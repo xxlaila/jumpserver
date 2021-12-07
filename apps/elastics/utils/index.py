@@ -6,7 +6,8 @@
 @Software: PyCharm
 """
 
-from elasticsearch import TransportError
+from elasticsearch import TransportError, RequestError, ConnectionTimeout
+import elasticsearch
 from ..models import MetaInfo
 from ..utils import default_conn, EsConnection
 from common.utils import get_logger
@@ -112,35 +113,27 @@ def delete_index(datas):
         if 'acknowledged' in result:
             return "seccess"
 
-def create_index(datas, index_name, mappings=None, settings=None, aliases=None, include_type_name=None):
+def create_index(data, index_name, body=None):
     """
-    create index
-    :param datas:
+    :param data:
     :param index_name:
-    :param mappings:
-    :param settings:
-    :param aliases:
-    :param include_type_name:
+    :param body:
     :return:
     """
-    for data in datas:
-        try:
-            result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                               data.metainfo.password).connentauth().indices.create(
-                index=index_name, mappings=mappings, settings=settings, aliases=aliases,
-                include_type_name=include_type_name, ignore=[400, 404])
-        except TransportError as e:
-            if e.status_code in [503, 502, 500]:
-                result = default_conn.EsConnection(data.metainfo.address, data.metainfo.username,
-                                                   data.metainfo.password).connentauth().indices.create(
-                    index=index_name, mappings=mappings, settings=settings, aliases=aliases,
-                    include_type_name=include_type_name, ignore=[400, 404])
-            elif e.status_code in [401]:
-                raise ValueError("Incorrect account password")
-            else:
-                raise ValueError("connent timeout")
-        if result:
-            pass
+    print(data, index_name)
+    try:
+        default_conn.EsConnection(data.address, data.username, data.password).connentauth().indices.create(
+            index=index_name, body=body, ignore=[400])
+    except RequestError as e:
+        if e.status_code in [503, 502, 500]:
+            default_conn.EsConnection(data.address, data.username, data.password).connentauth().indices.create(
+                index=index_name, body=body, ignore=[400])
+    except ConnectionTimeout:
+        raise ValueError("connent timeout")
+    except elasticsearch.AuthenticationException:
+        raise ValueError("Incorrect account password")
+    else:
+        return ("%s already exists" % index_name)
 
 def close_index(datas):
     """

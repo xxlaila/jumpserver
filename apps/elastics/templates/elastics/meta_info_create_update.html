@@ -66,6 +66,22 @@
             </div>
         </div>
     </div>
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.remote.id_for_label }}" class="col-sm-2 control-label">{% trans 'Remote cluster' %}</label>
+            <div class="col-sm-8">
+                {{ form.remote }}
+            </div>
+        </div>
+    </div>
+    <div class="auto-generate">
+        <div class="form-group">
+            <label for="{{ form.scbcl.id_for_label }}" class="col-sm-2 control-label">{% trans 'Sync across clusters' %}</label>
+            <div class="col-sm-8">
+                {{ form.scbcl }}
+            </div>
+        </div>
+    </div>
 
     <div class="hr-line-dashed"></div>
     <div class="form-group">

@@ -4,9 +4,19 @@
 {% load i18n %}
 
 {% block form %}
-<form id="groupForm" method="post" class="form-horizontal" enctype='application/json'>
+<form id="groupForm" method="post" class="form-horizontal" action="{% url 'elastics:index-create' %}" enctype='application/json'>
     {% csrf_token %}
     {% bootstrap_field form.name layout="horizontal" %}
+    {% bootstrap_field form.pri layout="horizontal" %}
+    {% bootstrap_field form.rep layout="horizontal" %}
+    {% bootstrap_field form.mapping layout="horizontal" %}
+{#    {% bootstrap_field form.metainfo layout="horizontal" %}#}
+{#    <p>{{ form.metainfo.label }}#}
+{#        {% for row in form.metainfo %}#}
+{#            {{ row }}#}
+{#        {% endfor %}#}
+{#    </p>#}
+
     <div class="hr-line-dashed"></div>
     <div class="form-group">
         <div class="col-sm-4 col-sm-offset-2">
@@ -17,28 +27,4 @@
 </form>
 {% endblock %}
 {% block custom_foot_js %}
-<script>
-$(document).ready(function () {
-})
-.on("submit", "form", function (evt) {
-    evt.preventDefault();
-    var the_url = '{% url 'api-elastics:index-list' %}';
-    var redirect_to = '{% url "elastics:index-list" %}';
-    var method = "POST";
-    {% if type == "update" %}
-        the_url = '{% url 'api-elastics:index-detail' pk=object.id %}';
-        method = "PUT";
-    {% endif %}
-    var form = $("form");
-    var data = form.serializeObject();
-    var props = {
-        url: the_url,
-        data: data,
-        method: method,
-        form: form,
-        redirect_to: redirect_to
-     };
-    formSubmit(props);
-})
-</script>
 {% endblock %}
