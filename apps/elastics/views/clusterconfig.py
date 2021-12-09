@@ -52,10 +52,13 @@ class ClusterDynamicConfigView(PermissionsMixin, SingleObjectMixin, TemplateView
         return super().get_context_data(**kwargs)
 
 class ClusterRouteringView(PermissionsMixin, SingleObjectMixin, APIView):
-    
+
+    permission_classes = (IsOrgAdmin,)
+    object = None
+
     def post(self, request, *args, **kwargs):
         data = request.POST
-        escoo = MetaInfo.objects.get(id=self.kwargs['pk'])
+        escoo = self.get_object(MetaInfo.objects.get(id=self.kwargs['pk']))
         body = {
           "persistent": {
             "cluster": {

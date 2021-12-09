@@ -14,22 +14,21 @@
         }
         p{
             box-sizing: border-box;
-            padding: 0px 10px;
-            {#width: 25%;#}
+            padding: 1px 10px;
             height: 30px;
             float: left;
             background-clip: content-box;
         }
     .one{
-        width: 37%;
+        width: 35%;
     }
     .two{
-        width: 8%;
+        width: 11%;
     }
     .three{
         width: 3%;
     }
-    .four{ width: 2%;}
+    .four{ width: 1%;}
 
     </style>
 {% endblock %}
@@ -77,10 +76,6 @@
                                     <i class="fa fa-link"></i> {% trans 'DSL' %}
                                 </a>
                             </li>
-                            <li class="pull-right">
-                                <a href="{% url 'elastics:basic-cluster-update' pk=object.id %}"
-                                   class="btn btn-outline btn-default"><i class="fa fa-refresh"></i>{% trans 'Update' %}</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -110,61 +105,61 @@
                                                 <p class="two" contenteditable="true" id="cluster_routing_rebalance_enable">{{ routing.rebalance_enable }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one" >cluster_routing_allocation_node_concurrent_recoveries</p>
+                                                <p class="one" >cluster.routing.allocation.node_concurrent_recoveries</p>
                                                 <p class="two" contenteditable="true" id="node_concurrent_recoveries">{{ routing.node_concurrent_recoveries }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
                                             <div class="parent">
-                                                <p class="one">cluster_routing_allocation_cluster_concurrent_rebalance</p>
+                                                <p class="one">cluster.routing.allocation.cluster_concurrent_rebalance</p>
                                                 <p class="two" contenteditable="true" id="cluster_concurrent_rebalance">{{ routing.cluster_concurrent_rebalance }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one">cluster_routing_node_initial_primaries_recoveries</p>
+                                                <p class="one">cluster.routing.node_initial_primaries_recoveries</p>
                                                 <p class="two" contenteditable="true" id="node_initial_primaries_recoveries">{{ routing.node_initial_primaries_recoveries }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
                                             <div class="parent">
-                                                <p class="one">cluster_routing_allocation_node_concurrent_outgoing_recoveries</p>
+                                                <p class="one">cluster.routing.allocation.node_concurrent_outgoing_recoveries</p>
                                                 <p class="two" contenteditable="true" id="node_concurrent_outgoing_recoveries">{{ routing.node_concurrent_outgoing_recoveries }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one">cluster_routing_allocation_disk_watermark_flood</p>
+                                                <p class="one">cluster.routing.allocation.disk.watermark.flood</p>
                                                 <p class="two" contenteditable="true" id="disk_watermark_flood_stage">{{ routing.disk_watermark_flood_stage }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
                                             <div class="parent">
-                                                <p class="one">cluster_routing_allocation_disk_watermark_low</p>
+                                                <p class="one">cluster.routing.allocation.disk.watermark.low</p>
                                                 <p class="two" contenteditable="true" id="disk_watermark_low">{{ routing.disk_watermark_low }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one">cluster_routing_allocation_disk_watermark_high</p>
+                                                <p class="one">cluster.routing.allocation.disk.watermark.high</p>
                                                 <p class="two" contenteditable="true" id="disk_watermark_high">{{ routing.disk_watermark_high }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
                                             <div class="parent">
-                                                <p class="one">cluster_routing_allocation_allow_rebalance</p>
+                                                <p class="one">cluster.routing.allocation.allow_rebalance</p>
                                                 <p class="two" contenteditable="true" id="allow_rebalance">{{ routing.allow_rebalance }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one">cluster_routing_allocation_allocation_enable</p>
+                                                <p class="one">cluster.routing.allocation.allocation.enable</p>
                                                 <p class="two" contenteditable="true" id="allocation_enable">{{ routing.allocation_enable }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
                                             <div class="parent">
-                                                <p class="one">cluster_routing_awareness_attributes</p>
+                                                <p class="one">cluster.routing.awareness.attributes</p>
                                                 <p class="two" contenteditable="true" id="awareness_attributes">{{ routing.awareness_attributes }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one">cluster_routing_balance_index</p>
+                                                <p class="one">cluster.routing.balance.index</p>
                                                 <p class="two" contenteditable="true" id="balance_index">{{ routing.balance_index }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
                                             <div class="parent">
-                                                <p class="one">cluster_routing_balance_threshold</p>
+                                                <p class="one">cluster.routing.balance.threshold</p>
                                                 <p class="two" contenteditable="true" id="balance_threshold">{{ routing.balance_threshold }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one">cluster_routing_balance_shard</p>
+                                                <p class="one">cluster.routing.balance.shard</p>
                                                 <p class="two" contenteditable="true" id="balance_shard">{{ routing.balance_shard }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
@@ -271,7 +266,7 @@
         var colddata = $("#colddata").val();
         var csrf_token = $("input[name=csrfmiddlewaretoken]").val();
         $.ajax({
-            url: "{% url 'elastics:setting-routing' pk=object.id %}",
+            {#url: "{% url 'elastics:setting-routing' pk=object.id %}",#}
             type: 'post',
             data: {
                 cluster_routing_rebalance_enable: cluster_routing_rebalance_enable,
