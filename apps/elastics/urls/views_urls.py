@@ -29,6 +29,7 @@ urlpatterns = [
     path('meta-info/<uuid:pk>/node/', views.NodeListView.as_view(), name='node-list'),
     path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
     path('node/<uuid:pk>/update/', views.NodeUpdateView.as_view(), name='node-update'),
+    path('meta-info/<uuid:pk>/routing/', views.ClusterRouteringView.as_view(), name='setting-routing'),
     
     path('node/<uuid:pk>/nodeindice/', views.NodeIndiceListView.as_view(), name='node-indice-list'),
     

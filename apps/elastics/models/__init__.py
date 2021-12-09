@@ -11,3 +11,4 @@ from .metainfo import *
 from .esnode import *
 from .es_cluster import *
 from .index import *
+from .dynamic_config import *

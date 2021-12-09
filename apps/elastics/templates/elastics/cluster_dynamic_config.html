@@ -4,6 +4,34 @@
 {% block custom_head_css_js %}
     <link rel="stylesheet" href="{% static 'css/customize/three-columns.css' %}">
     <link rel="stylesheet" href="{% static 'css/customize/codemirrorjson.css' %}">
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .parent{
+            margin: 0 -10px;
+        }
+        p{
+            box-sizing: border-box;
+            padding: 0px 10px;
+            {#width: 25%;#}
+            height: 30px;
+            float: left;
+            background-clip: content-box;
+        }
+    .one{
+        width: 37%;
+    }
+    .two{
+        width: 8%;
+    }
+    .three{
+        width: 3%;
+    }
+    .four{ width: 2%;}
+
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -76,58 +104,70 @@
                                 </div>
                                 <div class="ibox-content">
                                     <div id="main">
-                                        <form method="post" action="">
-                                            <table class="table table-striped"frame=ovid rules=none width="100%">
-                                                <thead>
-                                                {% for i,k in clustersettings.persis.cluster.routing.items %}
-                                                    <tr>
-                                                        <th width="40%">cluster.routing.rebalance.enable</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.persis.cluster.rebalance.enable }}</td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
-                                                        <th width="40%">cluster.routing.allocation.cluster_concurrent_rebalance</th>
-                                                        <td  width="8%" contenteditable="true">{{ k.cluster_concurrent_rebalance }}</td>
-                                                        <th width="5%"><i class="fa fa-edit"></i></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th width="40%">cluster.routing.allocation.node_concurrent_recoveries</th>
-                                                        <td width="8%" contenteditable="true">{{ k.cluster_concurrent_rebalance }}</td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
-                                                        <th width="40%">cluster.routing.allocation.disk.watermark.low</th>
-                                                        <td width="8%" contenteditable="true">{{ k.disk.watermark.low }}</td>
-                                                        <th width="5%"><i class="fa fa-edit"></i></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th width="40%">cluster.routing.allocation.disk.watermark.flood.stage</th>
-                                                        <td width="8%" contenteditable="true">{{ k.disk.watermark.flood_stage }}</td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
-                                                        <th width="40%">cluster.routing.allocation.disk.watermark.high</th>
-                                                        <td width="8%" contenteditable="true">{{ k.disk.watermark.high }}</td>
-                                                       <th width="5%"><i class="fa fa-edit"></i></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th width="40%">cluster.routing.node_initial_primaries_recoveries</th>
-                                                        <td width="8%" contenteditable="true">{{ k.node_initial_primaries_recoveries }}</td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
-                                                        <th width="40%">cluster.routing.allocation.enable</th>
-                                                        <td width="8%" contenteditable="true">{{ k.allocation.enable }}</td>
-                                                        <th width="5%"><i class="fa fa-edit"></i></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th width="40%">cluster.routing.allocation.allow_rebalance</th>
-                                                        <td width="8%" contenteditable="true"></td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
-                                                        <th width="40%">cluster.routing.awareness.attributes</th>
-                                                        <td width="8%" contenteditable="true"></td>
-                                                        <th width="5%"><i class="fa fa-edit"></i></th>
-                                                    </tr>
-                                                {% endfor %}
-                                                </thead>
-                                            </table>
+                                        <form class="form-horizontal" method="post" action="{% url 'elastics:setting-routing' %}">
+                                            <div class="parent">
+                                                <p class="one" name="rebalance_enable">cluster.routing.rebalance.enable</p>
+                                                <p class="two" contenteditable="true" id="cluster_routing_rebalance_enable">{{ routing.rebalance_enable }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one" >cluster_routing_allocation_node_concurrent_recoveries</p>
+                                                <p class="two" contenteditable="true" id="node_concurrent_recoveries">{{ routing.node_concurrent_recoveries }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
+                                            <div class="parent">
+                                                <p class="one">cluster_routing_allocation_cluster_concurrent_rebalance</p>
+                                                <p class="two" contenteditable="true" id="cluster_concurrent_rebalance">{{ routing.cluster_concurrent_rebalance }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one">cluster_routing_node_initial_primaries_recoveries</p>
+                                                <p class="two" contenteditable="true" id="node_initial_primaries_recoveries">{{ routing.node_initial_primaries_recoveries }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
+                                            <div class="parent">
+                                                <p class="one">cluster_routing_allocation_node_concurrent_outgoing_recoveries</p>
+                                                <p class="two" contenteditable="true" id="node_concurrent_outgoing_recoveries">{{ routing.node_concurrent_outgoing_recoveries }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one">cluster_routing_allocation_disk_watermark_flood</p>
+                                                <p class="two" contenteditable="true" id="disk_watermark_flood_stage">{{ routing.disk_watermark_flood_stage }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
+                                            <div class="parent">
+                                                <p class="one">cluster_routing_allocation_disk_watermark_low</p>
+                                                <p class="two" contenteditable="true" id="disk_watermark_low">{{ routing.disk_watermark_low }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one">cluster_routing_allocation_disk_watermark_high</p>
+                                                <p class="two" contenteditable="true" id="disk_watermark_high">{{ routing.disk_watermark_high }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
+                                            <div class="parent">
+                                                <p class="one">cluster_routing_allocation_allow_rebalance</p>
+                                                <p class="two" contenteditable="true" id="allow_rebalance">{{ routing.allow_rebalance }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one">cluster_routing_allocation_allocation_enable</p>
+                                                <p class="two" contenteditable="true" id="allocation_enable">{{ routing.allocation_enable }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
+                                            <div class="parent">
+                                                <p class="one">cluster_routing_awareness_attributes</p>
+                                                <p class="two" contenteditable="true" id="awareness_attributes">{{ routing.awareness_attributes }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one">cluster_routing_balance_index</p>
+                                                <p class="two" contenteditable="true" id="balance_index">{{ routing.balance_index }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
+                                            <div class="parent">
+                                                <p class="one">cluster_routing_balance_threshold</p>
+                                                <p class="two" contenteditable="true" id="balance_threshold">{{ routing.balance_threshold }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                                <p class="four"></p>
+                                                <p class="one">cluster_routing_balance_shard</p>
+                                                <p class="two" contenteditable="true" id="balance_shard">{{ routing.balance_shard }}</p>
+                                                <p class="three"><i class="fa fa-edit"></i></p>
+                                            </div>
                                             <div style="text-align: center;">
                                                 <button type="button" class="btn btn-sm btn-primary" id="loginBtn" style="float: right;">保存</button>
                                             </div>
@@ -160,40 +200,43 @@
                                 <div class="ibox-content">
                                     <div id="main">
                                         <form method="post" action="">
-                                            <table class="table table-striped"frame=ovid rules=none width="100%">
+                                            <table class="table table-striped" frame=ovid rules=none width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th width="40%">indices.breaker.fielddata.overhead</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.fielddata.overhead }}</td>
+                                                        <td width="8%" contenteditable="true">{{ breaker.fielddata_overhead }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">indices.breaker.request.overhead</th>
+                                                        <td width="8%" contenteditable="true">{{ breaker.request_over }}</td>
+                                                        <th width="3%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">indices.breaker.total.limit</th>
+                                                        <td width="8%" contenteditable="true">{{breaker.total_limit }}</td>
                                                         <th width="3%"><i class="fa fa-edit"></i></th>
                                                         <th width="2%"></th>
                                                         <th width="40%">indices.breaker.request.limit</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.request.limit }}</td>
+                                                        <td width="8%" contenteditable="true">{{ breaker.request_limit }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="40%">indices.breaker.fielddata.limit</th>
+                                                        <td width="8%" contenteditable="true">{{ breaker.fielddata_limit }}</td>
+                                                        <th width="5%"><i class="fa fa-edit"></i></th>
+                                                        <th width="2%"></th>
+                                                        <th width="40%">network.breaker.inflight_requests.limit</th>
+                                                        <td width="8%" contenteditable="true">{{ breaker.inflight_req_limit }}</td>
                                                         <th width="5%"><i class="fa fa-edit"></i></th>
                                                     </tr>
                                                     <tr>
                                                         <th width="40%">indices.network.breaker.inflight_requests.overhead</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.inflight_requests.overhead }}</td>
+                                                        <td width="8%" contenteditable="true">{{ breaker.inflight_req }}</td>
                                                         <th width="3%"><i class="fa fa-edit"></i></th>
                                                         <th width="2%"></th>
-                                                        <th width="40%">indices.breaker.fielddata.limit</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.fielddata.limit }}</td>
-                                                        <th width="5%"><i class="fa fa-edit"></i></th>
                                                     </tr>
                                                     <tr>
-                                                        <th width="40%">indices.breaker.request.overhead</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.request.overhead }}</td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
-                                                        <th width="40%">network.breaker.inflight_requests.limit</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.inflight_requests.limit }}</td>
-                                                        <th width="5%"><i class="fa fa-edit"></i></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th width="40%">indices.breaker.total.limit</th>
-                                                        <td width="8%" contenteditable="true">{{ clustersettings.def_xpack.breaker.total.limit }}</td>
-                                                        <th width="3%"><i class="fa fa-edit"></i></th>
-                                                        <th width="2%"></th>
+
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -214,5 +257,39 @@
 {% block content_bottom_left %}{% endblock %}
 {% block custom_foot_js %}
 <script>
+    $("#loginBtn").on("click", function () {
+        var cluster_routing_rebalance_enable = document.getElementsByName("cluster_routing_rebalance_enable");
+        var cluster_routing_rebalance_enable1 = $("p[id=cluster_routing_rebalance_enable]").val();
+        var username = $("input[name=username]").val();
+        var password = $("input[name=password]").val();
+        var clushostname = $("input[name=clushostname]").val();
+        var mdomain = $("input[name=mdomain]").val();
+        var envs = $("select.envs option:selected").val();
+        var master = $("#master").val();
+        var ingest = $("#ingest").val();
+        var hotdata = $("#hotdata").val();
+        var colddata = $("#colddata").val();
+        var csrf_token = $("input[name=csrfmiddlewaretoken]").val();
+        $.ajax({
+            url: "{% url 'elastics:setting-routing' pk=object.id %}",
+            type: 'post',
+            data: {
+                cluster_routing_rebalance_enable: cluster_routing_rebalance_enable,
+                cluster_routing_rebalance_enable1: cluster_routing_rebalance_enable1,
+                csrfmiddlewaretoken: csrf_token,
+            },
+            success: function (res) {
+                if (res.status === "success") {
+                   $('.toastrDefaultSuccess').click(function() {
+                        toastr.success('保存成功');
+                        setTimeout(function () {
+                            location.href ='{% url 'elastics:cluster-dynamic-config' pk=object.id %}';
+                        },3000);
+                    });
+                }
+            }
+        })
+
+    })
 </script>
 {% endblock %}
