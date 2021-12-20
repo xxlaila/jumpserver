@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block custom_head_css_js %}
+    <link href='{% static "css/plugins/sweetalert/sweetalert.css" %}' rel="stylesheet">
+    <script src='{% static "js/plugins/sweetalert/sweetalert.min.js" %}'></script>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a href="{% url 'scaling:scaling-asset-detail' pk=object.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Asset detail' %} </a>
+                            </li>
+                             <li>
+                                <a href="{% url 'scaling:disk-info-list' pk=object.id %}"  class="text-center"><i class="fa fa-diamond"></i> {% trans 'DiskInfo' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-8" style="padding-left: 0">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label"><b>{{ object.primaryip }}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr class="no-borders-tr">
+                                                <td>{% trans 'Hostname' %}:</td>
+                                                <td><b>{{ object.hostname }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Instance name' %}:</td>
+                                                <td><b>{{ object.instance }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Memory' %}:</td>
+                                                <td><b>{{ object.memory }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'OS version' %}:</td>
+                                                <td><b>{{ object.os_version }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Release' %}:</td>
+                                                <td><b>{{ object.os_arch }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Mirror image' %}:</td>
+                                                <td><b>{{ object.images }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Vpc network' %}:</td>
+                                                <td><b>{{ object.vpc }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Virtual switch' %}:</td>
+                                                <td><b>{{ object.vswaitch }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Instance type' %}:</td>
+                                                <td><b>{{ object.instancetype }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Elastic ip bandwidth' %}:</td>
+                                                <td><b>{{ object.ebandwidth }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Bandwidth billing method' %}:</td>
+                                                <td><b>{{ object.paybywidth }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Area' %}:</td>
+                                                <td><b>{{ object.regionid }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Availability zone' %}:</td>
+                                                <td><b>{{ object.zoneid }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Billing method' %}:</td>
+                                                <td><b>{{ object.chargetype }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Status' %}:</td>
+                                                <td><b>{{ object.status }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'CloudInfor' %}:</td>
+                                                <td><b>{{ object.cloudinfor }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Created by' %}:</td>
+                                                <td><b>{{ object.created_by }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Creation time' %}:</td>
+                                                <td><b>{{ object.create_time|date:"Y-m-j H:i:s" }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Expired' %}:</td>
+                                                <td><b>{{ object.expired_time }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Start Time' %}:</td>
+                                                <td><b>{{ object.start_time }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Date updated' %}:</td>
+                                                <td><b>{{ object.update_data }}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if user.is_superuser or user.is_org_admin %}
+                        <div class="col-sm-4" style="padding-left: 0;padding-right: 0">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'Network Type' %}
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>{% trans 'Public IP' %}:</td>
+                                                <td><b>{{ object.publicip}}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'IP' %}:</td>
+                                                <td><b>{{ object.primaryip }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Private network card' %}:</td>
+                                                <td><b>{{ object.primarynetwork }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{% trans 'Private network card mac' %}:</td>
+                                                <td><b>{{ object.primarymac }}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'CPU' %}
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td>{% trans 'Cpu threads' %}:</td>
+                                            <td><b>{{ object.core_thread}}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Virtual cpu' %}:</td>
+                                            <td><b>{{ object.cpu_vcpus }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Cpu core' %}:</td>
+                                            <td><b>{{ object.cpu_cores }}</b></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'Storage' %}
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                              <td>{% trans 'Number of data disks' %}:</td>
+                                                <td><b>{{ object.localstoranum }}</b></td>
+                                            </tr>
+                                            <tr>
+                                              <td>{% trans 'Single disk size' %}:</td>
+                                               <td><b>{{ object.localstorasize }}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-warning">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> {% trans 'Security group' %}
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="tag-list" style="padding: 0">
+                                        <li ><i class="fa fa-tag"></i> {{ security }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_foot_js %}
+<script>
+</script>
+{% endblock %}

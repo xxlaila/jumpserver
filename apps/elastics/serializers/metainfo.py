@@ -20,7 +20,7 @@ class MetaInfoSerializer(BulkOrgResourceModelSerializer):
         list_serializer_class = AdaptedBulkListSerializer
         fields = [
             'id', 'name', 'env', 'org_name', 'address', 'username',
-            'password', 'kibana', 'kafka', 'cloud_base', 'labels', 'comment',
+            'password', 'kibana', 'kafka', 'cloud', 'cloud_base', 'labels', 'comment',
             'health', 'setting', 'alter', 'indexes', 'node', 'remote', 'scbcl',
             'created_by', 'date_created'
         ]

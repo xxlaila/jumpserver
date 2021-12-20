@@ -74,7 +74,7 @@ def write_default_setting(results, k):
 
 @shared_task
 @register_as_period_task(interval=600)
-def check_setting_connent(request,_settins=None):
+def check_setting_connent(_settins=None):
     try:
         obj = []
         if _settins is None:
@@ -92,7 +92,7 @@ def check_setting_connent(request,_settins=None):
                 else:
                     raise ValueError("connent timeout")
             result = get_check_setting_data(data, k)
-            # get_indices_breaker(data, k)
+            get_indices_breaker(data, k)
             get_routing(data, k)
             if result:
                 obj.append(result)

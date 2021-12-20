@@ -32,6 +32,9 @@
                             <li class="pull-right">
                                 <a class="btn btn-outline btn-default" href="{% url 'elastics:meta-info-update' pk=meteinfo.id %}"><i class="fa fa-edit"></i>{% trans 'Update' %}</a>
                             </li>
+                            <li>
+                                <a class="text-center"  href="{% url 'elastics:cluster-dsl' pk=object.id %}" ><i class="fa fa-link"></i> {% trans 'DSL' %}</a>
+                            </li>
                             <li class="pull-right">
                                 <a class="btn btn-outline btn-danger btn-delete-asset">
                                     <i class="fa fa-trash-o"></i>{% trans 'Delete' %}

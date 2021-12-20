@@ -101,3 +101,4 @@ jumpserver-django-oidc-rp==0.3.7.5
 jsonfield==3.1.0
 elasticsearch-dsl==7.4.0
 jsonsearch==0.0.2
+django-cors-headers==3.10.1

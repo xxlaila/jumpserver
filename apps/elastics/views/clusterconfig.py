@@ -11,11 +11,10 @@ from django.views.generic import (
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from common.permissions import PermissionsMixin, IsOrgAdmin,IsOrgAdminOrAppUser
-from rest_framework.views import APIView
 from ..models import MetaInfo, BreakerConfig, RoutingConfig
 from common.utils import get_logger
 from ..utils import default_conn,put_settings_cluster
-from django.http import JsonResponse
+from rest_framework.views import APIView, Response
 
 __all__ = (
     "ClusterDynamicConfigView", "ClusterRouteringView",
@@ -51,14 +50,14 @@ class ClusterDynamicConfigView(PermissionsMixin, SingleObjectMixin, TemplateView
         kwargs.update(context)
         return super().get_context_data(**kwargs)
 
-class ClusterRouteringView(PermissionsMixin, SingleObjectMixin, APIView):
+class ClusterRouteringView(SingleObjectMixin, APIView):
 
     permission_classes = (IsOrgAdmin,)
     object = None
 
     def post(self, request, *args, **kwargs):
         data = request.POST
-        escoo = self.get_object(MetaInfo.objects.get(id=self.kwargs['pk']))
+        escoo = self.get_object(RoutingConfig.objects.filter(id=self.kwargs['pk']))
         body = {
           "persistent": {
             "cluster": {
@@ -85,4 +84,6 @@ class ClusterRouteringView(PermissionsMixin, SingleObjectMixin, APIView):
         }
         result = put_settings_cluster(escoo, body)
         if result:
-            return JsonResponse({"status": "success"})
+            return Response("success")
+        else:
+            return Response("error", status=400)

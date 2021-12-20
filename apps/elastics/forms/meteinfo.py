@@ -25,7 +25,7 @@ class MetaInfoForm(OrgModelForm):
         model = MetaInfo
         fields = ['name', 'env', 'address', 'username', 'password',
                   'kibana', 'kafka', 'cloud', 'comment', 'labels', 'remote', 'scbcl',
-                  'health', 'setting', 'alter', 'indexes', 'node']
+                  'health', 'setting', 'alter', 'indexes', 'node',]
 
     # widgets = {
     #     # 'name': forms.TextInput(attrs={'placeholder': _('Name')}),

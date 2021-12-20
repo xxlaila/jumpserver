@@ -18,7 +18,7 @@ from ..models import EsNode, MetaInfo, IndiceNode
 from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
-from ..utils import get_nodes_connenct,exclude_node, get_node_stats
+from ..utils import get_nodes_connenct, exclude_node, get_node_stats
 from django.shortcuts import (
     render, redirect
 )
@@ -45,7 +45,6 @@ class NodeListView(PermissionsMixin, SingleObjectMixin, TemplateView):
             'app': _('Elastics'),
             'action': _('Node list'),
             'object': self.get_object(),
-            # 'nodes': self.node_data(),
         }
         kwargs.update(context)
         return super().get_context_data(**kwargs)

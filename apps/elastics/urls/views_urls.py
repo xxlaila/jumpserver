@@ -30,6 +30,7 @@ urlpatterns = [
     path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
     path('node/<uuid:pk>/update/', views.NodeUpdateView.as_view(), name='node-update'),
     path('meta-info/<uuid:pk>/routing/', views.ClusterRouteringView.as_view(), name='setting-routing'),
+    path('meta-info/<uuid:pk>/dsl/', views.KibanaDslView.as_view(), name='cluster-dsl'),
     
     path('node/<uuid:pk>/nodeindice/', views.NodeIndiceListView.as_view(), name='node-indice-list'),
     
@@ -45,6 +46,6 @@ urlpatterns = [
     path('index/<uuid:pk>/indexshard/', views.IndexShardsNodeView.as_view(), name='index-shards'),
 
 
-    path('meta-info/health/', utils.check_setting_connent, name='meta-info-health'),
+    path('meta-info/health/', utils.get_indexs_connent, name='meta-info-health'),
 
 ]

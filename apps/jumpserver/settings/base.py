@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'orgs.apps.OrgsConfig',
     'users.apps.UsersConfig',
     'elastics.apps.ElasticsConfig',
+    'scaling.apps.ScalingConfig',
     'assets.apps.AssetsConfig',
     'perms.apps.PermsConfig',
     'ops.apps.OpsConfig',
@@ -65,11 +66,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -251,6 +255,9 @@ FEISHU = {
     'KEY_WORDS': CONFIG.FEISHU_KEY_WORDS,
     'WEBHOOK': CONFIG.FEISHU_WEBHOOK,
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 FORCE_SCRIPT_NAME = CONFIG.FORCE_SCRIPT_NAME
 

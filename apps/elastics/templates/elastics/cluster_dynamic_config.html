@@ -41,40 +41,28 @@
                     <div class="panel-options">
                         <ul class="nav nav-tabs">
                             <li>
-                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}"
-                                   class="text-center"><i
-                                        class="fa fa-laptop"></i> {% trans 'Meta info detail' %}
+                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Meta info detail' %}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'elastics:cluster-dynamic-config' pk=object.id %}"
-                                   class="text-center"><i
-                                        class="fa fa-diamond"></i> {% trans 'Dynamic configuration' %}
+                                <a href="{% url 'elastics:cluster-dynamic-config' pk=object.id %}" class="text-center"><i class="fa fa-diamond"></i> {% trans 'Dynamic configuration' %}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'elastics:basic-cluster-list' pk=object.id %}"
-                                   class="text-center"><i
-                                        class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %}
+                                <a href="{% url 'elastics:basic-cluster-list' pk=object.id %}" class="text-center"><i class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %}
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{% url 'elastics:cluster-remote-list' pk=object.id %}"
-                                   class="text-center"><i
-                                        class="fa fa-gavel"></i> {% trans 'Cluster remote list' %}
+                                <a href="{% url 'elastics:cluster-remote-list' pk=object.id %}" class="text-center"><i class="fa fa-gavel"></i> {% trans 'Cluster remote list' %}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'elastics:node-list' pk=object.id %}"
-                                   class="text-center"><i
-                                        class="fa fa-server"></i> {% trans 'Node list' %}
+                                <a href="{% url 'elastics:node-list' pk=object.id %}" class="text-center"><i class="fa fa-server"></i> {% trans 'Node list' %}
                                 </a>
                             </li>
                             <li>
-                                <a class="text-center" href="">
-                                    <i class="fa fa-link"></i> {% trans 'DSL' %}
-                                </a>
+                                <a class="text-center"  href="{% url 'elastics:cluster-dsl' pk=object.id %}" ><i class="fa fa-link"></i> {% trans 'DSL' %}</a>
                             </li>
                         </ul>
                     </div>
@@ -99,13 +87,13 @@
                                 </div>
                                 <div class="ibox-content">
                                     <div id="main">
-                                        <form class="form-horizontal" method="post" action="{% url 'elastics:setting-routing' %}">
+                                        <form class="form-horizontal" method="post" action="{% url 'elastics:setting-routing' pk=object.id %}">
                                             <div class="parent">
-                                                <p class="one" name="rebalance_enable">cluster.routing.rebalance.enable</p>
-                                                <p class="two" contenteditable="true" id="cluster_routing_rebalance_enable">{{ routing.rebalance_enable }}</p>
+                                                <p class="one">cluster.routing.rebalance.enable</p>
+                                                <p class="two" contenteditable="true" id="rebalance_enable">{{ routing.rebalance_enable }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                                 <p class="four"></p>
-                                                <p class="one" >cluster.routing.allocation.node_concurrent_recoveries</p>
+                                                <p class="one"  >cluster.routing.allocation.node_concurrent_recoveries</p>
                                                 <p class="two" contenteditable="true" id="node_concurrent_recoveries">{{ routing.node_concurrent_recoveries }}</p>
                                                 <p class="three"><i class="fa fa-edit"></i></p>
                                             </div>
@@ -253,9 +241,8 @@
 {% block custom_foot_js %}
 <script>
     $("#loginBtn").on("click", function () {
-        var cluster_routing_rebalance_enable = document.getElementsByName("cluster_routing_rebalance_enable");
-        var cluster_routing_rebalance_enable1 = $("p[id=cluster_routing_rebalance_enable]").val();
-        var username = $("input[name=username]").val();
+        var rebalance_enable = $("#rebalance_enable").val();
+        var node_concurrent_recoveries = $("p[id=node_concurrent_recoveries]").val();
         var password = $("input[name=password]").val();
         var clushostname = $("input[name=clushostname]").val();
         var mdomain = $("input[name=mdomain]").val();
@@ -266,11 +253,11 @@
         var colddata = $("#colddata").val();
         var csrf_token = $("input[name=csrfmiddlewaretoken]").val();
         $.ajax({
-            {#url: "{% url 'elastics:setting-routing' pk=object.id %}",#}
+            url: "{% url 'elastics:setting-routing' pk=object.id %}",
             type: 'post',
             data: {
-                cluster_routing_rebalance_enable: cluster_routing_rebalance_enable,
-                cluster_routing_rebalance_enable1: cluster_routing_rebalance_enable1,
+                rebalance_enable: rebalance_enable,
+                node_concurrent_recoveries: node_concurrent_recoveries,
                 csrfmiddlewaretoken: csrf_token,
             },
             success: function (res) {

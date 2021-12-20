@@ -10,8 +10,8 @@ import uuid
 import logging
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from ..models.asset_expansion import CTYPE_CHOICES, CATEGORY_CHOICES, PAYBY_CHOICES
-from ..models import AssetExpansion
+from ..models.asset_expansion import PAYBY_CHOICES
+from orgs.mixins.models import OrgModelMixin
 
 __all__ = ['Balanced']
 logger = logging.getLogger(__name__)
@@ -21,7 +21,7 @@ NETWORK_TYPE_CHOICES = (
         ("intranet", "内网"),
     )
 
-class Balanced(models.Model):
+class Balanced(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     loadid = models.CharField(null=True, blank=True, max_length=128, verbose_name=_('Instance id'))
     ip = models.GenericIPAddressField(null=True, blank=True, verbose_name=_('IP'), db_index=True)
@@ -42,8 +42,8 @@ class Balanced(models.Model):
     comment = models.TextField(blank=True, null=True, verbose_name=_("Comment"))
 
     def __int__(self):
-        return '{0.loadid}({0.ip})'.format(self)
+        return '{0.loadid}({0.ip})({0.loadname})'.format(self)
 
     class Meta:
         ordering = ['ip']
-        verbose_name = ("Balanced")
+        verbose_name = _("Balanced")

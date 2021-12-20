@@ -5,7 +5,7 @@
 @Author  : xxlaila
 @Software: PyCharm
 """
-
+from django.http import JsonResponse
 from django.views.generic import TemplateView, CreateView, \
     UpdateView, DeleteView, DetailView
 from django.views.generic.detail import SingleObjectMixin
@@ -20,7 +20,7 @@ from ..models import MetaInfo, CloudInfor
 
 __all__ = (
     "MetaInfoListView", "MetaInfoCreateView", "MetaInfoUpdateView",
-    "MetaInfoDetailView", "MetaInfoDeleteView"
+    "MetaInfoDetailView", "MetaInfoDeleteView", "KibanaDslView"
 )
 logger = get_logger(__file__)
 
@@ -92,3 +92,23 @@ class MetaInfoDeleteView(PermissionsMixin, DeleteView):
     template_name = 'delete_confirm.html'
     success_url = reverse_lazy('elastics:meta-info-list')
     permission_classes = [IsOrgAdmin]
+
+
+class KibanaDslView(PermissionsMixin, SingleObjectMixin, TemplateView):
+    template_name = 'elastics/_kibana_dsl.html'
+    model = MetaInfo
+    object = None
+    permission_classes = [IsOrgAdmin]
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=self.model.objects.all())
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'app': _('Elastics'),
+            'action': _('DSL'),
+            'object': self.get_object(),
+        }
+        kwargs.update(context)
+        return super().get_context_data(**kwargs)

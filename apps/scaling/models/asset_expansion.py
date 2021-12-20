@@ -9,6 +9,9 @@ import uuid
 import logging
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from elastics.models import CloudInfor
+from orgs.mixins.models import OrgModelMixin
+from common.utils import lazyproperty
 
 __all__ = ['AssetExpansion']
 logger = logging.getLogger(__name__)
@@ -32,7 +35,7 @@ CATEGORY_CHOICES = (
         ("local_hdd_pro", "吞吐密集型本地盘"),
     )
 
-class AssetExpansion(models.Model):
+class AssetExpansion(OrgModelMixin):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     hostname = models.CharField(null=True, blank=True, max_length=64, verbose_name=_('Hostname'), db_index=True)
     instance = models.CharField(null=True, blank=True, max_length=64, verbose_name=_('Instance name'), db_index=True)
@@ -63,6 +66,7 @@ class AssetExpansion(models.Model):
     devuser = models.CharField(max_length=64, blank=True, null=True, verbose_name=_("Development Director"), db_index=True)
     dept = models.CharField(max_length=64, blank=True, null=True, verbose_name=_("Department"), db_index=True)
     status = models.CharField(max_length=128, null=True, blank=True, db_index=True, verbose_name=_('Status'))
+    cloudinfor = models.ForeignKey(CloudInfor, on_delete=models.SET_NULL, null=True, verbose_name=_('CloudInfor'))
     create_time = models.DateTimeField(null=True, blank=True, verbose_name=_('Creation time'))
     expired_time = models.DateTimeField(blank=True, null=True, verbose_name=_("Expired"))
     start_time = models.DateTimeField(blank=True, null=True, verbose_name=_("Start Time"))
@@ -71,6 +75,14 @@ class AssetExpansion(models.Model):
 
     def __str__(self):
         return '{0.hostname}({0.primaryip})({0.instance})'.format(self)
+
+    @property
+    def access_count(self):
+        return self.primaryip.all().count()
+
+    @lazyproperty
+    def cloudinfor_display(self):
+        return self.cloudinfor.name
 
     class Meta:
         ordering = ['create_time']

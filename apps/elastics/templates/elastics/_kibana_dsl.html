@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a href="{% url 'elastics:meta-info-detail' pk=object.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Meta info detail' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:cluster-dynamic-config' pk=object.id %}" class="text-center"><i class="fa fa-diamond"></i> {% trans 'Dynamic configuration' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:basic-cluster-list' pk=object.id %}" class="text-center"><i class="fa fa-lastfm"></i> {% trans 'Basic cluster list' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:cluster-remote-list' pk=object.id %}" class="text-center"><i class="fa fa-gavel"></i> {% trans 'Cluster remote list' %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'elastics:node-list' pk=object.id %}" class="text-center"><i class="fa fa-server"></i> {% trans 'Node list' %}</a>
+                            </li>
+                            <li>
+                                <a class="text-center"  href="{% url 'elastics:cluster-dsl' pk=object.id %}" ><i class="fa fa-link"></i> {% trans 'DSL' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0;">
+                            <div class="" id="content_start">
+                            </div>
+                            <iframe src="{{ object.kibana }}" frameborder="0" width="100%" height="737px"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block content_bottom_left %}{% endblock %}
+{% block custom_foot_js %}
+
+{% endblock %}

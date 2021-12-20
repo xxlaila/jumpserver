@@ -32,6 +32,19 @@
     </li>
 {% endif %}
 
+{# Scaling info #}
+{% if request.user.can_admin_current_org %}
+    <li id="assets">
+        <a>
+            <i class="fa fa-cloud" style="width: 14px"></i> <span class="nav-label">{% trans 'Scaling' %}</span><span class="fa arrow"></span>
+        </a>
+        <ul class="nav nav-second-level">
+            <li id="asset"><a href="{% url 'scaling:scaling-asset-list' %}">{% trans 'Asset list' %}</a></li>
+            <li id="domain"><a href="#">{% trans 'Load balancing' %}</a></li>
+        </ul>
+    </li>
+{% endif %}
+
 {# Assets #}
 {% if request.user.can_admin_current_org %}
     <li id="assets">

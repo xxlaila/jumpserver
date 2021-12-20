@@ -11,7 +11,6 @@ from common.serializers import AdaptedBulkListSerializer
 from ..models import EsNode, IndiceNode
 from orgs.mixins.serializers import BulkOrgResourceModelSerializer
 
-
 class EsNodeSerializer(BulkOrgResourceModelSerializer):
 
     class Meta:
