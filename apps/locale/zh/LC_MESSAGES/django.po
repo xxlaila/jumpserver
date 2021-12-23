@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-17 17:50+0800\n"
+"POT-Creation-Date: 2021-12-23 10:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -126,7 +126,7 @@ msgstr "运行参数"
 #: elastics/templates/elastics/cluster_remote_list.html:64
 #: elastics/templates/elastics/index_detail.html:52
 #: elastics/templates/elastics/index_list.html:21
-#: elastics/templates/elastics/meta_info_detail.html:65
+#: elastics/templates/elastics/meta_info_detail.html:68
 #: elastics/templates/elastics/meta_info_list.html:21
 #: elastics/templates/elastics/node_detail.html:55
 #: elastics/templates/elastics/node_list.html:71
@@ -241,14 +241,14 @@ msgstr "数据库"
 #: elastics/models/cloudinfor.py:23 elastics/models/metainfo.py:47
 #: elastics/templates/elastics/cloud_info_detail.html:68
 #: elastics/templates/elastics/cloud_info_list.html:25
-#: elastics/templates/elastics/meta_info_detail.html:137
+#: elastics/templates/elastics/meta_info_detail.html:140
 #: elastics/templates/elastics/meta_info_list.html:26 ops/models/adhoc.py:37
 #: orgs/models.py:18 perms/models/base.py:56
 #: perms/templates/perms/asset_permission_detail.html:97
 #: perms/templates/perms/database_app_permission_detail.html:93
 #: perms/templates/perms/remote_app_permission_detail.html:89
-#: scaling/models/asset_expansion.py:73 scaling/models/balanced.py:41
-#: scaling/models/diskinfo.py:66 settings/models.py:31 terminal/models.py:36
+#: scaling/models/asset_expansion.py:74 scaling/models/balanced.py:42
+#: scaling/models/diskinfo.py:61 settings/models.py:31 terminal/models.py:36
 #: terminal/models.py:381 terminal/models.py:418
 #: terminal/templates/terminal/base_storage_list.html:33
 #: terminal/templates/terminal/terminal_detail.html:63
@@ -309,14 +309,14 @@ msgstr "参数"
 #: elastics/models/dynamic_config.py:30 elastics/models/dynamic_config.py:72
 #: elastics/models/metainfo.py:50
 #: elastics/templates/elastics/cloud_info_detail.html:72
-#: elastics/templates/elastics/meta_info_detail.html:129
+#: elastics/templates/elastics/meta_info_detail.html:132
 #: ops/templates/ops/adhoc_detail.html:84 orgs/models.py:16
 #: perms/models/base.py:54
 #: perms/templates/perms/asset_permission_detail.html:93
 #: perms/templates/perms/database_app_permission_detail.html:89
 #: perms/templates/perms/remote_app_permission_detail.html:85
-#: users/models/user.py:481 users/serializers/group.py:32
-#: users/templates/users/user_detail.html:97
+#: scaling/templates/scaling/asset_detail.html:112 users/models/user.py:481
+#: users/serializers/group.py:32 users/templates/users/user_detail.html:97
 msgid "Created by"
 msgstr "创建者"
 
@@ -336,7 +336,7 @@ msgstr "创建者"
 #: elastics/models/dynamic_config.py:71 elastics/models/esnode.py:39
 #: elastics/models/index.py:80 elastics/models/metainfo.py:49
 #: elastics/templates/elastics/cloud_info_detail.html:64
-#: elastics/templates/elastics/meta_info_detail.html:133
+#: elastics/templates/elastics/meta_info_detail.html:136
 #: elastics/templates/elastics/node_detail.html:100 ops/models/adhoc.py:38
 #: ops/templates/ops/adhoc_detail.html:88 ops/templates/ops/task_detail.html:62
 #: orgs/models.py:17 perms/models/base.py:55
@@ -466,7 +466,7 @@ msgstr "提交"
 #: perms/templates/perms/remote_app_permission_detail.html:13
 #: perms/templates/perms/remote_app_permission_remote_app.html:13
 #: perms/templates/perms/remote_app_permission_user.html:13
-#: scaling/models/balanced.py:38
+#: scaling/models/balanced.py:39
 msgid "Detail"
 msgstr "详情"
 
@@ -552,7 +552,7 @@ msgstr "更新"
 #: elastics/templates/elastics/cloud_info_detail.html:100
 #: elastics/templates/elastics/cloud_info_list.html:48
 #: elastics/templates/elastics/index_list.html:53
-#: elastics/templates/elastics/meta_info_detail.html:37
+#: elastics/templates/elastics/meta_info_detail.html:40
 #: elastics/templates/elastics/meta_info_list.html:49
 #: elastics/templates/elastics/node_list.html:114
 #: ops/templates/ops/task_list.html:74
@@ -620,6 +620,7 @@ msgstr "创建数据库应用"
 #: perms/templates/perms/database_app_permission_user.html:54
 #: perms/templates/perms/remote_app_permission_list.html:20
 #: scaling/templates/scaling/assets_list.html:28
+#: scaling/templates/scaling/disk_list.html:60
 #: terminal/templates/terminal/base_storage_list.html:34
 #: terminal/templates/terminal/session_list.html:34
 #: terminal/templates/terminal/terminal_list.html:37
@@ -731,7 +732,8 @@ msgstr "节点"
 #: assets/templates/assets/asset_detail.html:72
 #: elastics/templates/elastics/cloud_info_list.html:63
 #: elastics/templates/elastics/meta_info_list.html:65
-#: scaling/templates/scaling/assets_list.html:71 templates/_nav.html:57
+#: scaling/templates/scaling/assets_list.html:71
+#: scaling/templates/scaling/disk_list.html:106 templates/_nav.html:57
 msgid "Admin user"
 msgstr "管理用户"
 
@@ -820,7 +822,7 @@ msgstr "SSH网关，支持代理SSH,RDP和VNC"
 #: authentication/templates/authentication/login.html:21
 #: authentication/templates/authentication/xpack_login.html:93
 #: elastics/models/metainfo.py:34
-#: elastics/templates/elastics/meta_info_detail.html:77 ops/models/adhoc.py:148
+#: elastics/templates/elastics/meta_info_detail.html:80 ops/models/adhoc.py:148
 #: perms/templates/perms/asset_permission_list.html:185
 #: perms/templates/perms/remote_app_permission_user.html:50
 #: settings/templates/settings/_ldap_list_users_modal.html:31
@@ -868,7 +870,7 @@ msgstr "密码或密钥密码"
 #: authentication/templates/authentication/login.html:29
 #: authentication/templates/authentication/xpack_login.html:101
 #: elastics/models/metainfo.py:35
-#: elastics/templates/elastics/meta_info_detail.html:81
+#: elastics/templates/elastics/meta_info_detail.html:84
 #: settings/forms/ldap.py:22
 #: settings/templates/settings/_ldap_test_user_login_modal.html:16
 #: users/forms/user.py:22 users/forms/user.py:193
@@ -967,7 +969,8 @@ msgstr "内部的"
 #: elastics/templates/elastics/node_list.html:72
 #: elastics/templates/elastics/node_stats_indices_detail.html:61
 #: perms/templates/perms/asset_permission_list.html:187
-#: scaling/models/asset_expansion.py:58 scaling/models/balanced.py:26
+#: scaling/models/asset_expansion.py:59 scaling/models/balanced.py:27
+#: scaling/templates/scaling/asset_detail.html:151
 #: scaling/templates/scaling/assets_list.html:26 settings/forms/terminal.py:16
 #: users/templates/users/_granted_assets.html:26
 #: users/templates/users/user_asset_permission.html:156
@@ -984,7 +987,8 @@ msgstr "IP"
 #: assets/templates/assets/asset_list.html:24
 #: assets/templates/assets/user_asset_list.html:75
 #: perms/templates/perms/asset_permission_list.html:188
-#: scaling/models/asset_expansion.py:39
+#: scaling/models/asset_expansion.py:40
+#: scaling/templates/scaling/asset_detail.html:48
 #: scaling/templates/scaling/assets_list.html:21 settings/forms/terminal.py:15
 #: users/templates/users/_granted_assets.html:25
 #: users/templates/users/user_asset_permission.html:157
@@ -1017,6 +1021,7 @@ msgid "Is active"
 msgstr "激活"
 
 #: assets/models/asset.py:202 assets/templates/assets/asset_detail.html:64
+#: scaling/templates/scaling/asset_detail.html:147
 msgid "Public IP"
 msgstr "公网IP"
 
@@ -1053,7 +1058,8 @@ msgid "CPU vcpus"
 msgstr "CPU总数"
 
 #: assets/models/asset.py:214 assets/templates/assets/asset_detail.html:92
-#: scaling/models/asset_expansion.py:41
+#: scaling/models/asset_expansion.py:42
+#: scaling/templates/scaling/asset_detail.html:56
 #: scaling/templates/scaling/assets_list.html:22
 msgid "Memory"
 msgstr "内存"
@@ -1073,7 +1079,8 @@ msgstr "硬盘信息"
 msgid "OS"
 msgstr "操作系统"
 
-#: assets/models/asset.py:219 scaling/models/asset_expansion.py:47
+#: assets/models/asset.py:219 scaling/models/asset_expansion.py:48
+#: scaling/templates/scaling/asset_detail.html:60
 #: scaling/templates/scaling/assets_list.html:25
 msgid "OS version"
 msgstr "系统版本"
@@ -1088,8 +1095,8 @@ msgstr "主机名原始"
 
 #: assets/models/asset.py:223 assets/templates/assets/asset_create.html:46
 #: assets/templates/assets/asset_detail.html:220 elastics/models/metainfo.py:48
-#: elastics/templates/elastics/meta_info_detail.html:97
-#: elastics/templates/elastics/meta_info_detail.html:303 templates/_nav.html:59
+#: elastics/templates/elastics/meta_info_detail.html:100
+#: elastics/templates/elastics/meta_info_detail.html:306 templates/_nav.html:59
 msgid "Labels"
 msgstr "标签管理"
 
@@ -1135,8 +1142,10 @@ msgstr "ssh公钥"
 #: elastics/templates/elastics/basic_cluster_list.html:115
 #: elastics/templates/elastics/cluster_remote_list.html:91
 #: elastics/templates/elastics/node_detail.html:97 ops/models/adhoc.py:39
-#: scaling/models/asset_expansion.py:72 scaling/models/balanced.py:40
-#: scaling/models/diskinfo.py:65
+#: scaling/models/asset_expansion.py:73 scaling/models/balanced.py:41
+#: scaling/models/diskinfo.py:60
+#: scaling/templates/scaling/asset_detail.html:128
+#: scaling/templates/scaling/disk_detail.html:92
 msgid "Date updated"
 msgstr "更新日期"
 
@@ -1154,7 +1163,7 @@ msgid "Phone"
 msgstr "手机"
 
 #: assets/models/cluster.py:23 elastics/models/metainfo.py:33
-#: elastics/templates/elastics/meta_info_detail.html:73
+#: elastics/templates/elastics/meta_info_detail.html:76
 #: elastics/templates/elastics/meta_info_list.html:23
 msgid "Address"
 msgstr "地址"
@@ -1720,13 +1729,13 @@ msgstr "请输入密码"
 
 #: assets/templates/assets/_asset_user_auth_update_modal.html:68
 #: assets/templates/assets/asset_detail.html:300
-#: elastics/templates/elastics/meta_info_detail.html:393
-#: elastics/templates/elastics/meta_info_detail.html:411
-#: elastics/templates/elastics/meta_info_detail.html:429
-#: elastics/templates/elastics/meta_info_detail.html:447
-#: elastics/templates/elastics/meta_info_detail.html:465
-#: elastics/templates/elastics/meta_info_detail.html:483
-#: elastics/templates/elastics/meta_info_detail.html:501
+#: elastics/templates/elastics/meta_info_detail.html:396
+#: elastics/templates/elastics/meta_info_detail.html:414
+#: elastics/templates/elastics/meta_info_detail.html:432
+#: elastics/templates/elastics/meta_info_detail.html:450
+#: elastics/templates/elastics/meta_info_detail.html:468
+#: elastics/templates/elastics/meta_info_detail.html:486
+#: elastics/templates/elastics/meta_info_detail.html:504
 #: users/templates/users/user_detail.html:356
 #: users/templates/users/user_detail.html:383
 msgid "Update successfully!"
@@ -1785,7 +1794,7 @@ msgstr "查看"
 #: assets/templates/assets/asset_asset_user_list.html:57
 #: assets/templates/assets/asset_detail.html:174
 #: assets/templates/assets/system_user_assets.html:74
-#: elastics/templates/elastics/meta_info_detail.html:168
+#: elastics/templates/elastics/meta_info_detail.html:171
 #: terminal/templates/terminal/base_storage_list.html:72
 msgid "Test"
 msgstr "测试"
@@ -1816,7 +1825,7 @@ msgstr "如果使用了nat端口映射，请设置为ssh真实监听的端口"
 #: assets/templates/assets/asset_list.html:124
 #: elastics/templates/elastics/node_detail.html:20
 #: elastics/templates/elastics/node_stats_indices_detail.html:14
-#: elastics/views/esnode.py:62
+#: elastics/views/esnode.py:61
 msgid "Node detail"
 msgstr "节点详情"
 
@@ -1879,12 +1888,14 @@ msgstr "其它"
 #: assets/templates/assets/_user_asset_detail_modal.html:11
 #: assets/templates/assets/asset_asset_user_list.html:13
 #: assets/templates/assets/asset_detail.html:18 assets/views/asset.py:200
+#: scaling/templates/scaling/asset_detail.html:18
+#: scaling/templates/scaling/disk_list.html:12
 msgid "Asset detail"
 msgstr "资产详情"
 
 #: assets/templates/assets/admin_user_assets.html:16
 #: assets/templates/assets/admin_user_detail.html:16
-#: scaling/views/assetexpansion.py:34
+#: scaling/views/assetexpansion.py:35
 msgid "Assets list"
 msgstr "资产列表"
 
@@ -1968,7 +1979,7 @@ msgstr "资产用户"
 
 #: assets/templates/assets/asset_asset_user_list.html:47
 #: assets/templates/assets/asset_detail.html:140
-#: elastics/templates/elastics/meta_info_detail.html:180
+#: elastics/templates/elastics/meta_info_detail.html:183
 #: terminal/templates/terminal/session_detail.html:87
 #: users/templates/users/user_detail.html:126
 #: users/templates/users/user_profile.html:150
@@ -1986,6 +1997,7 @@ msgid "Select all"
 msgstr "全选"
 
 #: assets/templates/assets/asset_detail.html:88
+#: scaling/templates/scaling/asset_detail.html:168
 msgid "CPU"
 msgstr "CPU"
 
@@ -2022,7 +2034,7 @@ msgstr "更新硬件信息"
 #: assets/templates/assets/asset_detail.html:166
 #: authentication/templates/authentication/login_wait_confirm.html:42
 #: elastics/models/index.py:76
-#: elastics/templates/elastics/meta_info_detail.html:160
+#: elastics/templates/elastics/meta_info_detail.html:163
 msgid "Refresh"
 msgstr "刷新"
 
@@ -2546,8 +2558,12 @@ msgstr "原因"
 #: elastics/templates/elastics/index_list.html:23
 #: elastics/templates/elastics/node_list.html:79
 #: elastics/templates/elastics/node_stats_indices_detail.html:68
-#: scaling/models/asset_expansion.py:67 scaling/models/balanced.py:37
-#: scaling/models/diskinfo.py:62 scaling/templates/scaling/assets_list.html:24
+#: scaling/models/asset_expansion.py:68 scaling/models/balanced.py:38
+#: scaling/models/diskinfo.py:57
+#: scaling/templates/scaling/asset_detail.html:104
+#: scaling/templates/scaling/assets_list.html:24
+#: scaling/templates/scaling/disk_detail.html:83
+#: scaling/templates/scaling/disk_list.html:58
 #: tickets/templates/tickets/ticket_detail.html:34
 #: tickets/templates/tickets/ticket_list.html:36
 #: tickets/templates/tickets/ticket_list.html:104
@@ -2990,8 +3006,8 @@ msgstr ""
 msgid "AlterWeaken"
 msgstr "告警"
 
-#: elastics/models/cloudinfor.py:47 scaling/models/asset_expansion.py:68
-#: templates/_nav.html:92
+#: elastics/models/cloudinfor.py:47 scaling/models/asset_expansion.py:69
+#: scaling/templates/scaling/asset_detail.html:108 templates/_nav.html:92
 msgid "CloudInfor"
 msgstr "云管中心"
 
@@ -3409,24 +3425,24 @@ msgid "IndiceNode"
 msgstr ""
 
 #: elastics/models/metainfo.py:32
-#: elastics/templates/elastics/meta_info_detail.html:69
+#: elastics/templates/elastics/meta_info_detail.html:72
 #: elastics/templates/elastics/meta_info_list.html:22
 msgid "Env"
 msgstr "环境"
 
 #: elastics/models/metainfo.py:36
-#: elastics/templates/elastics/meta_info_detail.html:85
+#: elastics/templates/elastics/meta_info_detail.html:88
 #: elastics/templates/elastics/meta_info_list.html:24
 msgid "Kibana addr"
 msgstr "kibana地址"
 
 #: elastics/models/metainfo.py:37
-#: elastics/templates/elastics/meta_info_detail.html:89
+#: elastics/templates/elastics/meta_info_detail.html:92
 msgid "Kafka addr"
 msgstr "kafka地址"
 
 #: elastics/models/metainfo.py:39
-#: elastics/templates/elastics/meta_info_detail.html:93
+#: elastics/templates/elastics/meta_info_detail.html:96
 #: elastics/templates/elastics/meta_info_list.html:25
 #: scaling/templates/scaling/assets_list.html:27
 msgid "Cloud"
@@ -3444,15 +3460,15 @@ msgstr "告警"
 #: elastics/models/metainfo.py:45
 #: elastics/templates/elastics/cluster_remote_list.html:46
 #: elastics/templates/elastics/meta_info_create_update.html:71
-#: elastics/templates/elastics/meta_info_detail.html:121
-#: elastics/templates/elastics/meta_info_detail.html:266
+#: elastics/templates/elastics/meta_info_detail.html:124
+#: elastics/templates/elastics/meta_info_detail.html:269
 msgid "Remote cluster"
 msgstr "远程集群"
 
 #: elastics/models/metainfo.py:46
 #: elastics/templates/elastics/meta_info_create_update.html:79
-#: elastics/templates/elastics/meta_info_detail.html:125
-#: elastics/templates/elastics/meta_info_detail.html:282
+#: elastics/templates/elastics/meta_info_detail.html:128
+#: elastics/templates/elastics/meta_info_detail.html:285
 msgid "Sync across clusters"
 msgstr "跨集群同步"
 
@@ -3465,16 +3481,18 @@ msgstr "源信息"
 msgid "test server network: {}"
 msgstr ""
 
+#: elastics/templates/elastics/_kibana_dsl.html:13
 #: elastics/templates/elastics/basic_cluster_list.html:18
-#: elastics/templates/elastics/cluster_dynamic_config.html:46
+#: elastics/templates/elastics/cluster_dynamic_config.html:44
 #: elastics/templates/elastics/cluster_remote_list.html:18
 #: elastics/templates/elastics/meta_info_detail.html:18
 #: elastics/templates/elastics/node_list.html:13 elastics/views/meteinfo.py:85
 msgid "Meta info detail"
 msgstr "源集群详情"
 
+#: elastics/templates/elastics/_kibana_dsl.html:16
 #: elastics/templates/elastics/basic_cluster_list.html:21
-#: elastics/templates/elastics/cluster_dynamic_config.html:52
+#: elastics/templates/elastics/cluster_dynamic_config.html:48
 #: elastics/templates/elastics/cluster_remote_list.html:21
 #: elastics/templates/elastics/meta_info_detail.html:21
 #: elastics/templates/elastics/node_list.html:16
@@ -3482,9 +3500,10 @@ msgstr "源集群详情"
 msgid "Dynamic configuration"
 msgstr "动态配置"
 
+#: elastics/templates/elastics/_kibana_dsl.html:19
 #: elastics/templates/elastics/basic_cluster_list.html:24
 #: elastics/templates/elastics/basic_cluster_list.html:46
-#: elastics/templates/elastics/cluster_dynamic_config.html:58
+#: elastics/templates/elastics/cluster_dynamic_config.html:52
 #: elastics/templates/elastics/cluster_remote_list.html:24
 #: elastics/templates/elastics/meta_info_detail.html:24
 #: elastics/templates/elastics/node_list.html:19
@@ -3492,8 +3511,9 @@ msgstr "动态配置"
 msgid "Basic cluster list"
 msgstr "基本集群信息"
 
+#: elastics/templates/elastics/_kibana_dsl.html:22
 #: elastics/templates/elastics/basic_cluster_list.html:27
-#: elastics/templates/elastics/cluster_dynamic_config.html:65
+#: elastics/templates/elastics/cluster_dynamic_config.html:57
 #: elastics/templates/elastics/cluster_remote_list.html:27
 #: elastics/templates/elastics/meta_info_detail.html:27
 #: elastics/templates/elastics/node_list.html:22
@@ -3501,8 +3521,9 @@ msgstr "基本集群信息"
 msgid "Cluster remote list"
 msgstr "跨集群列表"
 
+#: elastics/templates/elastics/_kibana_dsl.html:25
 #: elastics/templates/elastics/basic_cluster_list.html:30
-#: elastics/templates/elastics/cluster_dynamic_config.html:71
+#: elastics/templates/elastics/cluster_dynamic_config.html:61
 #: elastics/templates/elastics/cluster_remote_list.html:30
 #: elastics/templates/elastics/meta_info_detail.html:30
 #: elastics/templates/elastics/node_detail.html:37
@@ -3513,10 +3534,12 @@ msgstr "跨集群列表"
 msgid "Node list"
 msgstr "节点角色"
 
+#: elastics/templates/elastics/_kibana_dsl.html:28
 #: elastics/templates/elastics/basic_cluster_list.html:33
-#: elastics/templates/elastics/cluster_dynamic_config.html:76
+#: elastics/templates/elastics/cluster_dynamic_config.html:65
 #: elastics/templates/elastics/cluster_remote_list.html:33
-#: elastics/templates/elastics/node_list.html:28
+#: elastics/templates/elastics/meta_info_detail.html:36
+#: elastics/templates/elastics/node_list.html:28 elastics/views/meteinfo.py:110
 msgid "DSL"
 msgstr ""
 
@@ -3545,11 +3568,11 @@ msgstr "用于获取elastics节点的配置详情。"
 msgid "Create cloud info"
 msgstr "创建云信息"
 
-#: elastics/templates/elastics/cluster_dynamic_config.html:87
+#: elastics/templates/elastics/cluster_dynamic_config.html:75
 msgid "ROUTING"
 msgstr ""
 
-#: elastics/templates/elastics/cluster_dynamic_config.html:182
+#: elastics/templates/elastics/cluster_dynamic_config.html:170
 msgid "BREAKER"
 msgstr ""
 
@@ -3580,40 +3603,40 @@ msgstr "默认启用"
 msgid "Setting"
 msgstr "设置"
 
-#: elastics/templates/elastics/meta_info_detail.html:101
-#: elastics/templates/elastics/meta_info_detail.html:186
+#: elastics/templates/elastics/meta_info_detail.html:104
+#: elastics/templates/elastics/meta_info_detail.html:189
 msgid "Health check"
 msgstr "健康检查"
 
-#: elastics/templates/elastics/meta_info_detail.html:105
-#: elastics/templates/elastics/meta_info_detail.html:202
+#: elastics/templates/elastics/meta_info_detail.html:108
+#: elastics/templates/elastics/meta_info_detail.html:205
 msgid "Default Setting"
 msgstr "默认设置"
 
-#: elastics/templates/elastics/meta_info_detail.html:109
-#: elastics/templates/elastics/meta_info_detail.html:218
+#: elastics/templates/elastics/meta_info_detail.html:112
+#: elastics/templates/elastics/meta_info_detail.html:221
 msgid "Alter status"
 msgstr "告警状态"
 
-#: elastics/templates/elastics/meta_info_detail.html:113
-#: elastics/templates/elastics/meta_info_detail.html:234
+#: elastics/templates/elastics/meta_info_detail.html:116
+#: elastics/templates/elastics/meta_info_detail.html:237
 msgid "Index status"
 msgstr "索引状态"
 
-#: elastics/templates/elastics/meta_info_detail.html:117
-#: elastics/templates/elastics/meta_info_detail.html:250
+#: elastics/templates/elastics/meta_info_detail.html:120
+#: elastics/templates/elastics/meta_info_detail.html:253
 msgid "Node status"
 msgstr "节点状态"
 
-#: elastics/templates/elastics/meta_info_detail.html:151
+#: elastics/templates/elastics/meta_info_detail.html:154
 msgid "Basic check"
 msgstr "基本检查"
 
-#: elastics/templates/elastics/meta_info_detail.html:157
+#: elastics/templates/elastics/meta_info_detail.html:160
 msgid "Network check"
 msgstr "网络检查"
 
-#: elastics/templates/elastics/meta_info_detail.html:165
+#: elastics/templates/elastics/meta_info_detail.html:168
 msgid "Port connective"
 msgstr "端口可连接性探测"
 
@@ -3632,7 +3655,7 @@ msgstr "创建原集群"
 
 #: elastics/templates/elastics/node_detail.html:26
 #: elastics/templates/elastics/node_stats_indices_detail.html:20
-#: elastics/views/esnode.py:85
+#: elastics/views/esnode.py:84
 #, fuzzy
 #| msgid "Node list"
 msgid "Node indices"
@@ -3664,12 +3687,12 @@ msgstr "更新ssh密钥成功"
 #: elastics/views/basiccluster.py:104 elastics/views/cloudinfor.py:33
 #: elastics/views/cloudinfor.py:49 elastics/views/cloudinfor.py:66
 #: elastics/views/cloudinfor.py:80 elastics/views/clusterconfig.py:44
-#: elastics/views/esnode.py:45 elastics/views/esnode.py:61
-#: elastics/views/esnode.py:84 elastics/views/index.py:39
+#: elastics/views/esnode.py:45 elastics/views/esnode.py:60
+#: elastics/views/esnode.py:83 elastics/views/index.py:39
 #: elastics/views/index.py:53 elastics/views/index.py:144
 #: elastics/views/meteinfo.py:34 elastics/views/meteinfo.py:52
 #: elastics/views/meteinfo.py:69 elastics/views/meteinfo.py:84
-#: templates/_nav.html:89
+#: elastics/views/meteinfo.py:109 templates/_nav.html:89
 msgid "Elastics"
 msgstr "搜索引擎"
 
@@ -4495,187 +4518,230 @@ msgstr "远程应用授权用户列表"
 msgid "RemoteApp permission RemoteApp list"
 msgstr "远程应用授权远程应用列表"
 
-#: scaling/models/asset_expansion.py:40 scaling/models/balanced.py:27
+#: scaling/models/asset_expansion.py:41 scaling/models/balanced.py:28
+#: scaling/templates/scaling/asset_detail.html:52
 msgid "Instance name"
 msgstr "实例名"
 
-#: scaling/models/asset_expansion.py:42
+#: scaling/models/asset_expansion.py:43
+#: scaling/templates/scaling/asset_detail.html:174
 msgid "Cpu threads"
 msgstr "CPU线程数"
 
-#: scaling/models/asset_expansion.py:43
+#: scaling/models/asset_expansion.py:44
+#: scaling/templates/scaling/asset_detail.html:178
 #: scaling/templates/scaling/assets_list.html:23
 msgid "Virtual cpu"
 msgstr "虚拟CPU"
 
-#: scaling/models/asset_expansion.py:44
+#: scaling/models/asset_expansion.py:45
+#: scaling/templates/scaling/asset_detail.html:182
 msgid "Cpu core"
 msgstr "CPU核数"
 
-#: scaling/models/asset_expansion.py:45
+#: scaling/models/asset_expansion.py:46
+#: scaling/templates/scaling/asset_detail.html:197
 msgid "Number of data disks"
 msgstr "磁盘块数"
 
-#: scaling/models/asset_expansion.py:46
+#: scaling/models/asset_expansion.py:47
+#: scaling/templates/scaling/asset_detail.html:201
 msgid "Single disk size"
 msgstr "单块磁盘大小"
 
-#: scaling/models/asset_expansion.py:48
-msgid "Release"
-msgstr "已释放"
-
 #: scaling/models/asset_expansion.py:49
+#: scaling/templates/scaling/asset_detail.html:64
+msgid "Release"
+msgstr "发布版"
+
+#: scaling/models/asset_expansion.py:50
+#: scaling/templates/scaling/asset_detail.html:68
 msgid "Mirror image"
 msgstr "镜像"
 
-#: scaling/models/asset_expansion.py:50 scaling/models/balanced.py:35
+#: scaling/models/asset_expansion.py:51 scaling/models/balanced.py:36
+#: scaling/templates/scaling/asset_detail.html:72
 msgid "Vpc network"
 msgstr "VPC网络"
 
-#: scaling/models/asset_expansion.py:51
+#: scaling/models/asset_expansion.py:52
+#: scaling/templates/scaling/asset_detail.html:210
 msgid "Security group"
 msgstr "安全组"
 
-#: scaling/models/asset_expansion.py:52 scaling/models/balanced.py:28
+#: scaling/models/asset_expansion.py:53 scaling/models/balanced.py:29
+#: scaling/templates/scaling/asset_detail.html:76
 msgid "Virtual switch"
 msgstr "虚拟交换机"
 
-#: scaling/models/asset_expansion.py:53 scaling/models/balanced.py:34
+#: scaling/models/asset_expansion.py:54 scaling/models/balanced.py:35
+#: scaling/templates/scaling/asset_detail.html:80
 msgid "Instance type"
 msgstr "实例类型"
 
-#: scaling/models/asset_expansion.py:54
+#: scaling/models/asset_expansion.py:55
 msgid "Flexible ip"
 msgstr "弹性IP"
 
-#: scaling/models/asset_expansion.py:55
+#: scaling/models/asset_expansion.py:56
+#: scaling/templates/scaling/asset_detail.html:84
 msgid "Elastic ip bandwidth"
 msgstr "弹性ip带宽"
 
-#: scaling/models/asset_expansion.py:56
+#: scaling/models/asset_expansion.py:57
+#: scaling/templates/scaling/asset_detail.html:88
 msgid "Bandwidth billing method"
 msgstr "带宽计费方式"
 
-#: scaling/models/asset_expansion.py:59
+#: scaling/models/asset_expansion.py:60
+#: scaling/templates/scaling/asset_detail.html:155
 msgid "Private network card"
 msgstr "私有网卡"
 
-#: scaling/models/asset_expansion.py:60
+#: scaling/models/asset_expansion.py:61
+#: scaling/templates/scaling/asset_detail.html:159
 msgid "Private network card mac"
 msgstr "私有网卡mac"
 
-#: scaling/models/asset_expansion.py:61 scaling/models/balanced.py:36
-#: scaling/models/diskinfo.py:58
+#: scaling/models/asset_expansion.py:62 scaling/models/balanced.py:37
+#: scaling/models/diskinfo.py:54 scaling/templates/scaling/asset_detail.html:92
+#: scaling/templates/scaling/disk_detail.html:74
 msgid "Area"
 msgstr "区域"
 
-#: scaling/models/asset_expansion.py:62 scaling/models/diskinfo.py:49
+#: scaling/models/asset_expansion.py:63 scaling/models/diskinfo.py:49
+#: scaling/templates/scaling/asset_detail.html:96
+#: scaling/templates/scaling/disk_detail.html:59
 msgid "Availability zone"
 msgstr "可用区"
 
-#: scaling/models/asset_expansion.py:63 scaling/models/balanced.py:30
-#: scaling/models/diskinfo.py:47
+#: scaling/models/asset_expansion.py:64 scaling/models/balanced.py:31
+#: scaling/models/diskinfo.py:48
+#: scaling/templates/scaling/asset_detail.html:100
+#: scaling/templates/scaling/disk_detail.html:56
 msgid "Billing method"
 msgstr "计费方式"
 
-#: scaling/models/asset_expansion.py:64
+#: scaling/models/asset_expansion.py:65
 msgid "Operation and maintenance principal"
 msgstr "运维负责人"
 
-#: scaling/models/asset_expansion.py:65
+#: scaling/models/asset_expansion.py:66
 msgid "Development Director"
 msgstr "开发负责人"
 
-#: scaling/models/asset_expansion.py:66
+#: scaling/models/asset_expansion.py:67
 msgid "Department"
 msgstr "部门"
 
-#: scaling/models/asset_expansion.py:69 scaling/models/balanced.py:39
-#: scaling/models/diskinfo.py:64
+#: scaling/models/asset_expansion.py:70 scaling/models/balanced.py:40
+#: scaling/models/diskinfo.py:59
+#: scaling/templates/scaling/asset_detail.html:116
+#: scaling/templates/scaling/disk_detail.html:89
 msgid "Creation time"
 msgstr "创建时间"
 
-#: scaling/models/asset_expansion.py:70 scaling/models/diskinfo.py:63
+#: scaling/models/asset_expansion.py:71 scaling/models/diskinfo.py:58
+#: scaling/templates/scaling/asset_detail.html:120
+#: scaling/templates/scaling/disk_detail.html:86
 msgid "Expired"
 msgstr "过期时间"
 
-#: scaling/models/asset_expansion.py:71
+#: scaling/models/asset_expansion.py:72
+#: scaling/templates/scaling/asset_detail.html:124
 msgid "Start Time"
 msgstr "开始时间"
 
-#: scaling/models/asset_expansion.py:89
+#: scaling/models/asset_expansion.py:90
 #, fuzzy
 #| msgid "Asset permission"
 msgid "AssetExpansion"
 msgstr "资产授权"
 
-#: scaling/models/balanced.py:25
+#: scaling/models/balanced.py:26
 msgid "Instance id"
 msgstr "实例ID"
 
-#: scaling/models/balanced.py:29
+#: scaling/models/balanced.py:30
 #, fuzzy
 #| msgid "Enterprise edition"
 msgid "Enterprise Resource Group"
 msgstr "企业资源组"
 
-#: scaling/models/balanced.py:31
+#: scaling/models/balanced.py:32
 msgid "Main zone"
 msgstr "主区域"
 
-#: scaling/models/balanced.py:32
+#: scaling/models/balanced.py:33
 msgid "Backup zone"
 msgstr "备区域"
 
-#: scaling/models/balanced.py:33
+#: scaling/models/balanced.py:34
+#: scaling/templates/scaling/asset_detail.html:141
 msgid "Network Type"
 msgstr "网络类型"
 
-#: scaling/models/diskinfo.py:42
+#: scaling/models/balanced.py:49
+#, fuzzy
+#| msgid "Total index"
+msgid "Balanced"
+msgstr "总索引"
+
+#: scaling/models/diskinfo.py:44 scaling/templates/scaling/disk_detail.html:44
+#: scaling/templates/scaling/disk_list.html:52
 msgid "Disk id"
+msgstr "id"
+
+#: scaling/models/diskinfo.py:45 scaling/templates/scaling/disk_detail.html:47
+#: scaling/templates/scaling/disk_list.html:53
+msgid "Disk device"
+msgstr "驱动"
+
+#: scaling/models/diskinfo.py:46 scaling/templates/scaling/disk_detail.html:50
+#: scaling/templates/scaling/disk_list.html:54
+msgid "Disk type"
+msgstr "类型"
+
+#: scaling/models/diskinfo.py:47 scaling/templates/scaling/disk_detail.html:53
+#: scaling/templates/scaling/disk_list.html:55
+msgid "Disk size"
+msgstr "大小"
+
+#: scaling/models/diskinfo.py:50 scaling/templates/scaling/disk_detail.html:62
+#: scaling/templates/scaling/disk_list.html:56
+msgid "Assetexpansion"
+msgstr "关联资产"
+
+#: scaling/models/diskinfo.py:51 scaling/templates/scaling/disk_detail.html:65
+#: scaling/templates/scaling/disk_list.html:59
+msgid "Release method"
+msgstr "删除类型"
+
+#: scaling/models/diskinfo.py:52 scaling/templates/scaling/disk_detail.html:68
+msgid "Automatic snapshot strategy"
+msgstr "自动快照策略"
+
+#: scaling/models/diskinfo.py:53 scaling/templates/scaling/disk_detail.html:71
+msgid "Snapshot policy function"
+msgstr "快照策略功能"
+
+#: scaling/models/diskinfo.py:55 scaling/templates/scaling/disk_detail.html:77
+#: scaling/templates/scaling/disk_list.html:57
+msgid "Disk attributes"
+msgstr "属性"
+
+#: scaling/models/diskinfo.py:56 scaling/templates/scaling/disk_detail.html:80
+msgid "Whether to encrypt"
+msgstr "加密"
+
+#: scaling/models/diskinfo.py:72 scaling/templates/scaling/asset_detail.html:21
+#: scaling/templates/scaling/disk_list.html:15
+msgid "DiskInfo"
 msgstr "硬盘信息"
 
-#: scaling/models/diskinfo.py:43
-msgid "Disk device"
-msgstr "硬盘大小"
-
-#: scaling/models/diskinfo.py:44
-#, fuzzy
-#| msgid "Doc type"
-msgid "Disk type"
-msgstr "文档类型"
-
-#: scaling/models/diskinfo.py:45
-msgid "Disk size"
-msgstr "禁用用户"
-
-#: scaling/models/diskinfo.py:51
-#, fuzzy
-#| msgid "assets"
-msgid "assetexpansion"
-msgstr "资产管理"
-
-#: scaling/models/diskinfo.py:53
-#, fuzzy
-#| msgid "Released"
-msgid "Release method"
-msgstr "已释放"
-
-#: scaling/models/diskinfo.py:55
-msgid "Automatic snapshot strategy"
-msgstr ""
-
-#: scaling/models/diskinfo.py:57
-msgid "Snapshot policy function"
-msgstr ""
-
-#: scaling/models/diskinfo.py:59
-msgid "Disk attributes"
-msgstr ""
-
-#: scaling/models/diskinfo.py:60
-msgid "Whether to encrypt"
-msgstr ""
+#: scaling/templates/scaling/asset_detail.html:191
+msgid "Storage"
+msgstr "存储"
 
 #: scaling/templates/scaling/assets_list.html:4
 msgid "Display all asset information on the cloud, "
@@ -4693,9 +4759,34 @@ msgstr "关机"
 msgid "Bootup"
 msgstr "开机"
 
-#: scaling/views/assetexpansion.py:33 templates/_nav.html:39
+#: scaling/templates/scaling/disk_detail.html:16
+#: scaling/templates/scaling/disk_detail.html:26
+#: scaling/views/assetexpansion.py:86
+msgid "Disk detail"
+msgstr "磁盘详情"
+
+#: scaling/templates/scaling/disk_list.html:25
+#: scaling/views/assetexpansion.py:71
+msgid "Disk list"
+msgstr "磁盘列表"
+
+#: scaling/templates/scaling/disk_list.html:44
+msgid "Add disk"
+msgstr "添加磁盘"
+
+#: scaling/templates/scaling/disk_list.html:90
+msgid "Uninstall"
+msgstr "卸载"
+
+#: scaling/views/assetexpansion.py:34 scaling/views/assetexpansion.py:51
+#: scaling/views/assetexpansion.py:70 scaling/views/assetexpansion.py:85
+#: templates/_nav.html:39
 msgid "Scaling"
 msgstr "云上资源"
+
+#: scaling/views/assetexpansion.py:52
+msgid "Assets detail"
+msgstr "资产详情"
 
 #: settings/api.py:33
 msgid "Test mail sent to {}, please check"
@@ -7087,6 +7178,22 @@ msgstr "用户授权远程应用"
 msgid "User granted DatabaseApp"
 msgstr "用户授权数据库应用"
 
+#~ msgid "Create disk"
+#~ msgstr "创建磁盘"
+
+#~ msgid "Create Disk"
+#~ msgstr "创建磁盘"
+
+#, fuzzy
+#~| msgid "Disk type"
+#~ msgid "disk_type"
+#~ msgstr "类型"
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "状态"
+
 #, fuzzy
 #~| msgid "CPU vcpus"
 #~ msgid "Cpu vcpus"
@@ -7432,9 +7539,6 @@ msgstr "用户授权数据库应用"
 #~ msgid "Asset user"
 #~ msgstr "资产用户"
 
-#~ msgid "Create task"
-#~ msgstr "创建任务"
-
 #~ msgid "Periodic"
 #~ msgstr "定时执行"
 
@@ -7569,9 +7673,6 @@ msgstr "用户授权数据库应用"
 
 #~ msgid "Org users"
 #~ msgstr "组织用户"
-
-#~ msgid "Add admin"
-#~ msgstr "添加管理员"
 
 #~ msgid "Add auditor"
 #~ msgstr "添加审计员"
@@ -7964,9 +8065,6 @@ msgstr "用户授权数据库应用"
 
 #~ msgid "Task update"
 #~ msgstr "更新"
-
-#~ msgid "Task create"
-#~ msgstr "创建"
 
 #~ msgid "%(hostname)s was %(action)s successfully"
 #~ msgstr "%(hostname)s %(action)s成功"

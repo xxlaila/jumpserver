@@ -14,6 +14,7 @@ from rest_framework import serializers
 
 class AssetExpansionSerializer(BulkOrgResourceModelSerializer):
     cloudinfor_display = serializers.ReadOnlyField()
+    # disk_count = serializers.SerializerMethodField()
 
     class Meta:
         model = AssetExpansion

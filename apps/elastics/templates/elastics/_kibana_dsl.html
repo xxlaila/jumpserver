@@ -24,7 +24,7 @@
                             <li>
                                 <a href="{% url 'elastics:node-list' pk=object.id %}" class="text-center"><i class="fa fa-server"></i> {% trans 'Node list' %}</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a class="text-center"  href="{% url 'elastics:cluster-dsl' pk=object.id %}" ><i class="fa fa-link"></i> {% trans 'DSL' %}</a>
                             </li>
                         </ul>

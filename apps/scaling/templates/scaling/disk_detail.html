@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block custom_head_css_js %}
+    <link rel="stylesheet" href="{% static 'css/customize/three-columns.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="{% url 'scaling:disk-detail' pk=object.id %}" class="text-center"><i class="fa fa-laptop"></i> {% trans 'Disk detail' %}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="col-sm-12" style="padding-left: 0;">
+                        <div class="" id="content_start">
+                        </div>
+                        <div class="ibox float-e-margins disabled">
+                            <div class="ibox-title">
+                                <span style="float: left"><b>{% trans 'Disk detail' %}</b></span>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle"
+                                       data-toggle="dropdown" href="#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Disk id' %} </span>: {{ object.diskid }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Disk device' %} </span>: {{ object.device }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Disk type' %} </span>: {{ object.get_category_display }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Disk size' %} </span>: {{ object.disk_size }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Billing method' %} </span>: {{ object.get_chargetype_display }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Availability zone' %} </span>: {{ object.zoneid }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Assetexpansion' %} </span>: {{ object.assetexpansion.hostname }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Release method' %} </span>: {{ object.get_delwith_display }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Automatic snapshot strategy' %} </span>: {{ object.get_snapshot_display }}</p>
+                                </div>
+                                 <div class="box">
+                                    <p><span class="font1">{% trans 'Snapshot policy function' %} </span>: {{ object.get_autoanspshot_display }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Area' %} </span>: {{ object.regionid }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Disk attributes' %} </span>: {{ object.get_disk_type_display }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Whether to encrypt' %} </span>: {{ object.encrypted }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Status' %} </span>: {{ object.get_status_display }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Expired' %} </span>: {{ object.expired_time }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Creation time' %} </span>: {{ object.create_time }}</p>
+                                </div>
+                                <div class="box">
+                                    <p><span class="font1">{% trans 'Date updated' %} </span>: {{ object.update_data|date:"Y-m-j H:i:s" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block content_bottom_left %}{% endblock %}
+{% block custom_foot_js %}
+<script>
+</script>
+
+{% endblock %}

@@ -13,21 +13,22 @@ from django.utils.translation import ugettext_lazy as _
 from ..models.asset_expansion import CTYPE_CHOICES, CATEGORY_CHOICES
 from ..models.asset_expansion import AssetExpansion
 from orgs.mixins.models import OrgModelMixin
+from common.utils import lazyproperty
 
 __all__ = ['DiskInfo']
 logger = logging.getLogger(__name__)
 
 DEL_TYPE_CHOICES = (
-    ("false", "保留不释放"),
-    ("true", "随实例释放")
+    ("False", "保留不释放"),
+    ("True", "随实例释放")
 )
 END_SANPSHOT_CHOICES = (
-    ("true", "启用"),
-    ("false", "未启用")
+    ("True", "启用"),
+    ("False", "未启用")
 )
 SNAPSHOT_POLICY_CHOICES = (
-    ("true", "已设置"),
-    ("false", "未设置")
+    ("True", "已设置"),
+    ("False", "未设置")
 )
 DISK_STATUS_CHOICES = (
     ("In_use", "使用中"),
@@ -61,6 +62,10 @@ class DiskInfo(OrgModelMixin):
 
     def __int__(self):
         return '{0.diskid}({0.device})'.format(self)
+
+    @lazyproperty
+    def assetexpansion_display(self):
+        return self.assetexpansion.hostname
 
     class Meta:
         ordering = ['create_time']
