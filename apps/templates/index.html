@@ -7,23 +7,23 @@
         <div class="col-sm-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-success pull-right">Users</span>
-                    <h5>{% trans 'Total users' %}</h5>
+                    <span class="label label-success pull-right">Meteinfo</span>
+                    <h5>{% trans 'Total Cluster' %}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><a href="{% url 'users:user-list' %}"><span id="total_count_users"></span></a></h1>
-                    <small>All users</small>
+                    <h1 class="no-margins"><a href="{% url 'elastics:meta-info-list' %}"><span id="total_count_users"></span></a></h1>
+                    <small>All cluster</small>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-info pull-right">Assets</span>
+                    <span class="label label-info pull-right">Node</span>
                     <h5>{% trans 'Total assets' %}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><a href="{% url 'assets:asset-list' %}"><span id="total_count_assets"></span></a></h1>
+                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"><span id="total_count_assets"></span></a></h1>
                     <small>All assets</small>
                 </div>
             </div>

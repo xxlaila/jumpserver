@@ -26,13 +26,15 @@ urlpatterns = [
     path('meta-info/<uuid:pk>/basiccluster/', views.BasicClusterListView.as_view(), name='basic-cluster-list'),
     path('meta-info/<uuid:pk>/dynamicconfig/', views.ClusterDynamicConfigView.as_view(), name='cluster-dynamic-config'),
     path('meta-info/<uuid:pk>/cluterremote/', views.ClusterRemoteListView.as_view(), name='cluster-remote-list'),
-    path('meta-info/<uuid:pk>/node/', views.NodeListView.as_view(), name='node-list'),
+    path('meta-info/<uuid:pk>/node/', views.MetainfoNodeListView.as_view(), name='meta-node-list'),
+    path('node/', views.NodeListView.as_view(), name='node-list'),
     path('node/<uuid:pk>/', views.NodeDetailView.as_view(), name='node-detail'),
     path('node/<uuid:pk>/update/', views.NodeUpdateView.as_view(), name='node-update'),
     path('meta-info/<uuid:pk>/routing/', views.ClusterRouteringView.as_view(), name='setting-routing'),
     path('meta-info/<uuid:pk>/dsl/', views.KibanaDslView.as_view(), name='cluster-dsl'),
-    
+
     path('node/<uuid:pk>/nodeindice/', views.NodeIndiceListView.as_view(), name='node-indice-list'),
+    path('malfunction/', views.MalfunctionListView.as_view(), name='malfunction-list'),
     
     path('node/<uuid:pk>/online/', views.NodeOnlineView.as_view(), name='node-online'),
     path('cluterremote/<uuid:pk>/update/', views.ClusterRemoteInfoUpdateView.as_view(), name='cluster-remote-update'),

@@ -57,8 +57,9 @@ function initTable() {
              }}],
         ajax_url: '{% url "api-scaling:disk-list" %}',
         columns: [
-            {data: "id" }, {data: "diskid"}, {data: "device"}, {data: "get_category_display"}, {data: "disk_size"},
-            {data: "assetexpansion_display"}, {data: "get_disk_type_display"}, {data: "get_status_display"},
+            {data: "id" }, {data: "diskid"}, {data: "device"}, {data: "get_category_display", orderable: false},
+            {data: "disk_size"}, {data: "assetexpansion_display", orderable: false},
+            {data: "get_disk_type_display", orderable: false}, {data: "get_status_display", orderable: false},
             {data: "id", orderable: false}
         ]
     };

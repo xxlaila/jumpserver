@@ -8,6 +8,7 @@ from collections import Counter
 
 from users.models import User
 from assets.models import Asset
+from elastics.models import MetaInfo, EsNode
 from terminal.models import Session
 from orgs.utils import current_org
 from common.permissions import IsOrgAdmin
@@ -210,6 +211,14 @@ class TotalCountMixin:
         return current_org.get_org_members().count()
 
     @staticmethod
+    def get_total_count_metainfo():
+        return MetaInfo.objects.all().count()
+
+    @staticmethod
+    def get_total_count_es_nodes():
+        return EsNode.objects.all().count()
+
+    @staticmethod
     def get_total_count_assets():
         return Asset.objects.all().count()
 
@@ -236,8 +245,8 @@ class IndexApi(TotalCountMixin, WeekSessionMetricMixin, MonthLoginMetricMixin, A
 
         if _all or query_params.get('total_count'):
             data.update({
-                'total_count_assets': self.get_total_count_assets(),
-                'total_count_users': self.get_total_count_users(),
+                'total_count_assets': self.get_total_count_es_nodes(),
+                'total_count_users': self.get_total_count_metainfo(),
                 'total_count_online_users': self.get_total_count_online_users(),
                 'total_count_online_sessions': self.get_total_count_online_sessions(),
             })

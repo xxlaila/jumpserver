@@ -9,7 +9,6 @@
 from django.views.generic import (
     TemplateView, CreateView, UpdateView, DeleteView, DetailView
 )
-from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from common.permissions import PermissionsMixin, IsOrgAdmin
@@ -19,19 +18,28 @@ from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
 from ..utils import get_nodes_connenct, exclude_node, get_node_stats
-from django.shortcuts import (
-    render, redirect
-)
-from django.shortcuts import get_object_or_404, reverse
 
 __all__ = (
     "NodeListView", "NodeDetailView", "NodeUpdateView", "NodeOnlineView",
-    "NodeIndiceListView"
+    "NodeIndiceListView", 'MetainfoNodeListView'
 )
 logger = get_logger(__name__)
 
-class NodeListView(PermissionsMixin, SingleObjectMixin, TemplateView):
+class NodeListView(PermissionsMixin,TemplateView):
+    model = EsNode
     template_name = 'elastics/node_list.html'
+    permission_classes = [IsOrgAdmin]
+
+    def get_context_data(self, **kwargs):
+        context = {
+            'app': _('Elastics'),
+            'action': _('Node list'),
+        }
+        kwargs.update(context)
+        return super().get_context_data(**kwargs)
+
+class MetainfoNodeListView(PermissionsMixin, SingleObjectMixin, TemplateView):
+    template_name = 'elastics/meta_node_list.html'
     model = MetaInfo
     object = None
     permission_classes = [IsOrgAdmin]
@@ -91,7 +99,7 @@ class NodeIndiceListView(PermissionsMixin, SingleObjectMixin, TemplateView):
 class NodeUpdateView(SingleObjectMixin, APIView):
     model = MetaInfo
     success_url = reverse_lazy('api-elastics:node-list')
-    template_name = 'elastics/node_list.html'
+    template_name = 'elastics/meta_node_list.html'
     success_message = update_success_msg
     permission_classes = [IsOrgAdmin]
     

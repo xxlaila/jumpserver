@@ -11,3 +11,4 @@ from .basiccluster import *
 from .esnode import *
 from .checkserver import *
 from .index import *
+from .malfunction import *

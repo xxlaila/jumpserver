@@ -32,8 +32,6 @@ class MetaInfoListView(PermissionsMixin,TemplateView):
     def get_context_data(self, **kwargs):
         context = {
             'app': _('Elastics'),
-            # 'labels': Label.objects.all().order_by('name'),
-            # 'cloud': CloudInfor.objects.all().order_by('name'),
             'action': _('Meta info list'),
         }
         kwargs.update(context)

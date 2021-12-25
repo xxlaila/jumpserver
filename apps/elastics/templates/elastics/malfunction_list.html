@@ -1,7 +1,9 @@
+
 {% extends '_base_list.html' %}
 {% load i18n static %}
 {% block help_message %}
-    {% trans 'Display node information of all clusters, '%}
+    {% trans 'Display all current fault information,'%}
+    {% trans 'Carry out and follow up on the failure, so that the failure can be traced,'%}
 {% endblock %}
 {% block table_search %}
     {% include '_csv_import_export.html' %}
@@ -9,7 +11,6 @@
 
 {% block table_container %}
 <div class="uc pull-left m-r-5">
-{#    <a href="{% url "elastics:meta-info-create" %}" class="btn btn-sm btn-primary"> {% trans "Create meta info" %} </a>#}
 </div>
 <table class="table table-striped table-bordered table-hover " id="meta_info_list_table" >
     <thead>
@@ -18,14 +19,10 @@
                 <input type="checkbox" id="check_all" class="ipt_check_all" >
             </th>
             <th class="text-center">{% trans 'Name' %}</th>
-            <th class="text-center">{% trans 'IP' %}</th>
-            <th class="text-center">{% trans 'Disk total' %}</th>
-            <th class="text-center">{% trans 'Total memory' %}</th>
-            <th class="text-center">{% trans 'Running uptime' %}</th>
-            <th class="text-center">{% trans 'Version' %}</th>
-            <th class="text-center">{% trans 'Jdk version' %}</th>
-            <th class="text-center">{% trans 'Http monitoring' %}</th>
+            <th class="text-center">{% trans 'Comment' %}</th>
             <th class="text-center">{% trans 'Status' %}</th>
+            <th class="text-center">{% trans 'Metainfo' %}</th>
+            <th class="text-center">{% trans 'Created by' %}</th>
             <th class="text-center">{% trans 'Action' %}</th>
         </tr>
     </thead>
@@ -43,19 +40,18 @@ function initTable() {
         columnDefs: [
             {targets: 1, render: function (cellData, tp, rowData, meta) {
                 cellData = htmlEscape(cellData);
-                var detail_btn = '<a href="{% url "elastics:node-detail" pk=DEFAULT_PK %}">' + cellData + '</a>';
+                var detail_btn = '<a href="#">' + cellData + '</a>';
                 return detail_btn.replace('{{ DEFAULT_PK }}', rowData.id);
             }},
-            {targets: 10, createdCell: function (td, cellData, rowData) {
+            {targets: 6, createdCell: function (td, cellData, rowData) {
                 var update_btn = '<a href="#" class="btn btn-xs m-l-xs btn-info">{% trans "Update" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
                 var del_btn = '<a class="btn btn-xs btn-danger m-l-xs btn_meta_info_delete" data-uid="{{ DEFAULT_PK }}">{% trans "Delete" %}</a>'.replace('{{ DEFAULT_PK }}', cellData);
                 $(td).html(update_btn + del_btn)
              }}],
-        ajax_url: '{% url "api-elastics:node-list" %}',
+        ajax_url: '{% url "api-elastics:malfunction-list" %}',
         columns: [
-            {data: "id"}, {data: "name" }, {data: 'ip'}, {data: 'disktotal'}, {data: "rammax"},
-            {data: "uptime"}, {data: "version" },{data: "jdk" },{data: "http_address" }, {data: "status"},
-            {data: "id", orderable: false}
+            {data: "id"}, {data: "name" }, {data: 'comment'}, {data: 'status'}, {data: "metainfo_base"},
+            {data: "created_by"}, {data: "id", orderable: false}
         ],
         op_html: $('#actions').html()
     };

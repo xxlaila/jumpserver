@@ -27,7 +27,7 @@
                                 <a href="{% url 'elastics:cluster-remote-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-gavel"></i> {% trans 'Cluster remote list' %} </a>
                             </li>
                             <li>
-                                <a href="{% url 'elastics:node-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-server"></i> {% trans 'Node list' %} </a>
+                                <a href="{% url 'elastics:meta-node-list' pk=meteinfo.id %}" class="text-center"><i class="fa fa-server"></i> {% trans 'Node list' %} </a>
                             </li>
                             <li class="pull-right">
                                 <a class="btn btn-outline btn-default" href="{% url 'elastics:meta-info-update' pk=meteinfo.id %}"><i class="fa fa-edit"></i>{% trans 'Update' %}</a>

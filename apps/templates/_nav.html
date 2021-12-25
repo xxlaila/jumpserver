@@ -92,8 +92,9 @@
         <ul class="nav nav-second-level">
             <li id="cloud"><a href="{% url 'elastics:cloud-info-list' %}">{% trans 'CloudInfor' %}</a></li>
             <li id="meta"><a href="{% url 'elastics:meta-info-list' %}">{% trans 'MetaInfo Cluster' %}</a></li>
-            <li id="meta"><a href="{% url 'elastics:index-list' %}">{% trans 'Index management' %}</a></li>
-            <li id="meta"><a href="{% url 'elastics:meta-info-list' %}">{% trans 'Failure center' %}</a></li>
+            <li id="esnode"><a href="{% url 'elastics:node-list' %}">{% trans 'Node management' %}</a></li>
+            <li id="index"><a href="{% url 'elastics:index-list' %}">{% trans 'Index management' %}</a></li>
+            <li id="malfunction"><a href="{% url 'elastics:malfunction-list' %}">{% trans 'Malfunction list' %}</a></li>
         </ul>
     </li>
 {% endif %}
