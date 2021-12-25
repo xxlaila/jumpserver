@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 10:03+0800\n"
+"POT-Creation-Date: 2021-12-23 17:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -271,8 +271,8 @@ msgstr "备注"
 #: perms/templates/perms/database_app_permission_detail.html:22
 #: perms/templates/perms/database_app_permission_list.html:17
 #: perms/templates/perms/database_app_permission_user.html:23
-#: perms/utils/database_app_permission.py:77 templates/_nav.html:79
-#: templates/_nav.html:114 templates/_nav_user.html:22
+#: perms/utils/database_app_permission.py:77 templates/_nav.html:80
+#: templates/_nav.html:115 templates/_nav_user.html:22
 #: users/templates/users/user_database_app_permission.html:39
 #: users/templates/users/user_database_app_permission.html:64
 msgid "DatabaseApp"
@@ -356,8 +356,8 @@ msgstr "创建日期"
 #: perms/templates/perms/remote_app_permission_list.html:17
 #: perms/templates/perms/remote_app_permission_remote_app.html:22
 #: perms/templates/perms/remote_app_permission_user.html:22
-#: perms/utils/remote_app_permission.py:76 templates/_nav.html:77
-#: templates/_nav.html:110 templates/_nav_user.html:16
+#: perms/utils/remote_app_permission.py:76 templates/_nav.html:78
+#: templates/_nav.html:111 templates/_nav_user.html:16
 #: users/templates/users/user_remote_app_permission.html:39
 #: users/templates/users/user_remote_app_permission.html:64
 msgid "RemoteApp"
@@ -620,7 +620,8 @@ msgstr "创建数据库应用"
 #: perms/templates/perms/database_app_permission_user.html:54
 #: perms/templates/perms/remote_app_permission_list.html:20
 #: scaling/templates/scaling/assets_list.html:28
-#: scaling/templates/scaling/disk_list.html:60
+#: scaling/templates/scaling/disk_asset_list.html:60
+#: scaling/templates/scaling/disk_list.html:28
 #: terminal/templates/terminal/base_storage_list.html:34
 #: terminal/templates/terminal/session_list.html:34
 #: terminal/templates/terminal/terminal_list.html:37
@@ -670,7 +671,7 @@ msgstr "数据库应用列表"
 #: applications/views/database_app.py:68 applications/views/database_app.py:83
 #: applications/views/database_app.py:99 applications/views/remote_app.py:28
 #: applications/views/remote_app.py:68 applications/views/remote_app.py:96
-#: applications/views/remote_app.py:112 templates/_nav.html:73
+#: applications/views/remote_app.py:112 templates/_nav.html:74
 msgid "Applications"
 msgstr "应用管理"
 
@@ -733,7 +734,8 @@ msgstr "节点"
 #: elastics/templates/elastics/cloud_info_list.html:63
 #: elastics/templates/elastics/meta_info_list.html:65
 #: scaling/templates/scaling/assets_list.html:71
-#: scaling/templates/scaling/disk_list.html:106 templates/_nav.html:57
+#: scaling/templates/scaling/disk_asset_list.html:106
+#: scaling/templates/scaling/disk_list.html:70 templates/_nav.html:58
 msgid "Admin user"
 msgstr "管理用户"
 
@@ -1096,7 +1098,7 @@ msgstr "主机名原始"
 #: assets/models/asset.py:223 assets/templates/assets/asset_create.html:46
 #: assets/templates/assets/asset_detail.html:220 elastics/models/metainfo.py:48
 #: elastics/templates/elastics/meta_info_detail.html:100
-#: elastics/templates/elastics/meta_info_detail.html:306 templates/_nav.html:59
+#: elastics/templates/elastics/meta_info_detail.html:306 templates/_nav.html:60
 msgid "Labels"
 msgstr "标签管理"
 
@@ -1391,7 +1393,7 @@ msgstr "手动登录"
 #: assets/views/platform.py:58 assets/views/platform.py:74
 #: assets/views/system_user.py:30 assets/views/system_user.py:47
 #: assets/views/system_user.py:64 assets/views/system_user.py:80
-#: templates/_nav.html:52
+#: templates/_nav.html:53
 msgid "Assets"
 msgstr "资产管理"
 
@@ -1450,7 +1452,7 @@ msgstr "SFTP根路径"
 #: perms/templates/perms/database_app_permission_list.html:18
 #: perms/templates/perms/remote_app_permission_detail.html:126
 #: perms/templates/perms/remote_app_permission_list.html:18
-#: templates/_nav.html:58 terminal/backends/command/models.py:20
+#: templates/_nav.html:59 terminal/backends/command/models.py:20
 #: terminal/models.py:189 terminal/templates/terminal/command_list.html:32
 #: terminal/templates/terminal/command_list.html:107
 #: terminal/templates/terminal/session_detail.html:56
@@ -1705,7 +1707,7 @@ msgstr "启用多因子认证"
 #: assets/templates/assets/system_user_assets.html:26
 #: assets/templates/assets/system_user_detail.html:18
 #: assets/templates/assets/system_user_users.html:25 assets/views/asset.py:38
-#: templates/_nav.html:42 templates/_nav.html:55
+#: templates/_nav.html:42 templates/_nav.html:56
 msgid "Asset list"
 msgstr "资产列表"
 
@@ -1889,13 +1891,13 @@ msgstr "其它"
 #: assets/templates/assets/asset_asset_user_list.html:13
 #: assets/templates/assets/asset_detail.html:18 assets/views/asset.py:200
 #: scaling/templates/scaling/asset_detail.html:18
-#: scaling/templates/scaling/disk_list.html:12
+#: scaling/templates/scaling/disk_asset_list.html:12
 msgid "Asset detail"
 msgstr "资产详情"
 
 #: assets/templates/assets/admin_user_assets.html:16
 #: assets/templates/assets/admin_user_detail.html:16
-#: scaling/views/assetexpansion.py:35
+#: scaling/views/assetexpansion.py:33
 msgid "Assets list"
 msgstr "资产列表"
 
@@ -2388,7 +2390,7 @@ msgstr "创建命令过滤器规则"
 msgid "Update command filter rule"
 msgstr "更新命令过滤器规则"
 
-#: assets/views/domain.py:32 templates/_nav.html:56
+#: assets/views/domain.py:32 templates/_nav.html:57
 msgid "Domain list"
 msgstr "网域列表"
 
@@ -2420,7 +2422,7 @@ msgstr "提示: 请避免使用内部预留标签名: {}"
 msgid "Update label"
 msgstr "更新标签"
 
-#: assets/views/platform.py:23 templates/_nav.html:62
+#: assets/views/platform.py:23 templates/_nav.html:63
 msgid "Platform list"
 msgstr "平台列表"
 
@@ -2562,8 +2564,9 @@ msgstr "原因"
 #: scaling/models/diskinfo.py:57
 #: scaling/templates/scaling/asset_detail.html:104
 #: scaling/templates/scaling/assets_list.html:24
+#: scaling/templates/scaling/disk_asset_list.html:58
 #: scaling/templates/scaling/disk_detail.html:83
-#: scaling/templates/scaling/disk_list.html:58
+#: scaling/templates/scaling/disk_list.html:27
 #: tickets/templates/tickets/ticket_detail.html:34
 #: tickets/templates/tickets/ticket_list.html:36
 #: tickets/templates/tickets/ticket_list.html:104
@@ -2628,23 +2631,23 @@ msgid "Handlers"
 msgstr "操作者"
 
 #: audits/views.py:86 audits/views.py:131 audits/views.py:168
-#: audits/views.py:213 audits/views.py:245 templates/_nav.html:174
+#: audits/views.py:213 audits/views.py:245 templates/_nav.html:175
 msgid "Audits"
 msgstr "日志审计"
 
-#: audits/views.py:87 templates/_nav.html:178
+#: audits/views.py:87 templates/_nav.html:179
 msgid "FTP log"
 msgstr "FTP日志"
 
-#: audits/views.py:132 templates/_nav.html:179
+#: audits/views.py:132 templates/_nav.html:180
 msgid "Operate log"
 msgstr "操作日志"
 
-#: audits/views.py:169 templates/_nav.html:180
+#: audits/views.py:169 templates/_nav.html:181
 msgid "Password change log"
 msgstr "改密日志"
 
-#: audits/views.py:214 templates/_nav.html:177
+#: audits/views.py:214 templates/_nav.html:178
 msgid "Login log"
 msgstr "登录日志"
 
@@ -3007,7 +3010,7 @@ msgid "AlterWeaken"
 msgstr "告警"
 
 #: elastics/models/cloudinfor.py:47 scaling/models/asset_expansion.py:69
-#: scaling/templates/scaling/asset_detail.html:108 templates/_nav.html:92
+#: scaling/templates/scaling/asset_detail.html:108 templates/_nav.html:93
 msgid "CloudInfor"
 msgstr "云管中心"
 
@@ -3692,7 +3695,7 @@ msgstr "更新ssh密钥成功"
 #: elastics/views/index.py:53 elastics/views/index.py:144
 #: elastics/views/meteinfo.py:34 elastics/views/meteinfo.py:52
 #: elastics/views/meteinfo.py:69 elastics/views/meteinfo.py:84
-#: elastics/views/meteinfo.py:109 templates/_nav.html:89
+#: elastics/views/meteinfo.py:109 templates/_nav.html:90
 msgid "Elastics"
 msgstr "搜索引擎"
 
@@ -4125,7 +4128,7 @@ msgstr "磁盘使用率超过 80%: {} => {}"
 msgid "Ops"
 msgstr "作业中心"
 
-#: ops/views/adhoc.py:32 templates/_nav.html:152
+#: ops/views/adhoc.py:32 templates/_nav.html:153
 msgid "Task list"
 msgstr "任务列表"
 
@@ -4207,7 +4210,7 @@ msgstr "上传下载"
 msgid "Actions"
 msgstr "动作"
 
-#: perms/models/asset_permission.py:87 templates/_nav.html:106
+#: perms/models/asset_permission.py:87 templates/_nav.html:107
 #: tickets/templates/tickets/ticket_list.html:22
 #: users/templates/users/_user_detail_nav_header.html:31
 #: users/views/user.py:221
@@ -4442,7 +4445,7 @@ msgstr "添加用户组"
 #: perms/views/remote_app_permission.py:66
 #: perms/views/remote_app_permission.py:84
 #: perms/views/remote_app_permission.py:116
-#: perms/views/remote_app_permission.py:149 templates/_nav.html:103
+#: perms/views/remote_app_permission.py:149 templates/_nav.html:104
 msgid "Perms"
 msgstr "权限管理"
 
@@ -4687,33 +4690,44 @@ msgstr "网络类型"
 msgid "Balanced"
 msgstr "总索引"
 
-#: scaling/models/diskinfo.py:44 scaling/templates/scaling/disk_detail.html:44
-#: scaling/templates/scaling/disk_list.html:52
+#: scaling/models/diskinfo.py:44
+#: scaling/templates/scaling/disk_asset_list.html:52
+#: scaling/templates/scaling/disk_detail.html:44
+#: scaling/templates/scaling/disk_list.html:21
 msgid "Disk id"
 msgstr "id"
 
-#: scaling/models/diskinfo.py:45 scaling/templates/scaling/disk_detail.html:47
-#: scaling/templates/scaling/disk_list.html:53
+#: scaling/models/diskinfo.py:45
+#: scaling/templates/scaling/disk_asset_list.html:53
+#: scaling/templates/scaling/disk_detail.html:47
+#: scaling/templates/scaling/disk_list.html:22
 msgid "Disk device"
 msgstr "驱动"
 
-#: scaling/models/diskinfo.py:46 scaling/templates/scaling/disk_detail.html:50
-#: scaling/templates/scaling/disk_list.html:54
+#: scaling/models/diskinfo.py:46
+#: scaling/templates/scaling/disk_asset_list.html:54
+#: scaling/templates/scaling/disk_detail.html:50
+#: scaling/templates/scaling/disk_list.html:23
 msgid "Disk type"
 msgstr "类型"
 
-#: scaling/models/diskinfo.py:47 scaling/templates/scaling/disk_detail.html:53
-#: scaling/templates/scaling/disk_list.html:55
+#: scaling/models/diskinfo.py:47
+#: scaling/templates/scaling/disk_asset_list.html:55
+#: scaling/templates/scaling/disk_detail.html:53
+#: scaling/templates/scaling/disk_list.html:24
 msgid "Disk size"
 msgstr "大小"
 
-#: scaling/models/diskinfo.py:50 scaling/templates/scaling/disk_detail.html:62
-#: scaling/templates/scaling/disk_list.html:56
+#: scaling/models/diskinfo.py:50
+#: scaling/templates/scaling/disk_asset_list.html:56
+#: scaling/templates/scaling/disk_detail.html:62
+#: scaling/templates/scaling/disk_list.html:25
 msgid "Assetexpansion"
 msgstr "关联资产"
 
-#: scaling/models/diskinfo.py:51 scaling/templates/scaling/disk_detail.html:65
-#: scaling/templates/scaling/disk_list.html:59
+#: scaling/models/diskinfo.py:51
+#: scaling/templates/scaling/disk_asset_list.html:59
+#: scaling/templates/scaling/disk_detail.html:65
 msgid "Release method"
 msgstr "删除类型"
 
@@ -4725,8 +4739,10 @@ msgstr "自动快照策略"
 msgid "Snapshot policy function"
 msgstr "快照策略功能"
 
-#: scaling/models/diskinfo.py:55 scaling/templates/scaling/disk_detail.html:77
-#: scaling/templates/scaling/disk_list.html:57
+#: scaling/models/diskinfo.py:55
+#: scaling/templates/scaling/disk_asset_list.html:57
+#: scaling/templates/scaling/disk_detail.html:77
+#: scaling/templates/scaling/disk_list.html:26
 msgid "Disk attributes"
 msgstr "属性"
 
@@ -4734,20 +4750,28 @@ msgstr "属性"
 msgid "Whether to encrypt"
 msgstr "加密"
 
-#: scaling/models/diskinfo.py:72 scaling/templates/scaling/asset_detail.html:21
-#: scaling/templates/scaling/disk_list.html:15
+#: scaling/models/diskinfo.py:72
 msgid "DiskInfo"
 msgstr "硬盘信息"
+
+#: scaling/templates/scaling/asset_detail.html:21
+#: scaling/templates/scaling/disk_asset_list.html:15
+#: scaling/templates/scaling/disk_asset_list.html:25
+#: scaling/views/diskinfo.py:48
+msgid "Associate Disk"
+msgstr "关联磁盘"
 
 #: scaling/templates/scaling/asset_detail.html:191
 msgid "Storage"
 msgstr "存储"
 
 #: scaling/templates/scaling/assets_list.html:4
+#: scaling/templates/scaling/disk_list.html:4
 msgid "Display all asset information on the cloud, "
 msgstr "展示云上的所有资产信息"
 
 #: scaling/templates/scaling/assets_list.html:5
+#: scaling/templates/scaling/disk_list.html:5
 msgid "Buy cloud assets."
 msgstr "购买云上资产"
 
@@ -4759,34 +4783,46 @@ msgstr "关机"
 msgid "Bootup"
 msgstr "开机"
 
-#: scaling/templates/scaling/disk_detail.html:16
-#: scaling/templates/scaling/disk_detail.html:26
-#: scaling/views/assetexpansion.py:86
-msgid "Disk detail"
-msgstr "磁盘详情"
-
-#: scaling/templates/scaling/disk_list.html:25
-#: scaling/views/assetexpansion.py:71
-msgid "Disk list"
-msgstr "磁盘列表"
-
-#: scaling/templates/scaling/disk_list.html:44
+#: scaling/templates/scaling/disk_asset_list.html:44
 msgid "Add disk"
 msgstr "添加磁盘"
 
-#: scaling/templates/scaling/disk_list.html:90
+#: scaling/templates/scaling/disk_asset_list.html:90
 msgid "Uninstall"
 msgstr "卸载"
 
-#: scaling/views/assetexpansion.py:34 scaling/views/assetexpansion.py:51
-#: scaling/views/assetexpansion.py:70 scaling/views/assetexpansion.py:85
-#: templates/_nav.html:39
+#: scaling/templates/scaling/disk_detail.html:16
+#: scaling/templates/scaling/disk_detail.html:26 scaling/views/diskinfo.py:63
+msgid "Disk detail"
+msgstr "磁盘详情"
+
+#: scaling/templates/scaling/disk_list.html:13
+msgid "Create disk"
+msgstr "创建磁盘"
+
+#: scaling/templates/scaling/disk_list.html:50
+#: scaling/templates/scaling/disk_list.html:53
+msgid "Emancipate"
+msgstr "释放"
+
+#: scaling/templates/scaling/disk_list.html:51
+#: scaling/templates/scaling/disk_list.html:54
+msgid "Mount"
+msgstr "挂载"
+
+#: scaling/views/assetexpansion.py:32 scaling/views/assetexpansion.py:49
+#: scaling/views/diskinfo.py:29 scaling/views/diskinfo.py:47
+#: scaling/views/diskinfo.py:62 templates/_nav.html:39
 msgid "Scaling"
 msgstr "云上资源"
 
-#: scaling/views/assetexpansion.py:52
+#: scaling/views/assetexpansion.py:50
 msgid "Assets detail"
 msgstr "资产详情"
+
+#: scaling/views/diskinfo.py:30 templates/_nav.html:44
+msgid "Disk list"
+msgstr "磁盘列表"
 
 #: settings/api.py:33
 msgid "Test mail sent to {}, please check"
@@ -5299,7 +5335,7 @@ msgstr "认证成功: {}"
 
 #: settings/views.py:19 settings/views.py:46 settings/views.py:73
 #: settings/views.py:105 settings/views.py:134 settings/views.py:161
-#: templates/_nav.html:215
+#: templates/_nav.html:216
 msgid "Settings"
 msgstr "系统设置"
 
@@ -5486,23 +5522,23 @@ msgstr ""
 msgid "Load balancing"
 msgstr "负载均衡"
 
-#: templates/_nav.html:60
+#: templates/_nav.html:61
 msgid "Command filters"
 msgstr "命令过滤"
 
-#: templates/_nav.html:93
+#: templates/_nav.html:94
 msgid "MetaInfo Cluster"
 msgstr "源集群"
 
-#: templates/_nav.html:94
+#: templates/_nav.html:95
 msgid "Index management"
 msgstr "索引管理"
 
-#: templates/_nav.html:95
+#: templates/_nav.html:96
 msgid "Failure center"
 msgstr "故障中心"
 
-#: templates/_nav.html:125 terminal/views/command.py:21
+#: templates/_nav.html:126 terminal/views/command.py:21
 #: terminal/views/session.py:48 terminal/views/session.py:59
 #: terminal/views/session.py:74 terminal/views/session.py:97
 #: terminal/views/terminal.py:32 terminal/views/terminal.py:48
@@ -5510,59 +5546,59 @@ msgstr "故障中心"
 msgid "Sessions"
 msgstr "会话管理"
 
-#: templates/_nav.html:128
+#: templates/_nav.html:129
 msgid "Session online"
 msgstr "在线会话"
 
-#: templates/_nav.html:129 terminal/views/session.py:60
+#: templates/_nav.html:130 terminal/views/session.py:60
 msgid "Session offline"
 msgstr "历史会话"
 
-#: templates/_nav.html:130 terminal/templates/terminal/session_commands.html:21
+#: templates/_nav.html:131 terminal/templates/terminal/session_commands.html:21
 #: terminal/templates/terminal/session_detail.html:21
 msgid "Commands"
 msgstr "命令记录"
 
-#: templates/_nav.html:133 templates/_nav_user.html:42
+#: templates/_nav.html:134 templates/_nav_user.html:42
 msgid "Web terminal"
 msgstr "Web终端"
 
-#: templates/_nav.html:134 templates/_nav_user.html:47
+#: templates/_nav.html:135 templates/_nav_user.html:47
 msgid "File manager"
 msgstr "文件管理"
 
-#: templates/_nav.html:138 terminal/views/storage.py:27
+#: templates/_nav.html:139 terminal/views/storage.py:27
 #: terminal/views/storage.py:42 terminal/views/storage.py:96
 #: terminal/views/storage.py:120 terminal/views/storage.py:149
 #: terminal/views/storage.py:175
 msgid "Terminal"
 msgstr "终端管理"
 
-#: templates/_nav.html:149
+#: templates/_nav.html:150
 msgid "Job Center"
 msgstr "作业中心"
 
-#: templates/_nav.html:153 templates/_nav.html:181
+#: templates/_nav.html:154 templates/_nav.html:182
 msgid "Batch command"
 msgstr "批量命令"
 
-#: templates/_nav.html:155
+#: templates/_nav.html:156
 msgid "Task monitor"
 msgstr "任务监控"
 
-#: templates/_nav.html:165 tickets/views.py:19 tickets/views.py:37
+#: templates/_nav.html:166 tickets/views.py:19 tickets/views.py:37
 msgid "Tickets"
 msgstr "工单管理"
 
-#: templates/_nav.html:191
+#: templates/_nav.html:192
 msgid "XPack"
 msgstr ""
 
-#: templates/_nav.html:199
+#: templates/_nav.html:200
 msgid "Account list"
 msgstr "账户列表"
 
-#: templates/_nav.html:200
+#: templates/_nav.html:201
 msgid "Sync instance"
 msgstr "同步实例"
 
@@ -7178,11 +7214,8 @@ msgstr "用户授权远程应用"
 msgid "User granted DatabaseApp"
 msgstr "用户授权数据库应用"
 
-#~ msgid "Create disk"
-#~ msgstr "创建磁盘"
-
-#~ msgid "Create Disk"
-#~ msgstr "创建磁盘"
+#~ msgid "Disk info list"
+#~ msgstr "磁盘信息"
 
 #, fuzzy
 #~| msgid "Disk type"

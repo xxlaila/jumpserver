@@ -6,3 +6,4 @@
 @Software: PyCharm
 """
 from .assetexpansion import *
+from .diskinfo import *

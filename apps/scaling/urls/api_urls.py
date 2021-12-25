@@ -17,6 +17,7 @@ app_name = 'scaling'
 
 router = BulkRouter()
 router.register(r'scaling-assets', api.AssetExpansionViewSet, 'scaling-asset')
+router.register(r'scaling-disks', api.DiskInfoViewSet, 'scaling-disk')
 router.register(r'disks', api.DiskInfoViewSet, 'disk')
 
 urlpatterns = [
