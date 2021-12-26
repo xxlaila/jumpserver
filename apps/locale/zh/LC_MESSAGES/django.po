@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 10:32+0800\n"
+"POT-Creation-Date: 2021-12-26 10:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -1079,10 +1079,7 @@ msgstr "CPU总数"
 msgid "Memory"
 msgstr "内存"
 
-#: assets/models/asset.py:215 elastics/models/esnode.py:24
-#: elastics/templates/elastics/meta_node_list.html:73
-#: elastics/templates/elastics/node_detail.html:61
-#: elastics/templates/elastics/node_list.html:22
+#: assets/models/asset.py:215
 #: elastics/templates/elastics/node_stats_indices_detail.html:62
 msgid "Disk total"
 msgstr "硬盘大小"
@@ -3305,13 +3302,20 @@ msgstr "代理模式"
 msgid "Uuid"
 msgstr "uuid"
 
+#: elastics/models/esnode.py:24
+#: elastics/templates/elastics/meta_node_list.html:73
+#: elastics/templates/elastics/node_detail.html:61
+#: elastics/templates/elastics/node_list.html:22
+msgid "Total disk"
+msgstr "总磁盘"
+
 #: elastics/models/esnode.py:25 elastics/templates/elastics/node_detail.html:64
-msgid "Disk used"
-msgstr "磁盘使用"
+msgid "Used disk"
+msgstr "已用磁盘"
 
 #: elastics/models/esnode.py:26 elastics/templates/elastics/node_detail.html:67
-msgid "Disk avail"
-msgstr "硬盘剩余"
+msgid "Avail disk"
+msgstr "剩余磁盘"
 
 #: elastics/models/esnode.py:27 elastics/templates/elastics/node_detail.html:70
 msgid "Used total memory"
@@ -7262,6 +7266,12 @@ msgstr "用户授权远程应用"
 #: users/views/user.py:263
 msgid "User granted DatabaseApp"
 msgstr "用户授权数据库应用"
+
+#~ msgid "Disk used"
+#~ msgstr "磁盘使用"
+
+#~ msgid "Disk avail"
+#~ msgstr "硬盘剩余"
 
 #~ msgid "Online users"
 #~ msgstr "在线用户"

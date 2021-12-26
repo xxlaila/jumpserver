@@ -72,7 +72,7 @@ class ClusterRemoteListView(PermissionsMixin, SingleObjectMixin, TemplateView):
         return super().get(request, *args, **kwargs)
 
     def cluster_remote_data(self):
-        data = self.get_object().clusterremote_set.all().first()
+        data = self.get_object().clusterremote_set.all()
         return data
 
     def get_context_data(self, **kwargs):

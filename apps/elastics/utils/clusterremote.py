@@ -46,6 +46,7 @@ def cluster_remote_connent(_settins=None):
         return False
 
 def get_cluster_remote(results, k):
+    result = {}
     if results is not None:
         for key, vaule in results.items():
             data = {"name": key, "mode": vaule["mode"], "conn": vaule["connected"],
@@ -56,7 +57,9 @@ def get_cluster_remote(results, k):
             try:
                 obj, created = ClusterRemote.objects.update_or_create(name=data['name'], metainfo_id=k.id, defaults=data)
                 if obj:
-                    return Response({"status": "%s update success: %s" % (data['name'], obj)})
+                    result.update({"update ": [data['name'], k.name]})
+                else:
+                    result.update({"create ": [data['name'], k.name]})
             except Exception as e:
                 return Response({"status": "Clusremote error", "message": 'Error: ' + str(e)})
-    return False
+    return result
