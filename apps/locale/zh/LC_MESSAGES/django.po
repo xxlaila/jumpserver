@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-25 21:54+0800\n"
+"POT-Creation-Date: 2021-12-26 10:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -1213,6 +1213,7 @@ msgstr "默认Cluster"
 
 #: assets/models/cluster.py:40 elastics/templates/elastics/index_list.html:28
 #: elastics/templates/elastics/index_list.html:70
+#: elastics/templates/elastics/malfunction_list.html:24
 msgid "Cluster"
 msgstr "集群"
 
@@ -3021,7 +3022,6 @@ msgstr "字段必须唯一"
 #: elastics/models/dynamic_config.py:83 elastics/models/es_cluster.py:40
 #: elastics/models/es_cluster.py:56 elastics/models/es_cluster.py:77
 #: elastics/models/esnode.py:37 elastics/models/index.py:42
-#: elastics/templates/elastics/malfunction_list.html:24
 msgid "Metainfo"
 msgstr "源信息"
 
@@ -3223,6 +3223,7 @@ msgstr "Client节点"
 #: elastics/templates/elastics/node_detail.html:73
 #: elastics/templates/elastics/node_list.html:23
 #: elastics/templates/elastics/node_stats_indices_detail.html:63
+#: templates/index.html:49
 msgid "Total memory"
 msgstr "总内存"
 
@@ -3636,9 +3637,8 @@ msgid "Display all current fault information,"
 msgstr "显示当前所有故障信息"
 
 #: elastics/templates/elastics/malfunction_list.html:6
-msgid ""
-"Carry out and follow up on the failure, so that the failure can be traced,"
-msgstr "对故障进行和跟进，让故障有迹可寻"
+msgid "Track and deal with faults, so that the faults can be traced back,"
+msgstr "对故障进行跟踪和处理，做到故障可追溯"
 
 #: elastics/templates/elastics/meta_info_create_update.html:25
 msgid "Default Enable"
@@ -3778,7 +3778,7 @@ msgstr "索引详情"
 msgid "Index shards"
 msgstr "索引分片"
 
-#: elastics/views/malfunction.py:31
+#: elastics/views/malfunction.py:31 templates/_nav.html:97
 msgid "Malfunction list"
 msgstr "故障列表"
 
@@ -5591,12 +5591,6 @@ msgstr "节点管理"
 msgid "Index management"
 msgstr "索引管理"
 
-#: templates/_nav.html:97
-#, fuzzy
-#| msgid "Failure center"
-msgid "Malfunction center"
-msgstr "故障中心"
-
 #: templates/_nav.html:127 terminal/views/command.py:21
 #: terminal/views/session.py:48 terminal/views/session.py:59
 #: terminal/views/session.py:74 terminal/views/session.py:97
@@ -5691,12 +5685,8 @@ msgid "Total assets"
 msgstr "资产总数"
 
 #: templates/index.html:36
-msgid "Online users"
-msgstr "在线用户"
-
-#: templates/index.html:49
-msgid "Online sessions"
-msgstr "在线会话"
+msgid "Total Disk"
+msgstr "总磁盘"
 
 #: templates/index.html:61
 msgid "In the past week, a total of "
@@ -7272,6 +7262,17 @@ msgstr "用户授权远程应用"
 #: users/views/user.py:263
 msgid "User granted DatabaseApp"
 msgstr "用户授权数据库应用"
+
+#~ msgid "Online users"
+#~ msgstr "在线用户"
+
+#~ msgid "Online sessions"
+#~ msgstr "在线会话"
+
+#, fuzzy
+#~| msgid "Failure center"
+#~ msgid "Malfunction center"
+#~ msgstr "故障中心"
 
 #~ msgid "Disk info list"
 #~ msgstr "磁盘信息"

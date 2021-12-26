@@ -5,6 +5,7 @@ from django.db.models import Count, Max
 from django.http.response import JsonResponse
 from rest_framework.views import APIView
 from collections import Counter
+from django.db.models import Sum
 
 from users.models import User
 from assets.models import Asset
@@ -206,9 +207,6 @@ class WeekSessionMetricMixin:
 
 
 class TotalCountMixin:
-    @staticmethod
-    def get_total_count_users():
-        return current_org.get_org_members().count()
 
     @staticmethod
     def get_total_count_metainfo():
@@ -219,8 +217,25 @@ class TotalCountMixin:
         return EsNode.objects.all().count()
 
     @staticmethod
-    def get_total_count_assets():
-        return Asset.objects.all().count()
+    def get_total_disk_count():
+        # count = EsNode.objects.filter().values_list('disktotal', flat=True).aggregate(Sum('disktotal'))
+        count = list(EsNode.objects.aggregate(Sum('disktotal')).values())[0]
+        return count
+
+    @staticmethod
+    def get_total_mem_count():
+        count = list(EsNode.objects.aggregate(Sum('rammax')).values())[0]
+        return count
+
+    @staticmethod
+    def get_used_disk_count():
+        count = list(EsNode.objects.aggregate(Sum('diskused')).values())[0]
+        return count
+
+    @staticmethod
+    def get_avail_disk_count():
+        count = list(EsNode.objects.aggregate(Sum('diskavail')).values())[0]
+        return count
 
     @staticmethod
     def get_total_count_online_users():
@@ -247,8 +262,8 @@ class IndexApi(TotalCountMixin, WeekSessionMetricMixin, MonthLoginMetricMixin, A
             data.update({
                 'total_count_assets': self.get_total_count_es_nodes(),
                 'total_count_users': self.get_total_count_metainfo(),
-                'total_count_online_users': self.get_total_count_online_users(),
-                'total_count_online_sessions': self.get_total_count_online_sessions(),
+                'total_count_online_users': self.get_total_disk_count(),
+                'total_count_online_sessions': self.get_total_mem_count(),
             })
 
         if _all or query_params.get('month_metrics'):

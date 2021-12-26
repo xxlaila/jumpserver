@@ -32,12 +32,12 @@
         <div class="col-sm-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-primary pull-right">Online</span>
-                    <h5>{% trans 'Online users' %}</h5>
+                    <span class="label label-primary pull-right">Disk</span>
+                    <h5>{% trans 'Total Disk' %}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><a href="{% url 'terminal:session-online-list' %}"> <span id="total_count_online_users"></span></a></h1>
-                    <small>Online users</small>
+                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_online_users"></span></a></h1>
+                    <small>Total Disk</small>
                 </div>
             </div>
         </div>
@@ -45,13 +45,13 @@
         <div class="col-sm-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-danger pull-right">Connected</span>
-                    <h5>{% trans 'Online sessions' %}</h5>
+                    <span class="label label-danger pull-right">Memory</span>
+                    <h5>{% trans 'Total memory' %}</h5>
 
                 </div>
                 <div class="ibox-content">
-                        <h1 class="no-margins"><a href="{% url 'terminal:session-online-list' %}"> <span id="total_count_online_sessions"></span></a></h1>
-                    <small>Online sessions</small>
+                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_online_sessions"></span></a></h1>
+                    <small>Total memory</small>
                 </div>
             </div>
         </div>

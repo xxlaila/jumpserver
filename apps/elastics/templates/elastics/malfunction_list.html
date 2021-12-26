@@ -3,7 +3,7 @@
 {% load i18n static %}
 {% block help_message %}
     {% trans 'Display all current fault information,'%}
-    {% trans 'Carry out and follow up on the failure, so that the failure can be traced,'%}
+    {% trans 'Track and deal with faults, so that the faults can be traced back,'%}
 {% endblock %}
 {% block table_search %}
     {% include '_csv_import_export.html' %}
@@ -21,7 +21,7 @@
             <th class="text-center">{% trans 'Name' %}</th>
             <th class="text-center">{% trans 'Comment' %}</th>
             <th class="text-center">{% trans 'Status' %}</th>
-            <th class="text-center">{% trans 'Metainfo' %}</th>
+            <th class="text-center">{% trans 'Cluster' %}</th>
             <th class="text-center">{% trans 'Created by' %}</th>
             <th class="text-center">{% trans 'Action' %}</th>
         </tr>
