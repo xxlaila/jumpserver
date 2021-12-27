@@ -6,6 +6,7 @@ from django.http.response import JsonResponse
 from rest_framework.views import APIView
 from collections import Counter
 from django.db.models import Sum
+from elastics.utils import pybyte
 
 from users.models import User
 from assets.models import Asset
@@ -220,22 +221,22 @@ class TotalCountMixin:
     def get_total_disk_count():
         # count = EsNode.objects.filter().values_list('disktotal', flat=True).aggregate(Sum('disktotal'))
         count = list(EsNode.objects.aggregate(Sum('disktotal')).values())[0]
-        return count
+        return pybyte.gbtransform(count)
 
     @staticmethod
     def get_total_mem_count():
         count = list(EsNode.objects.aggregate(Sum('rammax')).values())[0]
-        return count
+        return pybyte.gbtransform(count)
 
     @staticmethod
     def get_used_disk_count():
         count = list(EsNode.objects.aggregate(Sum('diskused')).values())[0]
-        return count
+        return pybyte.gbtransform(count)
 
     @staticmethod
     def get_avail_disk_count():
         count = list(EsNode.objects.aggregate(Sum('diskavail')).values())[0]
-        return count
+        return pybyte.gbtransform(count)
 
     @staticmethod
     def get_total_count_online_users():

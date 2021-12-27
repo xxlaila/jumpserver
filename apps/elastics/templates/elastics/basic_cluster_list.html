@@ -76,10 +76,10 @@
                                         <p><span class="font1">{% trans 'Total index' %} </span>: {{ cluster.incount }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Total docs' %} </span>: {{ cluster.indocs }}</p>
+                                        <p><span class="font1">{% trans 'Total docs' %} </span>: {{ obj.indocs }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Total use space' %} </span>: {{ cluster.instore }}</p>
+                                        <p><span class="font1">{% trans 'Total use space' %} </span>: {{ obj.instore }}</p>
                                     </div>
                                     <div class="box">
                                         <p><span class="font1">{% trans 'Total node' %} </span>: {{ cluster.nt }}</p>
@@ -100,13 +100,13 @@
                                         <p><span class="font1">{% trans 'Client node' %} </span>: {{ cluster.nr }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Total memory' %} </span>: {{ cluster.mt }}</p>
+                                        <p><span class="font1">{% trans 'Total memory' %} </span>: {{ obj.mt }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Free memory' %} </span>: {{ cluster.mf }}</p>
+                                        <p><span class="font1">{% trans 'Free memory' %} </span>: {{ obj.mf }}</p>
                                     </div>
                                     <div class="box">
-                                        <p><span class="font1">{% trans 'Use memory' %} </span>: {{ cluster.mu }}</p>
+                                        <p><span class="font1">{% trans 'Use memory' %} </span>: {{ obj.mu }}</p>
                                     </div>
                                     <div class="box">
                                         <p><span class="font1">{% trans 'Install' %} </span>: {{ cluster.pt }}</p>

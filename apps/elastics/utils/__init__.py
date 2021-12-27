@@ -13,3 +13,4 @@ from .health import *
 from .basiccluster import *
 from .clusterremote import *
 from .index import *
+from .pybyte import *

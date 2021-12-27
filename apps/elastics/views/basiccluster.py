@@ -13,9 +13,7 @@ from django.views.generic import (
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
 from common.permissions import PermissionsMixin, IsOrgAdmin,IsOrgAdminOrAppUser
-from ..models import ClusterSetting, ClusterRemote, BasicCluster, MetaInfo
-from orgs.mixins import generics
-from .. import serializers
+from ..models import MetaInfo
 from common.utils import get_logger
 from common.const import create_success_msg, update_success_msg
 from django.urls import reverse_lazy
@@ -24,6 +22,7 @@ from django.shortcuts import (
     render, redirect
 )
 from ..utils import get_default_setting,check_setting_connent, cluster_remote_connent
+from ..utils import pybyte
 
 __all__ = (
     "BasicClusterListView", "ClusterRemoteListView",
@@ -45,6 +44,12 @@ class BasicClusterListView(PermissionsMixin, SingleObjectMixin, TemplateView):
         data = self.get_object().basiccluster_set.all().first()
         return data
 
+    def huhuan_data(self):
+        obj = {"mt": pybyte.bytetransform(self.cluster_data().mt), "mf": pybyte.bytetransform(self.cluster_data().mf),
+           "mu": pybyte.bytetransform(self.cluster_data().mu), "instore": pybyte.bytetransform(self.cluster_data().instore),
+           "indocs": pybyte.quantitytransform(self.cluster_data().indocs)}
+        return obj
+
     def get_cluster_setting(self):
         results = self.get_object().clustersetting_set.all().first()
         return results
@@ -55,6 +60,7 @@ class BasicClusterListView(PermissionsMixin, SingleObjectMixin, TemplateView):
             'action': _('Basic cluster list'),
             'object': self.get_object(),
             'cluster': self.cluster_data(),
+            'obj': self.huhuan_data(),
             'clustersettings': self.get_cluster_setting(),
         }
         kwargs.update(context)

@@ -12,12 +12,13 @@ from orgs.mixins.serializers import BulkOrgResourceModelSerializer
 from rest_framework import serializers
 
 class MalfunctionSerializer(BulkOrgResourceModelSerializer):
+
     metainfo_base = serializers.ReadOnlyField()
 
     class Meta:
         model = Malfunction
         list_serializer_class = AdaptedBulkListSerializer
         fields = [
-            'id', 'name', 'org_name', 'comment', 'status', 'metainfo_base'
-            'metainfo', 'date_created', 'created_by'
+            'id', 'name', 'org_name', 'comment', 'status', 'metainfo_base',
+            'metainfo', 'date_created', 'created_by',
         ]

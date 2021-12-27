@@ -12,6 +12,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from orgs.mixins.models import OrgModelMixin
 from ..models import MetaInfo
+from common.utils import lazyproperty
 
 __all__ = ['AlterWeaken', 'Malfunction']
 logger = logging.getLogger(__name__)
@@ -24,6 +25,7 @@ class Malfunction(OrgModelMixin):
     date_created = models.DateTimeField(auto_now_add=True)
     metainfo = models.ForeignKey(MetaInfo, null=True, on_delete=models.SET_NULL, verbose_name=_('Metainfo'))
     created_by = models.CharField(max_length=128, blank=True, default='', verbose_name=_('Created by'))
+
 
     class Meta:
         ordering = ['-date_created']
