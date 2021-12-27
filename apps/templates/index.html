@@ -11,7 +11,7 @@
                     <h5>{% trans 'Total Cluster' %}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><a href="{% url 'elastics:meta-info-list' %}"><span id="total_count_users"></span></a></h1>
+                    <h1 class="no-margins"><a href="{% url 'elastics:meta-info-list' %}"><span id="total_count_metainfo"></span></a></h1>
                     <small>All cluster</small>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <h5>{% trans 'Total assets' %}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"><span id="total_count_assets"></span></a></h1>
+                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"><span id="total_count_es_nodes"></span></a></h1>
                     <small>All assets</small>
                 </div>
             </div>
@@ -32,12 +32,12 @@
         <div class="col-sm-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-primary pull-right">Disk</span>
-                    <h5>{% trans 'Total Disk' %}</h5>
+                    <span class="label label-primary pull-right">Docs</span>
+                    <h5>{% trans 'Total docs' %}</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_online_users"></span></a></h1>
-                    <small>Total Disk</small>
+                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_num_docs"></span></a></h1>
+                    <small>Total docs</small>
                 </div>
             </div>
         </div>
@@ -45,16 +45,120 @@
         <div class="col-sm-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-danger pull-right">Memory</span>
-                    <h5>{% trans 'Total memory' %}</h5>
+                    <span class="label label-danger pull-right">Shard</span>
+                    <h5>{% trans 'Total shard' %}</h5>
 
                 </div>
                 <div class="ibox-content">
-                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_online_sessions"></span></a></h1>
-                    <small>Total memory</small>
+                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_num_st"></span></a></h1>
+                    <small>Total shard</small>
                 </div>
             </div>
         </div>
+        <!--!-->
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">Disk</span>
+                    <h5>{% trans 'Total disk' %}</h5>
+
+                </div>
+                <div class="ibox-content">
+                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_disk"></span></a></h1>
+                    <small>Total disk</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">Disk</span>
+                    <h5>{% trans 'Total use disk' %}</h5>
+
+                </div>
+                <div class="ibox-content">
+                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="used_count_disk"></span></a></h1>
+                    <small>Use disk</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">Disk</span>
+                    <h5>{% trans 'Total free disk' %}</h5>
+
+                </div>
+                <div class="ibox-content">
+                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="avail_count_disk"></span></a></h1>
+                    <small>Total free disk</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">Index</span>
+                    <h5>{% trans 'Total index' %}</h5>
+
+                </div>
+                <div class="ibox-content">
+                        <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"> <span id="total_count_num_index"></span></a></h1>
+                    <small>Total index</small>
+                </div>
+            </div>
+        </div>
+        <!--!-->
+
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">Memory</span>
+                    <h5>{% trans 'Total memory' %}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"><span id="total_count_mem"></span></a></h1>
+                    <small>Total Memory</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">Memory</span>
+                    <h5>{% trans 'Used memory' %}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><a href="{% url 'elastics:node-list' %}"><span id="used_count_mem"></span></a></h1>
+                    <small>Used Memory</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">Cpu</span>
+                    <h5>{% trans 'Total Cpu' %}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><a href="{% url 'scaling:scaling-asset-list' %}"><span id="total_count_num_cpu"></span></a></h1>
+                    <small>Total cpu</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-warning pull-right">Advertising space</span>
+                    <h5>{% trans 'Advertising space' %}</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><a href="#"><span id="used_count_mem"></span></a></h1>
+                    <small>Advertising space</small>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-sm-2 border-bottom white-bg dashboard-header" style="margin-left:15px;height: 346px">
@@ -419,12 +523,31 @@ function renderRequestApi(query, success, error){
 
 function renderTotalCount(){
      var success = function (data) {
-         $('#total_count_assets').html(data['total_count_assets']);
-         $('#total_count_users').html(data['total_count_users']);
-         $('#total_count_online_users').html(data['total_count_online_users']);
-         $('#total_count_online_sessions').html(data['total_count_online_sessions']);
+         $('#total_count_es_nodes').html(data['total_count_es_nodes']);
+         $('#total_count_metainfo').html(data['total_count_metainfo']);
+         $('#total_count_num_docs').html(data['total_count_num_docs']);
+         $('#total_count_num_st').html(data['total_count_num_st']);
      };
     renderRequestApi('total_count=1', success);
+}
+
+function renderMemCount(){
+     var success = function (data) {
+         $('#total_count_mem').html(data['total_count_mem']);
+         $('#used_count_mem').html(data['used_count_mem']);
+         $('#total_count_num_cpu').html(data['total_count_num_cpu']);
+     };
+    renderRequestApi('mem_count=1', success);
+}
+
+function renderDiskCount(){
+     var success = function (data) {
+         $('#total_count_disk').html(data['total_count_disk']);
+         $('#used_count_disk').html(data['used_count_disk']);
+         $('#avail_count_disk').html(data['avail_count_disk']);
+         $('#total_count_num_index').html(data['total_count_num_index']);
+     };
+    renderRequestApi('disk_count=1', success);
 }
 
 function renderMonthMetricsECharts(){
@@ -587,6 +710,8 @@ function renderWeekLoginRecordTop10Sessions(){
 
 function renderData(){
     renderTotalCount();
+    renderDiskCount();
+    renderMemCount();
     renderMonthMetricsECharts();
     renderMonthTotalCountUsersPie();
     renderMonthTotalCountAssetsPie();

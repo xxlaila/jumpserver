@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-26 10:39+0800\n"
+"POT-Creation-Date: 2021-12-27 17:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -42,7 +42,7 @@ msgstr "自定义"
 #: perms/templates/perms/asset_permission_asset.html:53
 #: perms/templates/perms/asset_permission_create_update.html:57
 #: perms/templates/perms/asset_permission_list.html:35
-#: perms/templates/perms/asset_permission_list.html:87 templates/index.html:82
+#: perms/templates/perms/asset_permission_list.html:87 templates/index.html:186
 #: terminal/backends/command/models.py:19 terminal/models.py:187
 #: terminal/templates/terminal/command_list.html:31
 #: terminal/templates/terminal/command_list.html:106
@@ -116,14 +116,14 @@ msgstr "运行参数"
 #: assets/templates/assets/platform_detail.html:48
 #: assets/templates/assets/platform_list.html:16
 #: assets/templates/assets/system_user_detail.html:62
-#: assets/templates/assets/system_user_list.html:24 elastics/models/alter.py:21
+#: assets/templates/assets/system_user_list.html:24 elastics/models/alter.py:22
 #: elastics/models/cloudinfor.py:19 elastics/models/es_cluster.py:23
 #: elastics/models/es_cluster.py:68 elastics/models/esnode.py:23
 #: elastics/models/index.py:33 elastics/models/metainfo.py:31
 #: elastics/templates/elastics/basic_cluster_list.html:64
 #: elastics/templates/elastics/cloud_info_detail.html:48
 #: elastics/templates/elastics/cloud_info_list.html:21
-#: elastics/templates/elastics/cluster_remote_list.html:64
+#: elastics/templates/elastics/cluster_remote_list.html:65
 #: elastics/templates/elastics/index_detail.html:52
 #: elastics/templates/elastics/index_list.html:21
 #: elastics/templates/elastics/malfunction_list.html:21
@@ -239,7 +239,7 @@ msgstr "数据库"
 #: assets/templates/assets/platform_list.html:18
 #: assets/templates/assets/system_user_detail.html:112
 #: assets/templates/assets/system_user_list.html:29
-#: assets/templates/assets/user_asset_list.html:81 elastics/models/alter.py:22
+#: assets/templates/assets/user_asset_list.html:81 elastics/models/alter.py:23
 #: elastics/models/cloudinfor.py:23 elastics/models/metainfo.py:47
 #: elastics/templates/elastics/cloud_info_detail.html:68
 #: elastics/templates/elastics/cloud_info_list.html:25
@@ -308,7 +308,7 @@ msgstr "参数"
 #: assets/templates/assets/asset_detail.html:120
 #: assets/templates/assets/cmd_filter_detail.html:72
 #: assets/templates/assets/system_user_detail.html:108
-#: common/mixins/models.py:49 elastics/models/alter.py:26
+#: common/mixins/models.py:49 elastics/models/alter.py:27
 #: elastics/models/cloudinfor.py:26 elastics/models/dynamic_config.py:30
 #: elastics/models/dynamic_config.py:72 elastics/models/metainfo.py:50
 #: elastics/templates/elastics/cloud_info_detail.html:72
@@ -1155,7 +1155,7 @@ msgstr "ssh公钥"
 #: elastics/models/esnode.py:61 elastics/models/index.py:43
 #: elastics/models/index.py:62 elastics/models/index.py:79
 #: elastics/templates/elastics/basic_cluster_list.html:115
-#: elastics/templates/elastics/cluster_remote_list.html:91
+#: elastics/templates/elastics/cluster_remote_list.html:92
 #: elastics/templates/elastics/node_detail.html:97 ops/models/adhoc.py:39
 #: scaling/models/asset_expansion.py:73 scaling/models/balanced.py:41
 #: scaling/models/diskinfo.py:60
@@ -1322,7 +1322,7 @@ msgstr "默认资产组"
 #: perms/templates/perms/database_app_permission_list.html:15
 #: perms/templates/perms/remote_app_permission_create_update.html:41
 #: perms/templates/perms/remote_app_permission_list.html:15
-#: templates/index.html:78 terminal/backends/command/models.py:18
+#: templates/index.html:182 terminal/backends/command/models.py:18
 #: terminal/models.py:185 terminal/templates/terminal/command_list.html:30
 #: terminal/templates/terminal/command_list.html:105
 #: terminal/templates/terminal/session_detail.html:48
@@ -2566,12 +2566,12 @@ msgid "Reason"
 msgstr "原因"
 
 #: audits/models.py:88 audits/templates/audits/login_log_list.html:64
-#: elastics/models/alter.py:23 elastics/models/dynamic_config.py:42
+#: elastics/models/alter.py:24 elastics/models/dynamic_config.py:42
 #: elastics/models/dynamic_config.py:84 elastics/models/es_cluster.py:24
 #: elastics/models/es_cluster.py:70 elastics/models/esnode.py:36
 #: elastics/models/index.py:41
 #: elastics/templates/elastics/basic_cluster_list.html:67
-#: elastics/templates/elastics/cluster_remote_list.html:70
+#: elastics/templates/elastics/cluster_remote_list.html:71
 #: elastics/templates/elastics/index_list.html:23
 #: elastics/templates/elastics/malfunction_list.html:23
 #: elastics/templates/elastics/meta_node_list.html:79
@@ -3014,7 +3014,7 @@ msgstr "不能包含特殊字符"
 msgid "This field must be unique."
 msgstr "字段必须唯一"
 
-#: elastics/models/alter.py:25 elastics/models/dynamic_config.py:27
+#: elastics/models/alter.py:26 elastics/models/dynamic_config.py:27
 #: elastics/models/dynamic_config.py:41 elastics/models/dynamic_config.py:69
 #: elastics/models/dynamic_config.py:83 elastics/models/es_cluster.py:40
 #: elastics/models/es_cluster.py:56 elastics/models/es_cluster.py:77
@@ -3022,21 +3022,21 @@ msgstr "字段必须唯一"
 msgid "Metainfo"
 msgstr "源信息"
 
-#: elastics/models/alter.py:30
+#: elastics/models/alter.py:32
 #, fuzzy
 #| msgid "Maximum connection"
 msgid "Malfunction"
 msgstr "最大连接数"
 
-#: elastics/models/alter.py:35
+#: elastics/models/alter.py:37
 msgid "Is active "
 msgstr "激活"
 
-#: elastics/models/alter.py:36
+#: elastics/models/alter.py:38
 msgid "Frequency"
 msgstr ""
 
-#: elastics/models/alter.py:41
+#: elastics/models/alter.py:43
 msgid "AlterWeaken"
 msgstr "告警"
 
@@ -3159,6 +3159,7 @@ msgstr ""
 
 #: elastics/models/es_cluster.py:25
 #: elastics/templates/elastics/basic_cluster_list.html:70
+#: templates/index.html:49
 msgid "Total shard"
 msgstr "总分片"
 
@@ -3170,12 +3171,13 @@ msgstr "主分片"
 
 #: elastics/models/es_cluster.py:27
 #: elastics/templates/elastics/basic_cluster_list.html:76
+#: templates/index.html:102
 msgid "Total index"
 msgstr "总索引"
 
 #: elastics/models/es_cluster.py:28 elastics/models/index.py:37
 #: elastics/templates/elastics/basic_cluster_list.html:79
-#: elastics/templates/elastics/index_list.html:26
+#: elastics/templates/elastics/index_list.html:26 templates/index.html:36
 msgid "Total docs"
 msgstr "总文档数"
 
@@ -3220,7 +3222,7 @@ msgstr "Client节点"
 #: elastics/templates/elastics/node_detail.html:73
 #: elastics/templates/elastics/node_list.html:23
 #: elastics/templates/elastics/node_stats_indices_detail.html:63
-#: templates/index.html:49
+#: templates/index.html:117
 msgid "Total memory"
 msgstr "总内存"
 
@@ -3264,37 +3266,37 @@ msgid "Security"
 msgstr "安全"
 
 #: elastics/models/es_cluster.py:69
-#: elastics/templates/elastics/cluster_remote_list.html:67
+#: elastics/templates/elastics/cluster_remote_list.html:68
 msgid "Connection mode"
 msgstr "连接方式"
 
 #: elastics/models/es_cluster.py:71
-#: elastics/templates/elastics/cluster_remote_list.html:73
+#: elastics/templates/elastics/cluster_remote_list.html:74
 msgid "Connection timed out"
 msgstr "连接超时时间"
 
 #: elastics/models/es_cluster.py:72
-#: elastics/templates/elastics/cluster_remote_list.html:76
+#: elastics/templates/elastics/cluster_remote_list.html:77
 msgid "Skip cluster"
 msgstr "跳过集群"
 
 #: elastics/models/es_cluster.py:73
-#: elastics/templates/elastics/cluster_remote_list.html:79
+#: elastics/templates/elastics/cluster_remote_list.html:80
 msgid "Connection address"
 msgstr "连接地址"
 
 #: elastics/models/es_cluster.py:74
-#: elastics/templates/elastics/cluster_remote_list.html:82
+#: elastics/templates/elastics/cluster_remote_list.html:83
 msgid "Number of nodes"
 msgstr "节点数"
 
 #: elastics/models/es_cluster.py:75
-#: elastics/templates/elastics/cluster_remote_list.html:85
+#: elastics/templates/elastics/cluster_remote_list.html:86
 msgid "Maximum connection"
 msgstr "最大连接数"
 
 #: elastics/models/es_cluster.py:76
-#: elastics/templates/elastics/cluster_remote_list.html:88
+#: elastics/templates/elastics/cluster_remote_list.html:89
 msgid "Proxy model"
 msgstr "代理模式"
 
@@ -3305,7 +3307,7 @@ msgstr "uuid"
 #: elastics/models/esnode.py:24
 #: elastics/templates/elastics/meta_node_list.html:73
 #: elastics/templates/elastics/node_detail.html:61
-#: elastics/templates/elastics/node_list.html:22
+#: elastics/templates/elastics/node_list.html:22 templates/index.html:63
 msgid "Total disk"
 msgstr "总磁盘"
 
@@ -3499,7 +3501,7 @@ msgid "Alter"
 msgstr "告警"
 
 #: elastics/models/metainfo.py:45
-#: elastics/templates/elastics/cluster_remote_list.html:46
+#: elastics/templates/elastics/cluster_remote_list.html:47
 #: elastics/templates/elastics/meta_info_create_update.html:71
 #: elastics/templates/elastics/meta_info_detail.html:124
 #: elastics/templates/elastics/meta_info_detail.html:269
@@ -3549,7 +3551,7 @@ msgstr "动态配置"
 #: elastics/templates/elastics/cluster_remote_list.html:24
 #: elastics/templates/elastics/meta_info_detail.html:24
 #: elastics/templates/elastics/meta_node_list.html:19
-#: elastics/views/basiccluster.py:55
+#: elastics/views/basiccluster.py:60
 msgid "Basic cluster list"
 msgstr "基本集群信息"
 
@@ -3559,7 +3561,7 @@ msgstr "基本集群信息"
 #: elastics/templates/elastics/cluster_remote_list.html:27
 #: elastics/templates/elastics/meta_info_detail.html:27
 #: elastics/templates/elastics/meta_node_list.html:22
-#: elastics/views/basiccluster.py:81
+#: elastics/views/basiccluster.py:87
 msgid "Cluster remote list"
 msgstr "跨集群列表"
 
@@ -3738,8 +3740,8 @@ msgstr "节点角色"
 msgid "Display node information of all clusters, "
 msgstr "展示所有集群的资产信息"
 
-#: elastics/views/basiccluster.py:54 elastics/views/basiccluster.py:80
-#: elastics/views/basiccluster.py:104 elastics/views/cloudinfor.py:33
+#: elastics/views/basiccluster.py:59 elastics/views/basiccluster.py:86
+#: elastics/views/basiccluster.py:110 elastics/views/cloudinfor.py:33
 #: elastics/views/cloudinfor.py:49 elastics/views/cloudinfor.py:66
 #: elastics/views/cloudinfor.py:80 elastics/views/clusterconfig.py:44
 #: elastics/views/esnode.py:35 elastics/views/esnode.py:53
@@ -3752,7 +3754,7 @@ msgstr "展示所有集群的资产信息"
 msgid "Elastics"
 msgstr "搜索引擎"
 
-#: elastics/views/basiccluster.py:105
+#: elastics/views/basiccluster.py:111
 #, fuzzy
 #| msgid "Interface settings"
 msgid "Cluster setting list"
@@ -5688,137 +5690,153 @@ msgstr "总集群"
 msgid "Total assets"
 msgstr "资产总数"
 
-#: templates/index.html:36
-msgid "Total Disk"
-msgstr "总磁盘"
+#: templates/index.html:76
+msgid "Total use disk"
+msgstr "总使用磁盘"
 
-#: templates/index.html:61
+#: templates/index.html:89
+msgid "Total free disk"
+msgstr "总空闲磁盘"
+
+#: templates/index.html:129
+msgid "Used memory"
+msgstr "总使用内存"
+
+#: templates/index.html:141
+msgid "Total Cpu"
+msgstr "总CPU核心"
+
+#: templates/index.html:153
+msgid "Advertising space"
+msgstr "广告位"
+
+#: templates/index.html:165
 msgid "In the past week, a total of "
 msgstr "过去一周, 共有 "
 
-#: templates/index.html:61
+#: templates/index.html:165
 msgid " users have logged in "
 msgstr " 位用户登录 "
 
-#: templates/index.html:61
+#: templates/index.html:165
 msgid " times asset."
 msgstr " 次资产."
 
-#: templates/index.html:69
+#: templates/index.html:173
 msgid "Active user asset ratio"
 msgstr "活跃用户资产占比"
 
-#: templates/index.html:72
+#: templates/index.html:176
 msgid ""
 "The following graphs describe the percentage of active users per month and "
 "assets per user host per month, respectively."
 msgstr "以下图形分别描述一个月活跃用户和资产占所有用户主机的百分比"
 
-#: templates/index.html:97 templates/index.html:112
+#: templates/index.html:201 templates/index.html:216
 msgid "Top 10 assets in a week"
 msgstr "一周Top10资产"
 
-#: templates/index.html:113
+#: templates/index.html:217
 msgid "Login frequency and last login record."
 msgstr "登录次数及最近一次登录记录."
 
-#: templates/index.html:122
+#: templates/index.html:226
 msgid "Last 10 login"
 msgstr "最近十次登录"
 
-#: templates/index.html:128
+#: templates/index.html:232
 msgid "Login record"
 msgstr "登录记录"
 
-#: templates/index.html:129
+#: templates/index.html:233
 msgid "Last 10 login records."
 msgstr "最近十次登录记录."
 
-#: templates/index.html:143 templates/index.html:158
+#: templates/index.html:247 templates/index.html:262
 msgid "Top 10 users in a week"
 msgstr "一周Top10用户"
 
-#: templates/index.html:159
+#: templates/index.html:263
 msgid "User login frequency and last login record."
 msgstr "用户登录次数及最近一次登录记录"
 
-#: templates/index.html:184
+#: templates/index.html:288
 msgid "Monthly data overview"
 msgstr "月数据总览"
 
-#: templates/index.html:185
+#: templates/index.html:289
 msgid "History summary in one month"
 msgstr "一个月内历史汇总"
 
-#: templates/index.html:193 templates/index.html:217
+#: templates/index.html:297 templates/index.html:321
 msgid "Login count"
 msgstr "登录次数"
 
-#: templates/index.html:193 templates/index.html:224
+#: templates/index.html:297 templates/index.html:328
 msgid "Active users"
 msgstr "活跃用户"
 
-#: templates/index.html:193 templates/index.html:231
+#: templates/index.html:297 templates/index.html:335
 msgid "Active assets"
 msgstr "活跃资产"
 
-#: templates/index.html:262 templates/index.html:313
+#: templates/index.html:366 templates/index.html:417
 msgid "Monthly active users"
 msgstr "月活跃用户"
 
-#: templates/index.html:262 templates/index.html:314
+#: templates/index.html:366 templates/index.html:418
 msgid "Disable user"
 msgstr "禁用用户"
 
-#: templates/index.html:262 templates/index.html:315
+#: templates/index.html:366 templates/index.html:419
 msgid "Month not logged in user"
 msgstr "月未登录用户"
 
-#: templates/index.html:288 templates/index.html:368
+#: templates/index.html:392 templates/index.html:472
 msgid "Access to the source"
 msgstr "访问来源"
 
-#: templates/index.html:342
+#: templates/index.html:446
 msgid "Month is logged into the asset"
 msgstr "月被登录资产"
 
-#: templates/index.html:342 templates/index.html:393
+#: templates/index.html:446 templates/index.html:497
 msgid "Disable host"
 msgstr "禁用主机"
 
-#: templates/index.html:342 templates/index.html:394
+#: templates/index.html:446 templates/index.html:498
 msgid "Month not logged on host"
 msgstr "月未登录主机"
 
-#: templates/index.html:392
+#: templates/index.html:496
 msgid "Month is logged into the host"
 msgstr "月被登录主机"
 
-#: templates/index.html:466
+#: templates/index.html:589
 msgid " times/week"
 msgstr " 次/周"
 
-#: templates/index.html:491 templates/index.html:527
+#: templates/index.html:614 templates/index.html:650
 msgid " times"
 msgstr " 次"
 
-#: templates/index.html:494 templates/index.html:530
+#: templates/index.html:617 templates/index.html:653
 msgid "The time last logged in"
 msgstr "最近一次登录日期"
 
-#: templates/index.html:495 templates/index.html:531
+#: templates/index.html:618 templates/index.html:654
 msgid "At"
 msgstr "于"
 
-#: templates/index.html:510 templates/index.html:545 templates/index.html:580
+#: templates/index.html:633 templates/index.html:668 templates/index.html:703
 msgid "(No)"
 msgstr "(暂无)"
 
-#: templates/index.html:561
+#: templates/index.html:684
 msgid "Before"
 msgstr "前"
 
-#: templates/index.html:562
+#: templates/index.html:685
 msgid "Login in "
 msgstr "登录了"
 
@@ -7266,6 +7284,9 @@ msgstr "用户授权远程应用"
 #: users/views/user.py:263
 msgid "User granted DatabaseApp"
 msgstr "用户授权数据库应用"
+
+#~ msgid "Total Disk"
+#~ msgstr "总磁盘"
 
 #~ msgid "Disk used"
 #~ msgstr "磁盘使用"

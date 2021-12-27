@@ -24,20 +24,22 @@ def get_es_nodes():
             tengxunyun.append(k.ip)
         result['aliyun'] = aliyun
         result['tengxunyun'] = tengxunyun
-
     return result
 
 def fenzu(lists, res):
     n = 8
+    data = []
     for b in [lists[i:i + n] for i in range(0, len(lists), n)]:
-        data = list_instances(b, res)
-        return HttpResponse(data)
+        data.append(list_instances(b, res))
+    return HttpResponse(data)
 
 def cloud_asset_rsync(request):
     for k, v in get_es_nodes().items():
         if k == 'aliyun':
             res = CloudInfor.objects.get(value=k)
             fenzu(v, res)
+        else:
+            pass
 
 
 

@@ -10,7 +10,8 @@ from elastics.utils import pybyte
 
 from users.models import User
 from assets.models import Asset
-from elastics.models import MetaInfo, EsNode
+from elastics.models import MetaInfo, EsNode, BasicCluster, Index
+from scaling.models import AssetExpansion
 from terminal.models import Session
 from orgs.utils import current_org
 from common.permissions import IsOrgAdmin
@@ -218,25 +219,50 @@ class TotalCountMixin:
         return EsNode.objects.all().count()
 
     @staticmethod
-    def get_total_disk_count():
+    def get_disk_count_total():
         # count = EsNode.objects.filter().values_list('disktotal', flat=True).aggregate(Sum('disktotal'))
         count = list(EsNode.objects.aggregate(Sum('disktotal')).values())[0]
         return pybyte.gbtransform(count)
 
     @staticmethod
-    def get_total_mem_count():
-        count = list(EsNode.objects.aggregate(Sum('rammax')).values())[0]
-        return pybyte.gbtransform(count)
-
-    @staticmethod
-    def get_used_disk_count():
+    def get_disk_count_used():
         count = list(EsNode.objects.aggregate(Sum('diskused')).values())[0]
         return pybyte.gbtransform(count)
 
     @staticmethod
-    def get_avail_disk_count():
+    def get_disk_count_avail():
         count = list(EsNode.objects.aggregate(Sum('diskavail')).values())[0]
         return pybyte.gbtransform(count)
+
+    @staticmethod
+    def get_mem_count_total():
+        count = list(EsNode.objects.aggregate(Sum('rammax')).values())[0]
+        return pybyte.gbtransform(count)
+
+    @staticmethod
+    def get_mem_count_used():
+        count = list(EsNode.objects.aggregate(Sum('ramcurrent')).values())[0]
+        return pybyte.gbtransform(count)
+
+    @staticmethod
+    def get_total_count_num_docs():
+        count = list(BasicCluster.objects.aggregate(Sum('indocs')).values())[0]
+        return pybyte.quantitytransform(count)
+
+    @staticmethod
+    def get_total_count_num_st():
+        count = list(BasicCluster.objects.aggregate(Sum('st')).values())[0]
+        return count
+
+    @staticmethod
+    def get_total_count_num_index():
+        count = Index.objects.count()
+        return count
+
+    @staticmethod
+    def get_total_count_num_cpu():
+        count = list(AssetExpansion.objects.aggregate(Sum('cpu_vcpus')).values())[0]
+        return count
 
     @staticmethod
     def get_total_count_online_users():
@@ -261,10 +287,25 @@ class IndexApi(TotalCountMixin, WeekSessionMetricMixin, MonthLoginMetricMixin, A
 
         if _all or query_params.get('total_count'):
             data.update({
-                'total_count_assets': self.get_total_count_es_nodes(),
-                'total_count_users': self.get_total_count_metainfo(),
-                'total_count_online_users': self.get_total_disk_count(),
-                'total_count_online_sessions': self.get_total_mem_count(),
+                'total_count_es_nodes': self.get_total_count_es_nodes(),
+                'total_count_metainfo': self.get_total_count_metainfo(),
+                'total_count_num_docs': self.get_total_count_num_docs(),
+                'total_count_num_st': self.get_total_count_num_st(),
+            })
+
+        if _all or query_params.get('disk_count'):
+            data.update({
+                'total_count_disk': self.get_disk_count_total(),
+                'used_count_disk': self.get_disk_count_used(),
+                'avail_count_disk': self.get_disk_count_avail(),
+                'total_count_num_index': self.get_total_count_num_index(),
+            })
+
+        if _all or query_params.get('mem_count'):
+            data.update({
+                'total_count_mem': self.get_mem_count_total(),
+                'used_count_mem': self.get_mem_count_used(),
+                'total_count_num_cpu': self.get_total_count_num_cpu(),
             })
 
         if _all or query_params.get('month_metrics'):

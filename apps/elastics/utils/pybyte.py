@@ -70,6 +70,11 @@ def bytetransform(size, dot=2):
     return human_size
 
 def quantitytransform(num):
+    """
+    Quantity conversion unit
+    :param num:
+    :return:
+    """
     num = float(num)
     def strofquantity(num, level):
         if level >= 2:
