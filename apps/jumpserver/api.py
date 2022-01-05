@@ -246,12 +246,16 @@ class TotalCountMixin:
 
     @staticmethod
     def get_total_count_num_docs():
-        count = list(BasicCluster.objects.aggregate(Sum('indocs')).values())[0]
+        count = sum([BasicCluster.objects.filter(name=i['name'], metainfo_id=i['metainfo_id']).
+                    values_list('indocs',flat=True).order_by(
+            'date_updated').last() for i in BasicCluster.objects.values('name', 'metainfo_id').distinct()])
         return pybyte.quantitytransform(count)
 
     @staticmethod
     def get_total_count_num_st():
-        count = list(BasicCluster.objects.aggregate(Sum('st')).values())[0]
+        count = sum([BasicCluster.objects.filter(name=i['name'], metainfo_id=i['metainfo_id']).
+                    values_list('st', flat=True).order_by(
+            'date_updated').last() for i in BasicCluster.objects.values('name', 'metainfo_id').distinct()])
         # count = EsNode.objects.filter().values_list('disktotal', flat=True).aggregate(Sum('disktotal'))
         return count
 
