@@ -5,24 +5,19 @@
 @Author  : xxlaila
 @Software: PyCharm
 """
-import json
-from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic import (
-    TemplateView, CreateView, UpdateView, DeleteView, DetailView
+    TemplateView
 )
 from django.views.generic.detail import SingleObjectMixin
 from django.utils.translation import ugettext_lazy as _
-from common.permissions import PermissionsMixin, IsOrgAdmin,IsOrgAdminOrAppUser
+from common.permissions import PermissionsMixin, IsOrgAdmin
 from ..models import MetaInfo
 from common.utils import get_logger
-from common.const import create_success_msg, update_success_msg
+from common.const import update_success_msg
 from django.urls import reverse_lazy
 from rest_framework.views import APIView, Response
-from django.shortcuts import (
-    render, redirect
-)
 from ..utils import get_default_setting,check_setting_connent, cluster_remote_connent
-from ..utils import pybyte
+from ..core import pybyte
 
 __all__ = (
     "BasicClusterListView", "ClusterRemoteListView",

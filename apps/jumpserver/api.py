@@ -6,7 +6,7 @@ from django.http.response import JsonResponse
 from rest_framework.views import APIView
 from collections import Counter
 from django.db.models import Sum
-from elastics.utils import pybyte
+from elastics.core import pybyte
 
 from users.models import User
 from assets.models import Asset
