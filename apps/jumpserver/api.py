@@ -252,6 +252,7 @@ class TotalCountMixin:
     @staticmethod
     def get_total_count_num_st():
         count = list(BasicCluster.objects.aggregate(Sum('st')).values())[0]
+        # count = EsNode.objects.filter().values_list('disktotal', flat=True).aggregate(Sum('disktotal'))
         return count
 
     @staticmethod

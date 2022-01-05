@@ -121,15 +121,22 @@ def get_check_setting_data(results, k):
 def get_indices_breaker(results, k):
     data = {}
     jsondata = JsonSearch(object=results, mode='j')
-    bre = jsondata.search_all_value(key='indices')
-    nets = jsondata.search_all_value(key='network')
-    data.update({"inflight_req_limit": nets[0]['breaker']['inflight_requests']['limit'],
-                 "inflight_req": nets[0]['breaker']['inflight_requests']['overhead']})
-    data.update({"fielddata_over": bre[4]['breaker']['fielddata']['overhead'],
-                 "fielddata_limit": bre[4]['breaker']['fielddata']['limit'],
-                 "request_over": bre[0]['breaker']['request']['overhead'],
-                 "total_limit": bre[4]['breaker']['total']['limit'],
-                 "request_limit": bre[4]['breaker']['request']['limit'], "metainfo_id": k.id})
+    data.update({"inflight_req_limit":
+                     list(filter(None, [i.get('limit') for i in jsondata.search_all_value(key='inflight_requests')]))[
+                         0],
+                 "inflight_req": list(
+                     filter(None, [i.get('overhead') for i in jsondata.search_all_value(key='inflight_requests')]))[0],
+                 "fielddata_over":
+                     list(filter(None, [i.get('overhead') for i in jsondata.search_all_value(key='fielddata')]))[0],
+                 "fielddata_limit":
+                     list(filter(None, [i.get('limit') for i in jsondata.search_all_value(key='fielddata')]))[0],
+                 "request_over":
+                     list(filter(None, [i.get('overhead') for i in jsondata.search_all_value(key='request')]))[0],
+                 "request_limit":
+                     list(filter(None, [i.get('limit') for i in jsondata.search_all_value(key='request')]))[0],
+                 "total_limit": list(filter(None, [i.get('limit') for i in jsondata.search_all_value(key='total')]))[0],
+                 "metainfo_id": k.id
+                 })
     if not BreakerConfigNum.objects.filter(status=True, metainfo_id=k.id):
         obj = BreakerConfig.objects.create(**data)
         BreakerConfigNum.objects.create(status=True, metainfo_id=k.id, breakerconfig_id=obj.id)
@@ -137,21 +144,21 @@ def get_indices_breaker(results, k):
 
 def get_routing(results, k):
     jsondata = JsonSearch(object=results, mode='j')
-    rout = jsondata.search_all_value(key='routing')
-    data = {"node_concurrent_recoveries": rout[0]['allocation']['node_concurrent_recoveries'],
-            "cluster_concurrent_rebalance": rout[0]['allocation']['cluster_concurrent_rebalance'],
-            "node_initial_primaries_recoveries": rout[0]['allocation']['node_initial_primaries_recoveries'],
-            "node_concurrent_outgoing_recoveries": rout[2]['allocation']['node_concurrent_outgoing_recoveries'],
-            "disk_watermark_flood_stage": rout[0]['allocation']['disk']['watermark']['flood_stage'],
-            "disk_watermark_low": rout[0]['allocation']['disk']['watermark']['low'],
-            "disk_watermark_high": rout[0]['allocation']['disk']['watermark']['high'],
-            "allow_rebalance": rout[2]['allocation']['allow_rebalance'],
-            "allocation_enable": rout[0]['allocation']['enable'],
-            "rebalance_enable": rout[2]['rebalance']['enable'],
-            "awareness_attributes": rout[2]['allocation']['awareness']['attributes'],
-            "balance_index": rout[2]['allocation']['balance']['index'],
-            "balance_threshold": rout[2]['allocation']['balance']['threshold'],
-            "balance_shard": rout[2]['allocation']['balance']['shard'],
+    # "allocation_enable": list(filter(None, [i.get('enable') for i in jsondata.search_all_value(key='allocation')]))[0],
+    data = {"node_concurrent_recoveries": jsondata.search_all_value(key='node_concurrent_recoveries')[0],
+            "cluster_concurrent_rebalance": jsondata.search_all_value(key='cluster_concurrent_rebalance')[0],
+            "node_initial_primaries_recoveries": jsondata.search_all_value(key='node_initial_primaries_recoveries')[0],
+            "node_concurrent_outgoing_recoveries": jsondata.search_all_value(key='node_concurrent_outgoing_recoveries')[0],
+            "disk_watermark_flood_stage": jsondata.search_all_value(key='flood_stage')[0],
+            "disk_watermark_low": jsondata.search_all_value(key='low')[0],
+            "disk_watermark_high": jsondata.search_all_value(key='high')[0],
+            "allow_rebalance": jsondata.search_all_value(key='allow_rebalance')[0],
+            "allocation_enable": 'all',
+            "rebalance_enable": jsondata.search_all_value(key='rebalance')[0]['enable'],
+            "awareness_attributes": jsondata.search_all_value(key='attributes')[0],
+            "balance_index": jsondata.search_all_value(key='balance')[0]['index'],
+            "balance_threshold": jsondata.search_all_value(key='balance')[0]['threshold'],
+            "balance_shard": jsondata.search_all_value(key='balance')[0]['shard'],
             "metainfo_id": k.id
             }
     if not RoutingConfigNum.objects.filter(status=True, metainfo_id=k.id):

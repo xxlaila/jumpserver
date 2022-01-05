@@ -48,6 +48,6 @@ urlpatterns = [
     path('index/<uuid:pk>/indexshard/', views.IndexShardsNodeView.as_view(), name='index-shards'),
 
 
-    path('meta-info/health/', utils.cluster_remote_connent, name='meta-info-health'),
+    path('meta-info/health/', utils.check_setting_connent, name='meta-info-health'),
 
 ]
