@@ -21,7 +21,7 @@ from jsonsearch import JsonSearch
 
 @shared_task
 @register_as_period_task(interval=600)
-def get_default_setting(basics=None):
+def get_default_setting(request,basics=None):
     try:
         obj = []
         if basics is None:

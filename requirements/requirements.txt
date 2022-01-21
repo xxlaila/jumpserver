@@ -62,7 +62,7 @@ pytz==2018.3
 PyYAML==5.1
 redis==2.10.6
 requests==2.22.0
-jms-storage==0.0.29
+jms-storage==0.0.41
 s3transfer==0.3.3
 simplejson==3.13.2
 six==1.11.0
@@ -99,6 +99,7 @@ django-redis==4.11.0
 python-redis-lock==3.5.0
 jumpserver-django-oidc-rp==0.3.7.5
 jsonfield==3.1.0
+elasticsearch==7.8.0
 elasticsearch-dsl==7.4.0
 jsonsearch==0.0.2
 django-cors-headers==3.10.1
