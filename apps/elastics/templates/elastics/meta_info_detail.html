@@ -160,7 +160,7 @@
                                             <td>{% trans 'Network check' %}:</td>
                                             <td>
                                                 <span class="pull-right">
-                                                    <button type="button" class="btn btn-primary btn-xs" id="btn_refresh_asset" style="width: 54px">{% trans 'Refresh' %}</button>
+                                                    <button type="button" class="btn btn-primary btn-xs" id="btn_network_network" style="width: 54px">{% trans 'Examine' %}</button>
                                                 </span>
                                             </td>
                                         </tr>
@@ -168,7 +168,7 @@
                                             <td>{% trans 'Port connective' %}:</td>
                                             <td>
                                                 <span class="pull-right">
-                                                    <button type="button" class="btn btn-primary btn-xs" id="btn-test-is-alive" style="width: 54px">{% trans 'Test' %}</button>
+                                                    <button type="button" class="btn btn-primary btn-xs" id="btn-test-is-port" style="width: 54px">{% trans 'Test' %}</button>
                                                 </span>
                                             </td>
                                         </tr>
@@ -239,8 +239,8 @@
                                               <span class="pull-right">
                                                   <div class="switch">
                                                       <div class="onoffswitch">
-                                                          <input type="checkbox" {% if meteinfo.indexes %} checked {% endif %}  class="onoffswitch-checkbox" id="index">
-                                                          <label class="onoffswitch-label" for="index">
+                                                          <input type="checkbox" {% if meteinfo.indexes %} checked {% endif %}  class="onoffswitch-checkbox" id="indexes">
+                                                          <label class="onoffswitch-label" for="indexes">
                                                               <span class="onoffswitch-inner"></span>
                                                               <span class="onoffswitch-switch"></span>
                                                           </label>
@@ -352,22 +352,11 @@ function updateAssetNodes(nodes) {
     });
 }
 
-function zxctest() {
-    var the_url = "{% url 'api-elastics:metainfo-task-create' pk=meteinfo.id %}";
-    $("#btn_refresh_asset").on("click", function () {
-        requestApi({
-            url: the_url,
-            method: 'POST',
-            data: {action: "refresh"}
-        })
-    })
-}
-
-function refreshMetainfo() {
+function refreshNetworkCheck() {
     var the_url = "{% url 'api-elastics:metainfo-task-create' pk=meteinfo.id %}";
     var success = function(data) {
         var task_id = data.task;
-        showCeleryTaskLog(task_id);
+        {#showCeleryTaskLog(task_id);#}
     };
     requestApi({
         url: the_url,
@@ -376,7 +365,6 @@ function refreshMetainfo() {
         method: 'POST'
     });
 }
-
 
 $(document).ready(function () {
     nodesSelect2Init(".nodes-select2")
@@ -441,7 +429,7 @@ $(document).ready(function () {
     }else{
         $(".ibox-content > table > tbody > tr:nth-child(12) > td:last >b").html('False');
     }
-}).on('click', '#index', function () {
+}).on('click', '#indexes', function () {
     var the_url = '{% url "api-elastics:meta-info-detail" pk=meteinfo.id %}';
     var checked = $(this).prop('checked');
     var body = {
@@ -546,13 +534,13 @@ $(document).ready(function () {
     var the_url = '{% url "api-elastics:meta-info-detail" pk=DEFAULT_PK %}'.replace('{{ DEFAULT_PK }}', uid);
     var redirect_url = "{% url 'elastics:meta-info-list' %}";
     objectDelete($this, name, the_url, redirect_url);
-}).on('click', '#btn_refresh_asset11', function () {
-    refreshMetainfo()
-}).on('click', '#btn-test-is-alive', function () {
+}).on('click', '#btn_network_network', function () {
+    refreshNetworkCheck()
+}).on('click', '#btn-test-is-port', function () {
     var the_url = "{% url 'api-elastics:metainfo-task-create' pk=meteinfo.id %}";
     var success = function(data) {
         var task_id = data.task;
-        showCeleryTaskLog(task_id);
+        {#showCeleryTaskLog(task_id);#}
     };
     requestApi({
         url: the_url,

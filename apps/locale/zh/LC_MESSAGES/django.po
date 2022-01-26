@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JumpServer 0.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 17:19+0800\n"
+"POT-Creation-Date: 2022-01-26 13:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ibuler <ibuler@qq.com>\n"
 "Language-Team: JumpServer team<ibuler@qq.com>\n"
@@ -1745,13 +1745,13 @@ msgstr "请输入密码"
 
 #: assets/templates/assets/_asset_user_auth_update_modal.html:68
 #: assets/templates/assets/asset_detail.html:300
-#: elastics/templates/elastics/meta_info_detail.html:396
-#: elastics/templates/elastics/meta_info_detail.html:414
-#: elastics/templates/elastics/meta_info_detail.html:432
-#: elastics/templates/elastics/meta_info_detail.html:450
-#: elastics/templates/elastics/meta_info_detail.html:468
-#: elastics/templates/elastics/meta_info_detail.html:486
-#: elastics/templates/elastics/meta_info_detail.html:504
+#: elastics/templates/elastics/meta_info_detail.html:384
+#: elastics/templates/elastics/meta_info_detail.html:402
+#: elastics/templates/elastics/meta_info_detail.html:420
+#: elastics/templates/elastics/meta_info_detail.html:438
+#: elastics/templates/elastics/meta_info_detail.html:456
+#: elastics/templates/elastics/meta_info_detail.html:474
+#: elastics/templates/elastics/meta_info_detail.html:492
 #: users/templates/users/user_detail.html:356
 #: users/templates/users/user_detail.html:383
 msgid "Update successfully!"
@@ -2050,7 +2050,6 @@ msgstr "更新硬件信息"
 #: assets/templates/assets/asset_detail.html:166
 #: authentication/templates/authentication/login_wait_confirm.html:42
 #: elastics/models/index.py:76
-#: elastics/templates/elastics/meta_info_detail.html:163
 msgid "Refresh"
 msgstr "刷新"
 
@@ -3519,8 +3518,8 @@ msgstr "跨集群同步"
 msgid "MetaInfo"
 msgstr "源信息"
 
-#: elastics/tasks/gather_metainfo_test_connect.py:66
-#: elastics/tasks/gather_metainfo_test_connect.py:72
+#: elastics/tasks/gather_metainfo_test_connect.py:15
+#: elastics/tasks/gather_metainfo_test_connect.py:20
 msgid "test server network: {}"
 msgstr ""
 
@@ -3530,7 +3529,7 @@ msgstr ""
 #: elastics/templates/elastics/cluster_remote_list.html:18
 #: elastics/templates/elastics/meta_info_detail.html:18
 #: elastics/templates/elastics/meta_node_list.html:13
-#: elastics/views/meteinfo.py:83
+#: elastics/views/meteinfo.py:82
 msgid "Meta info detail"
 msgstr "源集群详情"
 
@@ -3551,7 +3550,7 @@ msgstr "动态配置"
 #: elastics/templates/elastics/cluster_remote_list.html:24
 #: elastics/templates/elastics/meta_info_detail.html:24
 #: elastics/templates/elastics/meta_node_list.html:19
-#: elastics/views/basiccluster.py:60
+#: elastics/views/basiccluster.py:55
 msgid "Basic cluster list"
 msgstr "基本集群信息"
 
@@ -3561,7 +3560,7 @@ msgstr "基本集群信息"
 #: elastics/templates/elastics/cluster_remote_list.html:27
 #: elastics/templates/elastics/meta_info_detail.html:27
 #: elastics/templates/elastics/meta_node_list.html:22
-#: elastics/views/basiccluster.py:87
+#: elastics/views/basiccluster.py:82
 msgid "Cluster remote list"
 msgstr "跨集群列表"
 
@@ -3584,7 +3583,7 @@ msgstr "节点角色"
 #: elastics/templates/elastics/cluster_remote_list.html:33
 #: elastics/templates/elastics/meta_info_detail.html:36
 #: elastics/templates/elastics/meta_node_list.html:28
-#: elastics/views/meteinfo.py:108
+#: elastics/views/meteinfo.py:107
 msgid "DSL"
 msgstr ""
 
@@ -3689,6 +3688,10 @@ msgstr "基本检查"
 msgid "Network check"
 msgstr "网络检查"
 
+#: elastics/templates/elastics/meta_info_detail.html:163
+msgid "Examine"
+msgstr "检查"
+
 #: elastics/templates/elastics/meta_info_detail.html:168
 msgid "Port connective"
 msgstr "端口可连接性探测"
@@ -3702,7 +3705,7 @@ msgid "Obtaining general parameters of the cluster, enabling status and alarms"
 msgstr "集群常规参数的获取，状态、告警启用"
 
 #: elastics/templates/elastics/meta_info_list.html:13
-#: elastics/views/meteinfo.py:51
+#: elastics/views/meteinfo.py:50
 msgid "Create meta info"
 msgstr "创建原集群"
 
@@ -3740,21 +3743,21 @@ msgstr "节点角色"
 msgid "Display node information of all clusters, "
 msgstr "展示所有集群的资产信息"
 
-#: elastics/views/basiccluster.py:59 elastics/views/basiccluster.py:86
-#: elastics/views/basiccluster.py:110 elastics/views/cloudinfor.py:33
+#: elastics/views/basiccluster.py:54 elastics/views/basiccluster.py:81
+#: elastics/views/basiccluster.py:105 elastics/views/cloudinfor.py:33
 #: elastics/views/cloudinfor.py:49 elastics/views/cloudinfor.py:66
 #: elastics/views/cloudinfor.py:80 elastics/views/clusterconfig.py:44
 #: elastics/views/esnode.py:35 elastics/views/esnode.py:53
 #: elastics/views/esnode.py:68 elastics/views/esnode.py:91
 #: elastics/views/index.py:39 elastics/views/index.py:53
 #: elastics/views/index.py:144 elastics/views/malfunction.py:30
-#: elastics/views/meteinfo.py:34 elastics/views/meteinfo.py:50
-#: elastics/views/meteinfo.py:67 elastics/views/meteinfo.py:82
-#: elastics/views/meteinfo.py:107 templates/_nav.html:90
+#: elastics/views/meteinfo.py:33 elastics/views/meteinfo.py:49
+#: elastics/views/meteinfo.py:66 elastics/views/meteinfo.py:81
+#: elastics/views/meteinfo.py:106 templates/_nav.html:90
 msgid "Elastics"
 msgstr "搜索引擎"
 
-#: elastics/views/basiccluster.py:111
+#: elastics/views/basiccluster.py:106
 #, fuzzy
 #| msgid "Interface settings"
 msgid "Cluster setting list"
@@ -3788,11 +3791,11 @@ msgstr "索引分片"
 msgid "Malfunction list"
 msgstr "故障列表"
 
-#: elastics/views/meteinfo.py:35
+#: elastics/views/meteinfo.py:34
 msgid "Meta info list"
 msgstr "云信息列表"
 
-#: elastics/views/meteinfo.py:68
+#: elastics/views/meteinfo.py:67
 msgid "Update meta info"
 msgstr "更新源集群"
 
@@ -7284,6 +7287,12 @@ msgstr "用户授权远程应用"
 #: users/views/user.py:263
 msgid "User granted DatabaseApp"
 msgstr "用户授权数据库应用"
+
+#~ msgid "Network Detection"
+#~ msgstr "网络检查"
+
+#~ msgid "Check Network"
+#~ msgstr "网络"
 
 #~ msgid "Total Disk"
 #~ msgstr "总磁盘"

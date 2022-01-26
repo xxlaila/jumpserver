@@ -7,24 +7,26 @@
 """
 
 import socket, sys,os
-from rest_framework.views import APIView, Response
-from django.views.generic.detail import SingleObjectMixin
-from common.permissions import IsOrgAdmin, IsOrgAdminOrAppUser
 
-def server_port_connect(*args):
-    print("1")
-    server_sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_result = server_sk.connect_ex((args[1], args[2]))
-    print(server_result)
-    if server_result == 0:
-        print('%s Port is Open' % (args[1] + ':' + args[2]))
-    else:
-        print ('%s Port is Not Open' % (args[1] + ':' + args[2]))
-        sys.exit(121)
+def server_port_connect(data):
+    try:
+        server_sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_result = server_sk.connect_ex((data[1], int(data[2])))
+        if server_result == 0:
+            print('%s Port is Open' % (data[1] + ':' + data[2]))
+            return True
+        else:
+            print('%s Port is Not Open' % (data[1] + ':' + data[2]))
+            sys.exit(121)
+    except socket.error:
+        print("error")
+        return False
 
 def server_ping(ip):
     backinfo = os.system('ping -c 1 %s' % ip)
     if backinfo == 0:
         print("The network is normal")
+        return True
     else:
         print("Connection failed")
+        return False

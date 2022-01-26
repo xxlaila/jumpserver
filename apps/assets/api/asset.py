@@ -103,7 +103,9 @@ class AssetTaskCreateApi(generics.CreateAPIView):
             task = update_asset_hardware_info_manual.delay(asset)
         else:
             task = test_asset_connectivity_manual.delay(asset)
+        print(task)
         data = getattr(serializer, '_data', {})
+        print(data)
         data["task"] = task.id
         setattr(serializer, '_data', data)
 

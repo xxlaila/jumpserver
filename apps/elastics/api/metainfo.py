@@ -31,7 +31,7 @@ class MetaInfoViewSet(OrgBulkModelViewSet):
 
 class MetaInfoTaskCreateApi(generics.CreateAPIView):
     model = MetaInfo
-    serializer_class = serializers.MetaInfoSerializer
+    serializer_class = serializers.MetaInfoTaskSerializer
     permission_classes = (IsOrgAdmin,)
 
     def get_object(self):
@@ -47,5 +47,8 @@ class MetaInfoTaskCreateApi(generics.CreateAPIView):
         else:
             task = test_mete_info_port_manual(metainfo)
         data = getattr(serializer, '_data', {})
-        data["task"] = task.id
+        if task == True:
+            data["task"] = task
+        else:
+            data["task"] = task.id
         setattr(serializer, '_data', data)

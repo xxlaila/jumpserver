@@ -5,7 +5,6 @@
 @Author  : xxlaila
 @Software: PyCharm
 """
-from django.http import JsonResponse
 from django.views.generic import TemplateView, CreateView, \
     UpdateView, DeleteView, DetailView
 from django.views.generic.detail import SingleObjectMixin
@@ -20,7 +19,7 @@ from ..models import MetaInfo, CloudInfor
 
 __all__ = (
     "MetaInfoListView", "MetaInfoCreateView", "MetaInfoUpdateView",
-    "MetaInfoDetailView", "MetaInfoDeleteView", "KibanaDslView"
+    "MetaInfoDetailView", "MetaInfoDeleteView", "KibanaDslView",
 )
 logger = get_logger(__file__)
 

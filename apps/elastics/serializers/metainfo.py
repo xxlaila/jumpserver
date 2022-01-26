@@ -30,3 +30,11 @@ class MetaInfoSerializer(BulkOrgResourceModelSerializer):
             'name': {'required': False},
         }
 
+class MetaInfoTaskSerializer(serializers.Serializer):
+    ACTION_CHOICES = (
+        ('refresh', 'refresh'),
+        ('test', 'test'),
+    )
+    task = serializers.CharField(read_only=True)
+    action = serializers.ChoiceField(choices=ACTION_CHOICES, write_only=True)
+
